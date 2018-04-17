@@ -151,7 +151,7 @@ class tree(object):
         for (obs, boundary) in iter(self.ts['obs'].items()):
             if obs[1] == 'b' and np.linalg.norm(np.subtract(x, boundary[0:-1])) <= boundary[-1]:
                 return obs[0]
-            elif obs[1] == 's':
+            elif obs[1] == 'p':
                 dictator = True
                 for i in range(len(boundary)):
                     if np.dot(x, boundary[i][0:-1]) + boundary[i][-1] > 0:
@@ -165,7 +165,7 @@ class tree(object):
         for (regions, boundary) in iter(self.ts['region'].items()):
             if regions[1] == 'b' and np.linalg.norm(x - np.asarray(boundary[0:-1])) <= boundary[-1]:
                 return regions[0]
-            elif regions[1] == 's':
+            elif regions[1] == 'p':
                 dictator = True
                 for i in range(len(boundary)):
                     if np.dot(x, np.asarray(boundary[i][0:-1])) + boundary[i][-1] > 0:
@@ -228,17 +228,18 @@ class tree(object):
         :param goal: goal state
         :return: dict path : cost
         """
-        paths= OrderedDict()
-        for goal in goals:
+        paths = OrderedDict()
+        for i in range(len(goals)):
+            goal = goals[i]
             path = [goal]
             s = goal
-            while s!= self.init:
+            while s != self.init:
                 s = list(self.tree.pred[s].keys())[0]
                 path.insert(0, s)
             if self.seg == 'pre':
-                paths[self.tree.nodes[goal]['cost']] = path
+                paths[i] = [self.tree.nodes[goal]['cost'], path]
             elif self.seg == 'suf':
-                paths[self.tree.nodes[goal]['cost'] + np.linalg.norm(np.subtract(goal[0], self.init[0]))] = path
+                paths[i] = [self.tree.nodes[goal]['cost'] + np.linalg.norm(np.subtract(goal[0], self.init[0])), path]
         return paths
 
 
