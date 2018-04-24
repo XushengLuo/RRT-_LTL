@@ -2,8 +2,20 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.patches import Polygon
 from matplotlib.collections import PatchCollection
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.patches import Circle, PathPatch
+import mpl_toolkits.mplot3d.art3d as art3d
+import networkx as nx
 
-def region_plot(regions, flag, fig, ax):
+def region_plot(regions, flag, ax):
+    """
+    plot the workspace
+    :param regions: regions
+    :param flag: regions or obstacle
+    :param ax: figure axis
+    :param d: 2D or 3D
+    :return: none
+    """
 
     ax.set_xlim((0, 1))
     ax.set_ylim((0, 1))
@@ -33,7 +45,14 @@ def region_plot(regions, flag, fig, ax):
             ax.add_collection(p)
             ax.text(np.mean(x), np.mean(y), r'${}_{}$'.format(key[0][0], key[0][1:]), fontsize=16)
 
+
 def intersection(l1, l2):
+    """
+    calculate the point of intersection between adjacent edges
+    :param l1: line 1
+    :param l2: line 2
+    :return: point of intersection
+    """
     if not l1[0]:
         y = -l1[2]/l1[1]
         x = (-l2[2] - l2[1]*y)/l2[0]
@@ -46,22 +65,67 @@ def intersection(l1, l2):
     return (x,y)
 
 def path_plot(path):
-    x = np.asarray([point[0][0] for point in path[0]])
-    y = np.asarray([point[0][1] for point in path[0]])
-    pre = plt.quiver(x[:-1], y[:-1], x[1:] - x[:-1], y[1:] - y[:-1], color = 'r', scale_units='xy', angles='xy', scale=1, label = 'prefix path')
+    """
+    plot the optimal path in the 2D and 3D
+    :param path: ([pre_path], [suf_path])
+    :param buchi: buchi state
+    :param regions: regions
+    :param obs: obstacle
+    :return: none
+    """
 
-    x_suf = [point[0][0] for point in path[1]]
-    y_suf = [point[0][1] for point in path[1]]
-    x = np.asarray([x[-2]] + x_suf)
-    y = np.asarray([y[-2]] + y_suf)
-    suf = plt.quiver(x[:-1], y[:-1], x[1:] - x[:-1], y[1:] - y[:-1], color = 'g', scale_units='xy', angles='xy', scale=1, label = 'suffix path')
-    # plt.plot(x, y, 'b-')
+    # prefix path
+    x_pre = np.asarray([point[0][0] for point in path[0]])
+    y_pre = np.asarray([point[0][1] for point in path[0]])
+    pre = plt.quiver(x_pre[:-1], y_pre[:-1], x_pre[1:] - x_pre[:-1], y_pre[1:] - y_pre[:-1], color = 'r', scale_units='xy', angles='xy', scale=1, label = 'prefix path')
+
+
+
+    # suffix path
+    x = [point[0][0] for point in path[1]]
+    y = [point[0][1] for point in path[1]]
+    x_suf = np.asarray([x_pre[-2]] + x)
+    y_suf = np.asarray([y_pre[-2]] + y)
+    suf = plt.quiver(x_suf[:-1], y_suf[:-1], x_suf[1:] - x_suf[:-1], y_suf[1:] - y_suf[:-1], color = 'g', scale_units='xy', angles='xy', scale=1, label = 'suffix path')
+
     plt.legend(handles=[pre, suf])
     plt.savefig('formula.png', bbox_inches='tight', dpi=600)
-    plt.show()
+
+
+
+def layer_plot(tree, opt_path, buchi):
+    """
+    plot 3D layer graph
+    :param tree: tree built by alg
+    :param buchi: buchi state
+    :return: none
+    """
+    path = list(nx.dfs_edges(tree))
+
+    # 2D workspace in 3D
+    fig = plt.figure(2)
+    plt.rc('text', usetex=True)
+    plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
+    ax = fig.add_subplot(111, projection='3d')
+    for i in range(len(path)):
+        x_pre = np.array([path[i][0][0][0], path[i][1][0][0]])
+        y_pre = np.array([path[i][0][0][1], path[i][1][0][1]])
+        z_pre = np.asarray([buchi[path[i][0][1]], buchi[path[i][1][1]]])
+        ax.plot(x_pre, y_pre, z_pre, 'b--d', markerfacecolor='None')
+
+    x_pre = np.asarray([point[0][0] for point in opt_path[0]])
+    y_pre = np.asarray([point[0][1] for point in opt_path[0]])
+    z_pre = np.asarray([buchi[point[1]] for point in opt_path[0]])
+    ax.plot(x_pre, y_pre, z_pre, 'r--d')
+    # region_plot(regions, 'region', ax)
+    # region_plot(obs, 'obs', ax)
+    plt.savefig('3D.png', bbox_inches='tight', dpi=600)
+    # plt.show()
+
 
 #
 # workspace, regions, obs, init_state, uni_cost, formula = problemFormulation().Formulation()
 # region_plot(regions, 'region')
 # path = (2.50032615691877, ([((0.8, 0.1), 'T0_init'), ((0.5981724872087247, 0.3377620547972048), 'T0_init'), ((0.49389453454964805, 0.4276146121762987), 'T0_init'), ((0.44573857157429486, 0.5078975412511033), 'T1_S8'), ((0.2408944180045951, 0.7160394591937538), 'T1_S8'), ((0.16881448811963862, 0.45388479130328774), 'T2_S8'), ((0.07373085190437723, 0.20101216973373925), 'T2_S8'), ((0.08908170012726457, 0.39929418348934276), 'accept_S8')], [((0.08908170012726457, 0.39929418348934276), 'accept_S8'), ((0.16156655801415953, 0.7450495775375108), 'T1_S8'), ((0.10289083291471668, 0.4017562120131536), 'T2_S8'), ((0.08025318053203045, 0.2943047234035542), 'T2_S8')]))
 # path_plot(path[1])
+

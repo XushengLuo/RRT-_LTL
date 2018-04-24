@@ -2,11 +2,12 @@ from Buchi import buchi_graph
 from Problem import problemFormulation
 import datetime
 from tree import tree, construction_tree
-from WorkspacePlot import region_plot, path_plot
+from WorkspacePlot import region_plot, path_plot, layer_plot
 from collections import OrderedDict
 import numpy as np
 import matplotlib.pyplot as plt
 import networkx as nx
+import pickle
 
 # +------------------------------------------+
 # |     construct transition system graph    |
@@ -26,6 +27,7 @@ buchi = buchi_graph(formula)
 buchi.formulaParser()
 buchi.execLtl2ba()
 buchi_graph = buchi.buchiGraph()
+buchi_state = dict(zip(list(buchi_graph.nodes()), range(1, buchi_graph.number_of_nodes() + 1)))  # dict
 
 # +------------------------------------------+
 # |            construct prefix path         |
@@ -37,7 +39,17 @@ cost_path = OrderedDict()
 
 
 for b_init in buchi_graph.graph['init']:
-    # prefix path
+    # initialization
+    opt_cost = (np.inf, np.inf)
+    opt_path_pre = []
+    opt_path_suf = []
+    opt_tree_suf = nx.DiGraph()
+
+    """
+     #----------------------------------------------#
+     |                Prefix Path                   |
+     #----------------------------------------------#
+    """
     start = datetime.datetime.now()
     init = (init_state, b_init)
     acpt = buchi_graph.graph['accept']
@@ -51,7 +63,9 @@ for b_init in buchi_graph.graph['init']:
         # print(tree_pre.goals)
         print('{0} accepting goals found'.format(len(tree_pre.goals)))
 
+        # write into file
         nx.write_gpickle(tree_pre, "data_pre_tree")
+
         ## plot the distribution of accepting states
         # x = np.asarray([point[0][0] for point in tree_pre.goals])
         # y = np.asarray([point[0][1] for point in tree_pre.goals])
@@ -61,9 +75,13 @@ for b_init in buchi_graph.graph['init']:
         print('Couldn\'t find the path within predetermined iteration')
         break
 
-    #suffix path
+    """
+     #----------------------------------------------#
+     |                Suffix Path                   |
+     #----------------------------------------------#
+    """
     start = datetime.datetime.now()
-    cost_path_suf = OrderedDict()
+
     # each initial state <=> multiple accepting states
     for i in range(len(tree_pre.goals)):
         goal = tree_pre.goals[i]
@@ -81,27 +99,40 @@ for b_init in buchi_graph.graph['init']:
             del cost_path_pre[i]
             print('delete {0}-th item in cost_path_pre, {1} left'.format(i, len(cost_path_pre)))
             continue
-        cost_path_suf[i] = cost_path_suf_cand[mincost]
+        cost_path_suf = cost_path_suf_cand[mincost]
+
+        if cost_path_pre[i][0] + cost_path_suf[0] < opt_cost[0] + opt_cost[1]:
+            opt_path_pre = cost_path_pre[i][1]      # [(position, buchi)]
+            opt_path_suf = cost_path_suf[1]
+            opt_cost = (cost_path_pre[i][0], cost_path_suf[0])    # optimal cost (pre_cost, suf_cost)
+            opt_tree_suf = tree_suf
+
+        nx.write_gpickle(opt_tree_suf, "data_suf_tree")
 
     # first pre + suf path
     # first_path = (cost_path_pre[0][0] + cost_path_suf[0][0], (cost_path_pre[0][1], cost_path_suf[0][1]))
     # path_plot(first_path[1])
 
-    # pre + suf cost
+    """
+     #----------------------------------------------#
+     |                  Pre + Suf                   |
+     #----------------------------------------------#
+    """
 
-    for i in cost_path_pre.keys():
-        cost_path[i] = (cost_path_pre[i][0]+cost_path_suf[i][0], (cost_path_pre[i][1], cost_path_suf[i][1]))
-
-    cost_path= OrderedDict(sorted(cost_path.items(), key=lambda x: x[1][0]))
-    mincost = list(cost_path.keys())[0]
-    opt_path = cost_path[mincost]
-    print('Total cost = prefix Cost + suffix Cost: {0} = {1} + {2}'.format(opt_path[0], cost_path_pre[mincost][0], cost_path_suf[mincost][0]))
+    print('Total cost = prefix Cost + suffix Cost: {0} = {1} + {2}'.format(opt_cost[0]+opt_cost[1], opt_cost[0], opt_cost[1]))
     print('Time to find the surfix path: {0}'.format((datetime.datetime.now() - start).total_seconds()))
 
     # plot optimal path
-    buchi_state = dict(zip(list(buchi_graph.nodes()), range(1, buchi_graph.number_of_nodes()+1)))
-    path_plot(opt_path[1])
+    path_plot((opt_path_pre, opt_path_suf))
 
+    # draw 3D layer graph
+    layer_plot(tree_pre.tree, (opt_path_pre, opt_path_suf), buchi_state)
+
+    # write into file
+    with open('data_opt_path', 'wb') as filehandle:
+        # store the data as binary data stream
+        pickle.dump((opt_path_pre, opt_path_suf), filehandle)
+        pickle.dump(sz, filehandle)
 
     # plot size of tree versus iteration
     plt.figure(3)

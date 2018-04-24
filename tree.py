@@ -4,6 +4,7 @@ import math
 import numpy as np
 from collections import OrderedDict
 
+
 class tree(object):
     """ construction of prefix and suffix tree
     """
@@ -23,7 +24,7 @@ class tree(object):
         self.step_size = step_size
         self.dim = len(self.ts['workspace'])
         self.gamma = np.ceil(4 * np.power(1/3.14, 1./self.dim))   # unit workspace
-        self.tree = DiGraph(type='PBA')
+        self.tree = DiGraph(type='PBA', init=init)
         self.tree.add_node(init, cost=0, label=self.label(init[0]))
 
     def sample(self):
@@ -244,6 +245,7 @@ class tree(object):
 
 
 def construction_tree(tree, buchi_graph, n_max):
+    sz = [0]
     for n in range(n_max):
         # sample
         x_rand = tree.sample()
@@ -272,5 +274,11 @@ def construction_tree(tree, buchi_graph, n_max):
             if added == 1:
                 tree.rewire(q_new, near_v, obs_check)
 
+        # number of nodes
+        sz.append(tree.tree.number_of_nodes())
+        # first accepting state
+        # if len(tree.goals):
+        #     break
+
     cost_path = tree.findpath(tree.goals)
-    return cost_path
+    return cost_path, sz
