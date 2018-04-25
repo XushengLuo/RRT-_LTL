@@ -64,32 +64,38 @@ def intersection(l1, l2):
         x = (-l1[2]*l2[0]-l1[1]*l2[0]*y)/(l1[0]*l2[0])
     return (x,y)
 
-def path_plot(path):
+def path_plot(path, regions, obs, n_robot, dim):
     """
     plot the optimal path in the 2D and 3D
     :param path: ([pre_path], [suf_path])
-    :param buchi: buchi state
     :param regions: regions
     :param obs: obstacle
     :return: none
     """
 
-    # prefix path
-    x_pre = np.asarray([point[0][0] for point in path[0]])
-    y_pre = np.asarray([point[0][1] for point in path[0]])
-    pre = plt.quiver(x_pre[:-1], y_pre[:-1], x_pre[1:] - x_pre[:-1], y_pre[1:] - y_pre[:-1], color = 'r', scale_units='xy', angles='xy', scale=1, label = 'prefix path')
+    for n in range(n_robot):
+        ax = plt.figure(n).gca()
+        region_plot(regions, 'region', ax)
+        region_plot(obs, 'obs', ax)
 
+        # prefix path
+        x_pre = np.asarray([point[0][n][0] for point in path[0]])
+        y_pre = np.asarray([point[0][n][1] for point in path[0]])
+        pre = plt.quiver(x_pre[:-1], y_pre[:-1], x_pre[1:] - x_pre[:-1], y_pre[1:] - y_pre[:-1], color='r',
+                         scale_units='xy', angles='xy', scale=1, label='prefix path')
 
+        # suffix path
+        x = [point[0][n][0] for point in path[1]]
+        y = [point[0][n][1] for point in path[1]]
+        # x_suf = np.asarray([x_pre[-2]] + x + [x_pre[-2]])
+        # y_suf = np.asarray([y_pre[-2]] + y + [y_pre[-2]])
+        x_suf = np.asarray(x + [x_pre[-1]])
+        y_suf = np.asarray(y + [y_pre[-1]])
+        suf = plt.quiver(x_suf[:-1], y_suf[:-1], x_suf[1:] - x_suf[:-1], y_suf[1:] - y_suf[:-1], color='g',
+                         scale_units='xy', angles='xy', scale=1, label='suffix path')
 
-    # suffix path
-    x = [point[0][0] for point in path[1]]
-    y = [point[0][1] for point in path[1]]
-    x_suf = np.asarray([x_pre[-2]] + x)
-    y_suf = np.asarray([y_pre[-2]] + y)
-    suf = plt.quiver(x_suf[:-1], y_suf[:-1], x_suf[1:] - x_suf[:-1], y_suf[1:] - y_suf[:-1], color = 'g', scale_units='xy', angles='xy', scale=1, label = 'suffix path')
-
-    plt.legend(handles=[pre, suf])
-    plt.savefig('formula.png', bbox_inches='tight', dpi=600)
+        plt.legend(handles=[pre, suf])
+        plt.savefig('path{0}.png'.format(n), bbox_inches='tight', dpi=600)
 
 
 

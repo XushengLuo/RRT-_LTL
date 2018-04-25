@@ -98,50 +98,86 @@ from matplotlib.transforms import Affine2D
 # # ax.set_ylim(0, 10)
 # # ax.set_zlim(0, 10)
 # plt.show()
+#
+# import networkx as nx
+# from Buchi import buchi_graph
+# from Problem import problemFormulation
+# import pickle
+# def layer_plot(tree, buchi):
+#     path = list(nx.dfs_edges(tree))
+#
+#     # 2D workspace in 3D
+#     fig = plt.figure(2)
+#     plt.rc('text', usetex=True)
+#     plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
+#     ax = fig.add_subplot(111, projection='3d')
+#     for i in range(len(path)):
+#         x_pre = np.array([path[i][0][0][0], path[i][1][0][0]])
+#         y_pre = np.array([path[i][0][0][1], path[i][1][0][1]])
+#         z_pre = np.asarray([buchi[path[i][0][1]], buchi[path[i][1][1]]])
+#         ax.plot(x_pre, y_pre, z_pre, 'r--d')
+#     # region_plot(regions, 'region', ax)
+#     # region_plot(obs, 'obs', ax)
+#     plt.savefig('3D.png', bbox_inches='tight', dpi=600)
+#     plt.show()
+#
+# def opt_path_plot(buchi):
+#     with open('data_opt_path', 'rb') as filehandle:
+#         pre = pickle.load(filehandle)
+#
+#     fig = plt.figure(2)
+#     plt.rc('text', usetex=True)
+#     plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
+#     ax = fig.add_subplot(111, projection='3d')
+#
+#     x_pre = np.asarray([point[0][0] for point in pre[0]])
+#     y_pre = np.asarray([point[0][1] for point in pre[0]])
+#     z_pre = np.asarray([buchi[point[1]] for point in pre[0]])
+#     ax.plot(x_pre, y_pre, z_pre, 'r--d')
+#     plt.show()
+#
+# workspace, regions, obs, init_state, uni_cost, formula = problemFormulation().Formulation()
+# buchi = buchi_graph(formula)
+# buchi.formulaParser()
+# buchi.execLtl2ba()
+# buchi_graph = buchi.buchiGraph()
+# buchi_state = dict(zip(list(buchi_graph.nodes()), range(1, buchi_graph.number_of_nodes()+1)))
+#
+#
+# opt_path_plot(buchi_state)
 
-import networkx as nx
-from Buchi import buchi_graph
-from Problem import problemFormulation
+# def sglp2mulp( point):
+#     """
+#     convert single form point () to multiple form point ((), (), (), ...)
+#     :param point: single form point ()
+#     :return:  multiple form point ((), (), (), ...)
+#     """
+#     mp = []
+#     for i in range(1):
+#         mp.append(point[i*2 :(i+1)*2])
+#         return tuple(mp)
+#
+# def mulp2sglp(point):
+#     """
+#     convert multiple form point ((),(),(),...) to single form point ()
+#     :param point: multiple points ((),(),(),...)
+#     :return: signle point ()
+#     """
+#     sp = []
+#     for p in point:
+#         sp = sp + list(p)
+#     return tuple(sp)
+#
+# point = (1,2)
+# print(sglp2mulp(point))     # (1,2)  -> ((1, 2),)                ((1,2), ) -> (((1, 2),),)
+#
+# point = ((1,2),)
+# print(mulp2sglp(point))    # ((1,2),) -> (1,2)  ((1,2)) ->fault
+
 import pickle
-def layer_plot(tree, buchi):
-    path = list(nx.dfs_edges(tree))
 
-    # 2D workspace in 3D
-    fig = plt.figure(2)
-    plt.rc('text', usetex=True)
-    plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
-    ax = fig.add_subplot(111, projection='3d')
-    for i in range(len(path)):
-        x_pre = np.array([path[i][0][0][0], path[i][1][0][0]])
-        y_pre = np.array([path[i][0][0][1], path[i][1][0][1]])
-        z_pre = np.asarray([buchi[path[i][0][1]], buchi[path[i][1][1]]])
-        ax.plot(x_pre, y_pre, z_pre, 'r--d')
-    # region_plot(regions, 'region', ax)
-    # region_plot(obs, 'obs', ax)
-    plt.savefig('3D.png', bbox_inches='tight', dpi=600)
-    plt.show()
+with open('data_opt_path', 'rb') as filehandle:
+    # store the data as binary data stream
+    prepath, sufpath = pickle.load(filehandle)
 
-def opt_path_plot(buchi):
-    with open('data_opt_path', 'rb') as filehandle:
-        pre = pickle.load(filehandle)
-
-    fig = plt.figure(2)
-    plt.rc('text', usetex=True)
-    plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
-    ax = fig.add_subplot(111, projection='3d')
-
-    x_pre = np.asarray([point[0][0] for point in pre[0]])
-    y_pre = np.asarray([point[0][1] for point in pre[0]])
-    z_pre = np.asarray([buchi[point[1]] for point in pre[0]])
-    ax.plot(x_pre, y_pre, z_pre, 'r--d')
-    plt.show()
-
-workspace, regions, obs, init_state, uni_cost, formula = problemFormulation().Formulation()
-buchi = buchi_graph(formula)
-buchi.formulaParser()
-buchi.execLtl2ba()
-buchi_graph = buchi.buchiGraph()
-buchi_state = dict(zip(list(buchi_graph.nodes()), range(1, buchi_graph.number_of_nodes()+1)))
-
-
-opt_path_plot(buchi_state)
+print(sufpath)

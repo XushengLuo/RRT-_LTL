@@ -15,10 +15,7 @@ import pickle
 
 workspace, regions, obs, init_state, uni_cost, formula = problemFormulation().Formulation()
 ts = {'workspace':workspace, 'region':regions, 'obs':obs, 'uni_cost':uni_cost}
-# plot the workspace
-ax = plt.figure(1).gca()
-region_plot(regions, 'region', ax)
-region_plot(obs, 'obs', ax)
+
 # +------------------------------------------+
 # |            construct buchi graph         |
 # +------------------------------------------+
@@ -36,7 +33,6 @@ buchi_state = dict(zip(list(buchi_graph.nodes()), range(1, buchi_graph.number_of
 n_max = 500
 step_size = 0.25
 cost_path = OrderedDict()
-
 
 for b_init in buchi_graph.graph['init']:
     # initialization
@@ -102,7 +98,7 @@ for b_init in buchi_graph.graph['init']:
         cost_path_suf = cost_path_suf_cand[mincost]
 
         if cost_path_pre[i][0] + cost_path_suf[0] < opt_cost[0] + opt_cost[1]:
-            opt_path_pre = cost_path_pre[i][1]      # [(position, buchi)]
+            opt_path_pre = cost_path_pre[i][1]      # plan of [(position, buchi)]
             opt_path_suf = cost_path_suf[1]
             opt_cost = (cost_path_pre[i][0], cost_path_suf[0])    # optimal cost (pre_cost, suf_cost)
             opt_tree_suf = tree_suf
@@ -123,7 +119,7 @@ for b_init in buchi_graph.graph['init']:
     print('Time to find the surfix path: {0}'.format((datetime.datetime.now() - start).total_seconds()))
 
     # plot optimal path
-    path_plot((opt_path_pre, opt_path_suf))
+    path_plot((opt_path_pre, opt_path_suf), regions, obs, 1, tree_pre.dim)
 
     # draw 3D layer graph
     layer_plot(tree_pre.tree, (opt_path_pre, opt_path_suf), buchi_state)
@@ -142,8 +138,8 @@ for b_init in buchi_graph.graph['init']:
     plt.plot(np.asarray(range(0,len(sz))), np.asarray(sz))
     plt.xlabel(r'Iteration $n$')
     plt.ylabel(r"$|V_T^n|$")
-    plt.show()
     plt.savefig('size_VS_n.png', bbox_inches='tight', dpi=600)
+    plt.show()
 
 
 
