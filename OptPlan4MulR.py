@@ -31,7 +31,7 @@ buchi_state = dict(zip(list(buchi_graph.nodes()), range(1, buchi_graph.number_of
 # |            construct prefix path         |
 # +------------------------------------------+
 
-n_max = 250
+n_max = 500
 n_robot = len(init_state)
 step_size = 0.25 *n_robot
 cost_path = OrderedDict()

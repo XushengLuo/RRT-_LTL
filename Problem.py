@@ -36,8 +36,8 @@ class problemFormulation(object):
                         # ('o3', 'p'): ((1, 1, -1), (-1, 1, 0.2), (0, -1, 0.2)),
                         # ('o4', 'b'): (0.3, 0.6, 0.1)
                       }
-        self.init_state = ((0.8, 0.1),(0.8, 0.1))
-        # self.init_state = ((0.8, 0.1),)
+        # self.init_state = ((0.8, 0.1),(0.8, 0.1))
+        self.init_state = ((0.8, 0.1),)
         self.uni_cost = 0.1
 
         # #----------------------------------------------#
@@ -95,8 +95,8 @@ class problemFormulation(object):
         """
 
         # self.formula = '<>(l3 && []<>l4)'
-        # self.formula = '<>l41 && []<>l11 && [](l11 -> X(!l11 U l21)) && []<>l31 && []!l51'
-        self.formula = '[]<>l11 && [](l11 -> X(!l11 U l22))'
+        self.formula = '<>l41 && []<>l11 && [](l11 -> X(!l11 U l21)) && []<>l31 && []!l51'
+        # self.formula = '[]<>l11 && [](l11 -> X(!l11 U l22))'
         # self.formula = '[]<>l11 && []<>l12'
         # self.formula = '<>l4 && []<>l1 && [](l1 -> X(!l1 U l2)) && []<>l3 && []!l5'
         #self.formula = '<>l4 && []<>l1 && []<>l5'  # formula 1

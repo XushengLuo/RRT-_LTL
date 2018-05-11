@@ -76,7 +76,7 @@ class tree(object):
         if np.linalg.norm(np.subtract(x_rand, x_nearest)) <= self.step_size:
             return x_rand
         else:
-            return tuple(np.asarray(x_nearest) + self.step_size * (np.subtract(x_rand, x_nearest)))
+            return tuple(np.asarray(x_nearest) + self.step_size * (np.subtract(x_rand, x_nearest))/np.linalg.norm(np.subtract(x_rand, x_nearest)))
 
     def extend(self, q_new, near_v, label, obs_check):
         """
@@ -243,6 +243,8 @@ class tree(object):
             atomic_label = label.split('&&')
             for a in atomic_label:
                 a = a.strip()
+                a = a.strip('(')
+                a = a.strip(')')
                 if a == '1':
                     continue
                 # whether ! in an atomic proposition
