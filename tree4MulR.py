@@ -1,5 +1,6 @@
 from random import uniform
 from networkx.classes.digraph import DiGraph
+from networkx.algorithms import dfs_labeled_edges
 import math
 import numpy as np
 from collections import OrderedDict
@@ -122,11 +123,16 @@ class tree(object):
         for near_vertex in near_v:
             if obs_check[(q_new[0], near_vertex[0])] and self.checkTranB(q_new[1], self.tree.nodes[q_new]['label'], near_vertex[1]):
                 c = self.tree.nodes[q_new]['cost'] + np.linalg.norm(np.subtract(self.mulp2sglp(q_new[0]), self.mulp2sglp(near_vertex[0])))      # without considering control
-                if self.tree.nodes[near_vertex]['cost'] > c:
-                    self.tree.nodes[near_vertex]['cost'] = c
+                delta_c = self.tree.nodes[near_vertex]['cost'] - c
+                # update the cost of node in the subtree rooted at near_vertex
+                if delta_c > 0:
+                    # self.tree.nodes[near_vertex]['cost'] = c
                     self.tree.remove_edge(list(self.tree.pred[near_vertex].keys())[0], near_vertex)
                     self.tree.add_edge(q_new, near_vertex)
-
+                    edges = dfs_labeled_edges(self.tree, source=near_vertex)
+                    for _, v, d in edges:
+                        if d == 'forward':
+                            self.tree.nodes[v]['cost'] = self.tree.nodes[v]['cost'] - delta_c
 
     def near(self, x_new):
         """

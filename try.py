@@ -185,30 +185,30 @@ from matplotlib.transforms import Affine2D
 import matplotlib.pyplot as plt
 
 
-x= [200, 300, 500, 1000, 2000]
-y = [3.47, 3.08, 3.03, 3.00, 2.90]
-tpre = [10.8, 25.0, 63.1, 152.3, 554.8 ]
-tsuf = ['19.1s', '673.3s', '0.71h', '6.7h', '52.1h']
-p = [4, 58, 114, 170, 392]
+x= [200, 300, 400, 500, 1000]
+y = [2.6, 2.43, 2.33 ,2.31, 2.24]
+tpre = [11.3, 26.8, 41.96, 67.6, 242.9]
+tsuf = ['75.8s', '477.4s', '0.37h','0.77h', '6.23h']
+p = [21, 60, 84, 113, 256]
 fig = plt.figure(2)
 plt.rc('text', usetex=True)
 plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
 ax = fig.add_subplot(111)
 ax.plot(x, y, 'r--d')
-plt.ylabel(r'Cost $J(\tau, \mathbf{u})$')
+plt.ylabel(r'Cost $J(\tau)$')
 plt.xlabel(r'$n_{\mathrm{max}}^{\mathrm{pre}} = n_{\mathrm{max}}^{\mathrm{suf}}$')
-plt.xticks([200, 300, 500, 1000, 2000, 2400], ["200", "300", "500", '1000', "2000", ""])
+plt.xticks([200, 300, 500, 1000], ["200", "300", "500", '1000'])
 ymin, ymax = plt.ylim()
 xmin, xmax = plt.xlim()
 for i in range(len(x)):
     plt.axvline(x=x[i], ls = '--', lw = 0.5, color = 'k', ymin= 0, ymax=(y[i]-ymin)/(ymax-ymin))
     plt.axhline(y=y[i], ls='--', lw = 0.5, color='k', xmin=0, xmax=(x[i] - xmin) / (xmax - xmin))
 
-plt.text(x[0]+50, y[0]-0.05, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[0]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[0]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[0]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-plt.text(x[1]+50, y[1]+0.05, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[1]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[1]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[1]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-plt.text(x[2]+50, y[2], r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[2]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[2]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[2]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-plt.text(x[3]+50, y[3]+0.02, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[3]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[3]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[3]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-plt.text(x[4]-50, y[4]+0.02, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[4]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[4]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[4]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-plt.savefig('cost_iter.png', bbox_inches='tight', dpi=600)
+plt.text(x[0]+50, y[0]-0.04, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[0]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[0]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[0]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+plt.text(x[1]+30, y[1]+0.025, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[1]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[1]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[1]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+plt.text(x[2], y[2]+0.025, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[2]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[2]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[2]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+plt.text(x[3]+60, y[3]+0.02, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[3]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[3]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[3]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+plt.text(x[4]-100, y[4]+0.02, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[4]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[4]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[4]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+plt.savefig(r'/Users/chrislaw/Box Sync/RRL_LTL_cntsSpace/figures/CostMaxNumIter.png', bbox_inches='tight', dpi=600)
 
 plt.show()

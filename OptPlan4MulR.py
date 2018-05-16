@@ -58,7 +58,8 @@ for b_init in buchi_graph.graph['init']:
     cost_path_pre, sz = construction_tree(tree_pre, buchi_graph, n_max)
 
     if len(tree_pre.goals):
-        print('Time for prefix path: {0}'.format((datetime.datetime.now() - start).total_seconds()))
+        pre_time = (datetime.datetime.now() - start).total_seconds()
+        print('Time for prefix path: {0}'.format(pre_time))
         # print(tree_pre.goals)
         print('{0} accepting goals found'.format(len(tree_pre.goals)))
 
@@ -83,6 +84,7 @@ for b_init in buchi_graph.graph['init']:
 
     # each initial state <=> multiple accepting states
     for i in range(len(tree_pre.goals)):
+    # for i in range(1):
         goal = tree_pre.goals[i]
         tree_suf = tree(n_robot,'', ts, buchi_graph, goal, 'suf', step_size)
         cost_path_suf_cand, _ = construction_tree(tree_suf, buchi_graph, n_max)
@@ -119,8 +121,9 @@ for b_init in buchi_graph.graph['init']:
     """
 
     print('Total cost = prefix Cost + suffix Cost: {0} = {1} + {2}'.format(opt_cost[0]+opt_cost[1], opt_cost[0], opt_cost[1]))
-    print('Time to find the surfix path: {0}'.format((datetime.datetime.now() - start).total_seconds()))
-
+    suf_time = (datetime.datetime.now() - start).total_seconds()
+    print('Time to find the surfix path: {0}'.format(suf_time))
+    print(pre_time+suf_time)
     # plot optimal path
     path_plot((opt_path_pre, opt_path_suf), regions, obs, tree_pre.robot, tree_pre.dim)
 
