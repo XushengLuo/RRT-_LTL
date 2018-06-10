@@ -340,6 +340,7 @@ def construction_tree(tree, buchi_graph, n_max):
                 break
             if l != '':
                 l = l + str(i+1)
+                # print(l)
             label.append(l)
         if not o_id:
             continue
@@ -358,7 +359,6 @@ def construction_tree(tree, buchi_graph, n_max):
 
             # extend
             added = tree.extend(q_new, near_v, label, obs_check)
-
             # rewire
             if added == 1:
                 tree.rewire(q_new, near_v, obs_check)

@@ -185,30 +185,62 @@ from matplotlib.transforms import Affine2D
 import matplotlib.pyplot as plt
 
 
-x= [200, 300, 400, 500, 1000]
-y = [2.6, 2.43, 2.33 ,2.31, 2.24]
-tpre = [11.3, 26.8, 41.96, 67.6, 242.9]
-tsuf = ['75.8s', '477.4s', '0.37h','0.77h', '6.23h']
-p = [21, 60, 84, 113, 256]
-fig = plt.figure(2)
-plt.rc('text', usetex=True)
-plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
-ax = fig.add_subplot(111)
-ax.plot(x, y, 'r--d')
-plt.ylabel(r'Cost $J(\tau)$')
-plt.xlabel(r'$n_{\mathrm{max}}^{\mathrm{pre}} = n_{\mathrm{max}}^{\mathrm{suf}}$')
-plt.xticks([200, 300, 500, 1000], ["200", "300", "500", '1000'])
-ymin, ymax = plt.ylim()
-xmin, xmax = plt.xlim()
-for i in range(len(x)):
-    plt.axvline(x=x[i], ls = '--', lw = 0.5, color = 'k', ymin= 0, ymax=(y[i]-ymin)/(ymax-ymin))
-    plt.axhline(y=y[i], ls='--', lw = 0.5, color='k', xmin=0, xmax=(x[i] - xmin) / (xmax - xmin))
+# x= [200, 300, 400, 500, 1000]
+# y = [2.53, 2.39, 2.33 ,2.30, 2.21]
+# tpre = [9.22, 22.15, 38.85, 57.43, 182.78]
+# tsuf = ['72.6s', '362.2s', '0.34h','0.65h', '6.56h']
+# p = [23, 48, 87, 105, 259]
+# fig = plt.figure(2)
+# plt.rc('text', usetex=True)
+# plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
+# ax = fig.add_subplot(111)
+# ax.plot(x, y, 'r--d')
+# plt.ylabel(r'Cost $J(\tau)$')
+# plt.xlabel(r'$n_{\mathrm{max}}^{\mathrm{pre}} = n_{\mathrm{max}}^{\mathrm{suf}}$')
+# plt.xticks([200, 300, 400, 500, 1000], ["200", "300", "400", "500", "1000"])
+# ymin, ymax = plt.ylim()
+# xmin, xmax = plt.xlim()
+# for i in range(len(x)):
+#     plt.axvline(x=x[i], ls = '--', lw = 0.5, color = 'k', ymin= 0, ymax=(y[i]-ymin)/(ymax-ymin))
+#     plt.axhline(y=y[i], ls='--', lw = 0.5, color='k', xmin=0, xmax=(x[i] - xmin) / (xmax - xmin))
+#
+# plt.text(x[0]+50, y[0]-0.04, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[0]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[0]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[0]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+# plt.text(x[1]+30, y[1]+0.025, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[1]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[1]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[1]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+# plt.text(x[2], y[2]+0.025, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[2]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[2]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[2]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+# plt.text(x[3]+60, y[3]+0.01, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[3]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[3]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[3]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+# plt.text(x[4]-120, y[4]+0.04, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[4]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[4]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[4]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+# plt.savefig(r'/Users/chrislaw/Box Sync/RRL_LTL_cntsSpace/figures/CostMaxNumIter.png', bbox_inches='tight', dpi=600)
+# #
+# plt.show()
 
-plt.text(x[0]+50, y[0]-0.04, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[0]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[0]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[0]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-plt.text(x[1]+30, y[1]+0.025, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[1]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[1]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[1]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-plt.text(x[2], y[2]+0.025, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[2]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[2]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[2]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-plt.text(x[3]+60, y[3]+0.02, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[3]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[3]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[3]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-plt.text(x[4]-100, y[4]+0.02, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[4]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[4]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[4]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-plt.savefig(r'/Users/chrislaw/Box Sync/RRL_LTL_cntsSpace/figures/CostMaxNumIter.png', bbox_inches='tight', dpi=600)
 
-plt.show()
+
+# plt.show()
+#
+# import  pickle
+# import networkx as nx
+# import numpy as np
+# n_pre = []
+# n_suf = []
+# for i in range(21):
+#     with open('data/data_opt_path_015_{0}.0'.format(i), 'rb') as filehandle:
+#         # store the data as binary data stream
+#         (opt_path_pre, opt_path_suf) = pickle.load(filehandle)
+#         tree_pre = pickle.load(filehandle)
+#         tree_suf = pickle.load(filehandle)
+#         buchi_state = pickle.load(filehandle)
+#         sz = pickle.load(filehandle)
+#         n_pre.append(tree_pre.tree.number_of_nodes())
+#         n_suf.append(tree_suf.tree.number_of_nodes())
+# print(np.mean(n_pre))
+# print(np.mean(n_suf))
+
+import pyvisgraph as vg
+polys = [[vg.Point(0.4,1.0), vg.Point(0.4,0.7), vg.Point(0.6,0.7), vg.Point(0.6, 1.0)],
+[vg.Point(0.3,0.2), vg.Point(0.3,0.0), vg.Point(0.7,0.0), vg.Point(0.7, 0.2)]]
+g = vg.VisGraph()
+g.build(polys, status=False)
+shortest = g.shortest_path(vg.Point(1.0,0.8), vg.Point(0.2, 0.8))
+print(shortest[1])
+# [Point(1.50, 0.00), Point(3.00, 1.00), Point(4.00, 6.00)]
+

@@ -8,7 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import networkx as nx
 import pickle
-
+import sys
 # +------------------------------------------+
 # |     construct transition system graph    |
 # +------------------------------------------+
@@ -16,7 +16,9 @@ import pickle
 workspace, regions, obs, init_state, uni_cost, formula = problemFormulation().Formulation()
 ts = {'workspace':workspace, 'region':regions, 'obs':obs, 'uni_cost':uni_cost}
 # plot the workspace
-
+ax = plt.figure(1).gca()
+region_plot(regions, 'region', ax)
+region_plot(obs, 'obs', ax)
 # +------------------------------------------+
 # |            construct buchi graph         |
 # +------------------------------------------+
@@ -31,9 +33,9 @@ buchi_state = dict(zip(list(buchi_graph.nodes()), range(1, buchi_graph.number_of
 # |            construct prefix path         |
 # +------------------------------------------+
 
-n_max = 500
+n_max = 300
 n_robot = len(init_state)
-step_size = 0.25 *n_robot
+step_size = 0.25*n_robot
 cost_path = OrderedDict()
 
 
@@ -56,11 +58,10 @@ for b_init in buchi_graph.graph['init']:
     print('--------------prefix path---------------------')
     # prefix path with cost
     cost_path_pre, sz = construction_tree(tree_pre, buchi_graph, n_max)
-
+    # print(cost_path_pre[0][1])
     if len(tree_pre.goals):
         pre_time = (datetime.datetime.now() - start).total_seconds()
         print('Time for prefix path: {0}'.format(pre_time))
-        # print(tree_pre.goals)
         print('{0} accepting goals found'.format(len(tree_pre.goals)))
 
         # write into file
@@ -81,7 +82,7 @@ for b_init in buchi_graph.graph['init']:
      #----------------------------------------------#
     """
     start = datetime.datetime.now()
-
+    tree_suf = tree_pre
     # each initial state <=> multiple accepting states
     for i in range(len(tree_pre.goals)):
     # for i in range(1):
@@ -120,21 +121,25 @@ for b_init in buchi_graph.graph['init']:
      #----------------------------------------------#
     """
 
-    print('Total cost = prefix Cost + suffix Cost: {0} = {1} + {2}'.format(opt_cost[0]+opt_cost[1], opt_cost[0], opt_cost[1]))
+    # print('Total cost = prefix Cost + suffix Cost: {0} = {1} + {2}'.format(opt_cost[0]+opt_cost[1], opt_cost[0], opt_cost[1]))
     suf_time = (datetime.datetime.now() - start).total_seconds()
     print('Time to find the surfix path: {0}'.format(suf_time))
-    print(pre_time+suf_time)
+    # print(pre_time+suf_time, opt_cost[0]+opt_cost[1])
     # plot optimal path
     path_plot((opt_path_pre, opt_path_suf), regions, obs, tree_pre.robot, tree_pre.dim)
-
     # draw 3D layer graph
-    # layer_plot(tree_pre.tree, (opt_path_pre, opt_path_suf), buchi_state)
+    # layer_plot(tree_pre.tree, opt_path_pre, buchi_state)
+    # layer_plot(tree_suf.tree, opt_path_suf, buchi_state)
+
 
     # write into file
-    with open('data_opt_path', 'wb') as filehandle:
-        # store the data as binary data stream
-        pickle.dump((opt_path_pre, opt_path_suf), filehandle)
-        pickle.dump(sz, filehandle)
+    # with open('data/data_opt_path_015_{0}'.format(float(sys.argv[1])), 'wb') as filehandle:
+    #     # store the data as binary data stream
+    #     pickle.dump((opt_path_pre, opt_path_suf), filehandle)
+    #     pickle.dump(tree_pre, filehandle)
+    #     pickle.dump(tree_suf, filehandle)
+    #     pickle.dump(buchi_state, filehandle)
+    #     pickle.dump(sz, filehandle)
 
     # plot size of tree versus iteration
     # plt.figure(3)
