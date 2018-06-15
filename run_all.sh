@@ -8,8 +8,8 @@
 #        /usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/bin/python3.6 /Users/chrislaw/Documents/GitHub/RRGLTL/OptPlan4MulR.py ${r}
 #    done
 # done
-for ((n=0;n<20;n++))
+for ((n=0;n<30;n++))
 do
      #echo "--# --------------------n = ${n}------------------------"
-     /usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/bin/python3.6 /Users/chrislaw/Documents/GitHub/RRT*_LTL/BiasOptPlan4MulR.py
+     /usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/bin/python3.6 /Users/chrislaw/Documents/GitHub/RRT*_LTL/BiasOptPlan4MulR.py ${n}
 done

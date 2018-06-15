@@ -182,6 +182,7 @@ from matplotlib.transforms import Affine2D
 #
 # print(sufpath)
 
+#--------------------------------------------------------------------------------------------------------
 import matplotlib.pyplot as plt
 
 
@@ -216,14 +217,14 @@ import matplotlib.pyplot as plt
 
 
 # plt.show()
-#
+#-------------------------------------------------------------------------------------------
 # import  pickle
 # import networkx as nx
 # import numpy as np
 # n_pre = []
 # n_suf = []
-# for i in range(21):
-#     with open('data/data_opt_path_015_{0}.0'.format(i), 'rb') as filehandle:
+# for i in [0,1,2,3,4,5,6,7,8,10,11,13,14,15,16]:
+#     with open('data/data_opt_path_b_010_{0}.0'.format(i), 'rb') as filehandle:
 #         # store the data as binary data stream
 #         (opt_path_pre, opt_path_suf) = pickle.load(filehandle)
 #         tree_pre = pickle.load(filehandle)
@@ -234,13 +235,28 @@ import matplotlib.pyplot as plt
 #         n_suf.append(tree_suf.tree.number_of_nodes())
 # print(np.mean(n_pre))
 # print(np.mean(n_suf))
-
-import pyvisgraph as vg
-polys = [[vg.Point(0.4,1.0), vg.Point(0.4,0.7), vg.Point(0.6,0.7), vg.Point(0.6, 1.0)],
-[vg.Point(0.3,0.2), vg.Point(0.3,0.0), vg.Point(0.7,0.0), vg.Point(0.7, 0.2)]]
-g = vg.VisGraph()
-g.build(polys, status=False)
-shortest = g.shortest_path(vg.Point(1.0,0.8), vg.Point(0.2, 0.8))
-print(shortest[1])
+# -------------------------------------------------------------------------------------------
+# import pyvisgraph as vg
+# polys = [[vg.Point(0.4,1.0), vg.Point(0.4,0.7), vg.Point(0.6,0.7), vg.Point(0.6, 1.0)],
+# [vg.Point(0.3,0.2), vg.Point(0.3,0.0), vg.Point(0.7,0.0), vg.Point(0.7, 0.2)]]
+# g = vg.VisGraph()
+# g.build(polys, status=False)
+# shortest = g.shortest_path(vg.Point(1.0,0.8), vg.Point(1.0, 0.8))
+# print(shortest[1])
 # [Point(1.50, 0.00), Point(3.00, 1.00), Point(4.00, 6.00)]
+# from scipy.stats import truncnorm
+# def get_truncated_normal( mean=0, sd=1, low=0, upp=10):
+#     return truncnorm(
+#         (low - mean) / sd, (upp - mean) / sd, loc=mean, scale=sd)
+# n = 0
+# for i in range(100000):
+#     d = get_truncated_normal(0, 4, 0, np.inf).rvs()
+#     if d < 4*3:
+#         n = n + 1
+# print(n/100000)
+#--------------------------------------------------------------------------------------------------------
+import itertools
 
+stuff = [1, 2, 3]
+for subset in itertools.combinations(stuff, 2):
+    print(subset)

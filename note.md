@@ -126,6 +126,18 @@ average(3)\
 ### with guaissian sampling (r/3) when 1 and with mixture dist (0.6, 0.4) and gaussian angle (pi/15/3) and p = 0.8
 [25.6682    2.7692]
 
+![](http://chart.googleapis.com/chart?cht=tx&chl=\delta=0.15)\
+[2.0995    1.6377]
+![](http://chart.googleapis.com/chart?cht=tx&chl=\delta=0.12)\
+[2.5912    1.8584]
+![](http://chart.googleapis.com/chart?cht=tx&chl=\delta=0.1)\
+[2.9799    2.0888]
+![](http://chart.googleapis.com/chart?cht=tx&chl=\delta=0.07)\
+[ 5.7907    2.1939]
+![](http://chart.googleapis.com/chart?cht=tx&chl=\delta=0.04)\
+[ 8.4991    1.9986]
+![](http://chart.googleapis.com/chart?cht=tx&chl=\delta=0.02)\
+[ 20.1242    2.1395]
 
 1000* [1.0439    0.7391    0.7704    0.7617    2.9527    1.2332    2.9692    1.3565    0.6031    0.2992    1.0070, 0.7625    1.0026    0.2817]
 
@@ -148,11 +160,24 @@ optimal in the sense R^2N  not R^2 * R^2 * R^2
 ## biased sampling
 ### with guaissian sampling (r/3) when 1 and with mixture dist (0.6, 0.4) and gaussian angle (pi/15/3) and p = 0.8
 [104.2536   12.2077]
-### without guaissian sampling (r/3) when 1 and with mixture dist (0.6, 0.4) and gaussian angle (pi/15/3) and p = 0.8
-[ 44.8380    8.9101]
+### without guaissian sampling (r/3) when 1 and with mixture dist (0.8, 0.2) and gaussian angle (pi/15/3) and p = 0.8
+[52.9886    8.7406] (23)
+[10.6162
+   63.0761
+    3.9007
+    4.8869
+]
 ## run until first plan
 ## with visibility graph and without gaussian-unguided 
 [90.8272    8.2564]
+
+
+
+maximum iteration 140
+Time for prefix path: 68.485708\
+137 accepting goals found\
+Total cost = prefix Cost + suffix Cost: 7.115724230779762 = 3.659011586539696 + 3.4567126442400653\
+Time to find the surfix path: 11637.30861\
 
 comment  the line "for i in range(len(tree_pre.goals)):"  
 uncomment the line "for i in range(1):"

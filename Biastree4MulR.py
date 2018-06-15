@@ -6,7 +6,7 @@ import numpy as np
 from scipy.stats import truncnorm
 from collections import OrderedDict
 import pyvisgraph as vg
-
+import random
 
 class tree(object):
     """ construction of prefix and suffix tree
@@ -123,8 +123,10 @@ class tree(object):
         :param target: target point
         :return: new point
         """
-
-        d = self.get_truncated_normal(0, min(self.gamma * np.power(np.log(self.tree.number_of_nodes()+1)/self.tree.number_of_nodes(),1./(self.dim*self.robot)), self.step_size)/3, 0)
+        # print(min(self.gamma * np.power(np.log(self.tree.number_of_nodes()+1)/self.tree.number_of_nodes(),1./(self.dim*self.robot)), self.step_size)/3)
+        # d = self.get_truncated_normal(0, min(self.gamma * np.power(np.log(self.tree.number_of_nodes()+1)/self.tree.number_of_nodes(),1./(self.dim*self.robot)), self.step_size)/3, 0, np.inf)
+        d = self.get_truncated_normal(0, self.step_size/3, 0, np.inf)
+        # d = self.get_truncated_normal(0, 1, 0, np.inf)
         d = d.rvs()
         # # print('d=',d)
         # if np.random.uniform(0,1,1) <= self.p:
@@ -184,7 +186,7 @@ class tree(object):
                 Rb_q_rand.append(b_state)
         # if empty
         if not Rb_q_rand:
-            return Rb_q_rand
+            return Rb_q_rand, Rb_q_rand
         # collects the buchi state in the reachable set of qb_rand with minimum distance to the final state
         b_min = self.min2final(min_qb_dict, b_final, Rb_q_rand)
 
@@ -199,7 +201,7 @@ class tree(object):
         M_cand = [b_state for b_state in decr_dict.keys() if decr_dict[b_state]]
         # if empty
         if not M_cand:
-            return M_cand
+            return M_cand, M_cand
         # sample b_min and b_decr
         b_min = M_cand[np.random.randint(0, len(M_cand))]
         b_decr = decr_dict[b_min][np.random.randint(0, len(decr_dict[b_min]))]
@@ -217,6 +219,7 @@ class tree(object):
         else:
             # label of current position
             blabel = b_label.split('||')[0]
+            # blabel = random.choice(b_label.split('||'))
             atomic_label = blabel.split('&&')
             for a in atomic_label:
                 a = a.strip().strip('(').strip(')')
@@ -245,8 +248,10 @@ class tree(object):
             # for i in range(self.robot):
             #     if x_rand[i] == q_rand[0][i]:
             #         x_rand[i] = self.gaussian_unguided(x_rand[i])
+            #   x_rand                  x_nearest
+        return self.mulp2sglp(x_rand), self.mulp2sglp(q_rand[0])
 
-        return x_rand
+        # return x_rand
 
     def nearest(self, x_rand):
         """
@@ -288,7 +293,7 @@ class tree(object):
         cost = np.inf
         q_min = ()
         for near_vertex in near_v:
-            if obs_check[(q_new[0], near_vertex[0])] and self.checkTranB(near_vertex[1], self.tree.nodes[near_vertex]['label'], q_new[1]):
+            if q_new != near_vertex and obs_check[(q_new[0], near_vertex[0])] and self.checkTranB(near_vertex[1], self.tree.nodes[near_vertex]['label'], q_new[1]):
                 c = self.tree.nodes[near_vertex]['cost'] + np.linalg.norm(np.subtract(self.mulp2sglp(q_new[0]), self.mulp2sglp(near_vertex[0])))      # don't consider control
                 if c < cost:
                     added = 1
@@ -476,7 +481,10 @@ class tree(object):
             s = goal
             while s != self.init:
                 s = list(self.tree.pred[s].keys())[0]
+                if s == path[0]:
+                    print("loop")
                 path.insert(0, s)
+
             if self.seg == 'pre':
                 paths[i] = [self.tree.nodes[goal]['cost'], path]
             elif self.seg == 'suf':
@@ -513,20 +521,21 @@ def construction_tree(tree, buchi_graph, min_qb_dict, regions, n_max):
         return {0:[0, []]}, sz
 
     for n in range(n_max):
-
         # sample form: multiple
-        x_new = tuple(tree.sample(buchi_graph, min_qb_dict, regions))
-        if not x_new:
+        # x_new= tuple(tree.sample(buchi_graph, min_qb_dict, regions))
+        x_rand, x_nearest = tree.sample(buchi_graph, min_qb_dict, regions)
+        # couldn't find
+        if not x_rand:
             continue
         # nearest
         # x_nearest = tree.nearest(x_rand)
-        # # steer
-        # x_new = tree.steer(x_rand, x_nearest)
+        # steer
+        x_new = tree.steer(x_rand, x_nearest)
 
         # label
         label = []
         o_id = True
-        # x_new = tree.sglp2mulp(x_new)
+        x_new = tree.sglp2mulp(x_new)
         for i in range(tree.robot):
             l = tree.label(x_new[i])
             # exists one sampled point lies within obstacles

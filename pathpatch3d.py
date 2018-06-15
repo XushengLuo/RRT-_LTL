@@ -276,33 +276,38 @@ import networkx as nx
 # plt.show()
 
 #-----------------------------------------------------------------------------------------------------------------------------
-# xs = [0.15, 0.12, 0.1, 0.07, 0.04, 0.02]
-# x = range(len(xs))
-# y1 = [3.01, 3.06, 3.29, 3.11, 3.57, 3.33]
-# y2 = [6.41, 6.21, 6.36, 6.5, 6.18, 7.72]
-# y = np.subtract(y2, y1)
-# f = plt.figure(1)
-# plt.rc('text', usetex=True)
-# plt.rc('font', family='serif')
-#
-# ax = f.add_subplot(111)
-# ax.plot(x, y, 'r--d', label=r'$\Delta J(\tau)$')
-# ax.plot(x, y1, 'b--s', label = r'$J(\tau)$')
-# ax.set_xticks(x)
-# ax.set_ylim(2.5, 4.5)
-# ax.set_xticklabels(xs)
-# ax.set_xlabel(r'$\delta$')
-# ax.set_ylabel(r'$\Delta J(\tau)$')
-# ax.legend()
-# # ax.tick_params('y', colors='r')
-#
+xs = [0.15, 0.12, 0.1, 0.07, 0.04, 0.02]
+x = range(len(xs))
+y0 = [1.64, 1.86, 2.09, 2.19, 2.00, 2.14]
+y1 = [3.01, 3.06, 3.29, 3.11, 3.57, 3.33]
+y2 = [6.41, 6.21, 6.36, 6.5, 6.18, 7.72]
+# y = np.subtract(y1, y0)
+# yy = np.subtract(y2, y0)
+f = plt.figure(1)
+plt.rc('text', usetex=True)
+plt.rc('font', family='serif')
+
+ax = f.add_subplot(111)
+ax.plot(x, y0, 'r--d', label=r'$J_b(\tau)$')
+ax.plot(x, y1, 'b--d', label = r'$J_u(\tau)$')
+ax.plot(x, y2, 'g--s', label = r'$J_s(\tau)$')
+ax.set_xticks(x)
+ax.set_ylim(1.5, 8)
+ax.set_xticklabels(xs)
+ax.set_xlabel(r'$\delta$')
+ax.set_ylabel(r'$J(\tau)$')
+ax.legend()
+# ax.tick_params('y', colors='r')
+
 # ax2 = ax.twinx()
-# ax2.set_ylim(2.5, 4.5)
-# ax2.plot(x, y1, 'b--s', label = r'$J(\tau)$')
+# ax2.set_ylim(1.5, 8)
+# ax2.plot(x, y0, 'g--s', label = r'$J(\tau)$')
 # ax2.set_ylabel(r'$J(\tau)$')
-# # ax2.tick_params('y', colors='b')
-# plt.savefig(r'/Users/chrislaw/Box Sync/RRL_LTL_cntsSpace/figures/delta_dis.png', bbox_inches='tight', dpi=600)
-#
-# plt.show()
+
+# ax2.tick_params('y', colors='b')
+plt.savefig(r'/Users/chrislaw/Box Sync/RRL_LTL_cntsSpace/figures/delta_dis.png', bbox_inches='tight', dpi=600)
+plt.show()
+
+
 
 

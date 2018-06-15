@@ -6,6 +6,7 @@ import re
 import networkx as nx
 import numpy as np
 from networkx.classes.digraph import DiGraph
+import pyvisgraph as vg
 
 class buchi_graph(object):
     """ construct buchi automaton graph
@@ -66,6 +67,41 @@ class buchi_graph(object):
 
         return self.buchi_graph
 
+    def ShorestPathBtRg(self, regions):
+        """
+        calculate shoresr path between any two labeled regions
+        :param regions: regions
+        :return: dict (region, region) : length
+        """
+        polys = [[vg.Point(0.4, 1.0), vg.Point(0.4, 0.7), vg.Point(0.6, 0.7), vg.Point(0.6, 1.0)],
+                 [vg.Point(0.3, 0.2), vg.Point(0.3, 0.0), vg.Point(0.7, 0.0), vg.Point(0.7, 0.2)]]
+        g = vg.VisGraph()
+        g.build(polys, status=False)
+
+        min_len_region = dict()
+        for key1, value1 in regions.items():
+            for key2, value2 in regions.items():
+                init = value1[:2]
+                tg = value2[:2]
+                # shorest path between init and tg point
+                shortest = g.shortest_path(vg.Point(init[0], init[1]), vg.Point(tg[0], tg[1]))
+                # (key2, key1) is already checked
+                if (key2, key1) in min_len_region.keys():
+                    min_len_region[(key1, key2)] = min_len_region[(key2, key1)]
+                else:
+                    # different regions
+                    if key1 != key2:
+                        dis = 0
+                        for i in range(len(shortest)-1):
+                            dis = dis + np.linalg.norm(np.subtract((shortest[i].x, shortest[i].y), (shortest[i+1].x, shortest[i+1].y)))
+
+                        min_len_region[(key1, key2)] = dis
+                    # same region
+                    else:
+                        min_len_region[(key1, key2)] = 0
+
+        return min_len_region
+
     def DelInfesEdge(self, robot):
         """
         Delete infeasible edge
@@ -96,7 +132,7 @@ class buchi_graph(object):
 
     def MinLen(self):
         """
-        search the shorest path from a node to another
+        search the shorest path from a node to another, weight = 1, i.e. # of state in the path
         :param buchi_graph:
         :return: dict of pairs of node : length of path
         """
@@ -124,6 +160,58 @@ class buchi_graph(object):
                 min_qb_dict[(node1, node2)] = l
 
         return min_qb_dict
+
+
+    # def MinLen_Cost(self):
+    #     """
+    #     search the shorest path from a node to another, weight = cost
+    #     :param buchi_graph:
+    #     :return: dict of pairs of node : length of path
+    #     """
+    #     min_qb_dict = dict()
+    #     for node1 in self.buchi_graph.nodes():
+    #         for node2 in self.buchi_graph.nodes():
+    #             c = np.inf
+    #             if node1 != node2:
+    #                 try:
+    #                     path = nx.all_simple_paths(self.buchi_graph, source=node1, target=node2)
+    #                     for i in range(len(path)-2):
+    #                         word_init = self.buchi_graph.edges[(path[i], path[i+1])]['label']
+    #                         word_tg = self.buchi_graph.edges[(path[i+1], path[i+2])]['label']
+    #                         # calculate distance travelled from word_init to word_tg
+    #                         t_s_b = True
+    #                         # split label with ||
+    #                         label_init = word_init.split('||')
+    #                         label_tg = word_tg.split('||')
+    #                         for label in b_label:
+    #                             t_s_b = True
+    #                             # spit label with &&
+    #                             atomic_label = label.split('&&')
+    #                             for a in atomic_label:
+    #                                 a = a.strip()
+    #                                 a = a.strip('(')
+    #                                 a = a.strip(')')
+    #                                 if a == '1':
+    #                                     continue
+    #                                 # whether ! in an atomic proposition
+    #                                 if '!' in a:
+    #                                     if a[1:] in x_label:
+    #                                         t_s_b = False
+    #                                         break
+    #                                 else:
+    #                                     if not a in x_label:
+    #                                         t_s_b = False
+    #                                         break
+    #                             # either one of || holds
+    #                             if t_s_b:
+    #                                 return t_s_b
+    #                 except nx.exception.NetworkXNoPath:
+    #                     c = np.inf
+    #             else:
+    #                 c = 0
+    #             min_qb_dict[(node1, node2)] = c
+    #
+    #     return min_qb_dict
 
     def FeasAcpt(self, min_qb):
         """
