@@ -7,6 +7,8 @@ import networkx as nx
 import numpy as np
 from networkx.classes.digraph import DiGraph
 import pyvisgraph as vg
+import itertools
+from sympy.logic.boolalg import to_cnf
 
 class buchi_graph(object):
     """ construct buchi automaton graph
@@ -14,8 +16,9 @@ class buchi_graph(object):
         formula: LTL formula specifying task
     """
 
-    def __init__(self, formula):
+    def __init__(self, formula, formula_comp):
         self.formula = formula
+        self.formula_comp = formula_comp
 
     def formulaParser(self):
         """replace letter with symbol
@@ -54,15 +57,21 @@ class buchi_graph(object):
             buchi_graph.succ = AdjacencyView({'T0_init': {'T0_init': {'label': '1'}, 'T1_S1': {'label': 'r3'}}})
         """
         self.buchi_graph = DiGraph(type='buchi', init=init, accept=accep)
+        order_key = list(self.formula_comp.keys())
+        order_key.sort(reverse=True)
         for state in state_group:
             # for each state, find transition relation
             # add node
             self.buchi_graph.add_node(state)
             state_if_fi = re.findall(state + r':\n\tif(.*?)fi', self.buchi_str, re.DOTALL)
-            if  state_if_fi:
-                relation_group = re.findall(r':: \((.*?)\) -> goto (\w+)\n\t', state_if_fi[0])
+            if state_if_fi:
+                relation_group = re.findall(r':: (\(.*?\)) -> goto (\w+)\n\t', state_if_fi[0])
                 for (label, state_dest) in relation_group:
                     # add edge
+                    for k in order_key:
+                        label = label.replace('e{0}'.format(k), self.formula_comp[k])
+                    # if '!' in label:
+                    #     label = self.PutNotInside(label)
                     self.buchi_graph.add_edge(state, state_dest, label=label)
 
         return self.buchi_graph
@@ -102,6 +111,82 @@ class buchi_graph(object):
 
         return min_len_region
 
+    def RobotRegion(self, exp, robot):
+        """
+        pair of robot and corresponding regions in the expression
+        :param exp: logical expression
+        :param robot: # of robots
+        :return: dic of robot index : regions
+        exp = 'l1_1 & l3_1 & l4_1 & l4_6 | l3_4 & l5_6'
+        {1: ['l1_1', 'l3_1', 'l4_1'], 4: ['l3_4'], 6: ['l4_6', 'l5_6']}
+        """
+
+        robot_region_dict = dict()
+        for r in range(robot):
+            findall = re.findall(r'l\d+?_{0}'.format(r + 1), exp)
+            if findall:
+                robot_region_dict[str(r + 1)] = findall
+
+        return robot_region_dict
+
+    def FeasTruthTable(self, exp, robot_region):
+        """
+        Find feasible truth table to make exp true
+        :param exp: expression
+        :return:
+        """
+        if exp == '(1)':
+            return '1'
+
+        sgl_value = []
+        for key, value in robot_region.items():
+            if len(value) == 1:
+                sgl_value.append(value[0])
+
+
+        # set all to be false
+        exp1 = to_cnf(exp)
+        value_in_exp = [value.name for value in exp1.atoms()]
+        subs = {true_rb_rg: False for true_rb_rg in value_in_exp}
+        if exp1.subs(subs):
+            return subs
+
+        # set one to be true, the other to be false
+        for prod in itertools.product(*robot_region.values()):
+            exp1 = exp
+            # set one specific item to be true
+            for true_rb_rg in prod:
+                # set the other to be false
+                value_cp = list(robot_region[true_rb_rg.split('_')[1]])
+                if len(value_cp) > 1:
+                    value_cp.remove(true_rb_rg)
+                    # replace the rest with same robot to be ~
+                    for v_remove in value_cp:
+                        exp1 = exp1.replace(v_remove, '~' + true_rb_rg)
+
+
+            exp1 = to_cnf(exp1)
+            # all value in expression
+            value_in_exp = [value.name for value in exp1.atoms()]
+            # all single value in expression
+            sgl_value_in_exp = [value for value in value_in_exp if value in sgl_value]
+            # not signle value in expression
+            not_sgl_value_in_exp = [value for value in value_in_exp if value not in sgl_value]
+
+            subs1 = {true_rb_rg: True for true_rb_rg in not_sgl_value_in_exp}
+            if len(sgl_value_in_exp):
+                for p in itertools.product(*[[True, False]] * len(sgl_value_in_exp)):
+                    subs2 = {sgl_value_in_exp[i]: p[i] for i in range(len(sgl_value_in_exp))}
+                    subs = {**subs1, **subs2}
+                    if exp1.subs(subs):
+                        return subs
+            else:
+                if exp1.subs(subs1):
+                    return subs1
+
+        return []
+
+
     def DelInfesEdge(self, robot):
         """
         Delete infeasible edge
@@ -111,21 +196,33 @@ class buchi_graph(object):
         TobeDel = []
         for edge in self.buchi_graph.edges():
             b_label = self.buchi_graph.edges[edge]['label']
-            feas = True
-            # split label with ||
-            b_label = b_label.split('||')
-            for label in b_label:
-                feas = True
-                # spit label with &&
-                for r in range(robot):
-                    if len(re.findall(r'l.+?_{0}'.format(r+1), label.replace('!l', ''))) > 1:
-                        feas = False
-                        break
-                if feas:
-                    break
-
-            if not feas:
+            exp = b_label.replace('||', '|').replace('&&', '&').replace('!', '~')
+            robot_region = self.RobotRegion(exp, robot)
+            truth_table = self.FeasTruthTable(exp, robot_region)
+            if not truth_table:
                 TobeDel.append(edge)
+            else:
+                self.buchi_graph.edges[edge]['truth'] = truth_table
+
+            # feas = True
+            # # split label with ||
+            # b_label = b_label.split('||')   # first layer by ||   e1 && (e2 or e3) || e4 -> [e1 && (e2 or e3), e4]
+            # for label in b_label:
+            #     feas = True
+            #     for sublabel in label.split('or'):     # second layer by or  e1 && (e2 or e3) -> [e1 && (e2, e3)]
+            #         # sublabel = re.sub("!(\().*?(\))", "\g<1>\g<2>", sublabel)   # replace word with !
+            #         for r in range(robot):
+            #             if len(re.findall(r'l.+?_{0}'.format(r+1), sublabel.replace('!l', ''))) > 1:
+            #             # if len(re.findall(r'l.+?_{0}'.format(r + 1), sublabel)) > 1:
+            #                 feas = False
+            #                 break
+            #         if not feas:
+            #             break
+            #     if feas:
+            #         break
+
+            # if not feas:
+            #     TobeDel.append(edge)
 
         for edge in TobeDel:
             self.buchi_graph.remove_edge(edge[0], edge[1])
@@ -223,3 +320,24 @@ class buchi_graph(object):
         for acpt in accept:
             if min_qb[(self.buchi_graph.graph['init'][0], acpt)] == np.inf or min_qb[(acpt, acpt)] == np.inf:
                 self.buchi_graph.graph['accept'].remove(acpt)
+
+
+    def PutNotInside(self, str):
+        """
+        put not inside the parenthesis !(p1 && p2) -> !p1 or !p2
+        :param str: old
+        :return: new
+        """
+        substr = re.findall("(!\(.*?\))", str)  # ['!(p1 && p2)', '!(p4 && p5)']
+        for s in substr:
+            oldstr = s.strip().strip('!').strip('(').strip(')')
+            nstr = ''
+            for ss in oldstr.split():
+                if '&&' in ss:
+                    nstr = nstr + ' or '
+                elif 'or' in ss:
+                    nstr = nstr + ' && '
+                else:
+                    nstr = nstr + '!' + ss
+            str = str.replace(s, nstr)
+        return str

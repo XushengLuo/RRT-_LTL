@@ -13,7 +13,7 @@ import sys
 # |     construct transition system graph    |
 # +------------------------------------------+
 
-workspace, regions, obs, init_state, uni_cost, formula = problemFormulation().Formulation()
+workspace, regions, obs, init_state, uni_cost, formula, formula_comp = problemFormulation().Formulation()
 ts = {'workspace':workspace, 'region':regions, 'obs':obs, 'uni_cost':uni_cost}
 # plot the workspace
 ax = plt.figure(1).gca()
@@ -23,16 +23,16 @@ region_plot(obs, 'obs', ax)
 # |            construct buchi graph         |
 # +------------------------------------------+
 
-buchi = Buchi.buchi_graph(formula)
-buchi.formulaParser()
-buchi.execLtl2ba()
-_ = buchi.buchiGraph()
-buchi.DelInfesEdge(len(init_state))
-min_qb = buchi.MinLen()
-buchi.FeasAcpt(min_qb)
-buchi_graph = buchi.buchi_graph
-buchi_state = dict(zip(list(buchi_graph.nodes()), range(1, buchi_graph.number_of_nodes() + 1)))  # dict
-#
+# buchi = Buchi.buchi_graph(formula, formula_comp)
+# buchi.formulaParser()
+# buchi.execLtl2ba()
+# _ = buchi.buchiGraph()
+# buchi.DelInfesEdge(len(init_state))
+# min_qb = buchi.MinLen()
+# buchi.FeasAcpt(min_qb)
+# buchi_graph = buchi.buchi_graph
+# buchi_state = dict(zip(list(buchi_graph.nodes()), range(1, buchi_graph.number_of_nodes() + 1)))  # dict
+# # #
 # with open('data/buchi_case3', 'wb') as filehandle:
 #     # store the data as binary data stream
 #     pickle.dump(buchi_graph, filehandle)

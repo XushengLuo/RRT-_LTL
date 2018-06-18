@@ -27,12 +27,12 @@ class problemFormulation(object):
         self.workspace =  (1,1)
         # !! no whitespace in atomic proposation      b:ball s:square
         r = 0.1
-        # self.ap = {'l1', 'l2', 'l3', 'l4', 'l5'}
-        # self.regions = {   ('l1', 'b'): (0.2, 0.8, r),
-        #                    ('l2', 'b'): (0.8, 0.8, r),
-        #                    ('l3', 'b'): (0.8, 0.4, r),
-        #                    ('l4', 'b'): (0.4, 0.4, r),
-        #                    ('l5', 'b'): (0.1, 0.2, r)}
+        self.ap = {'l1', 'l2', 'l3', 'l4', 'l5'}
+        self.regions = {   ('l1', 'b'): (0.2, 0.8, r),
+                           ('l2', 'b'): (0.8, 0.8, r),
+                           ('l3', 'b'): (0.8, 0.4, r),
+                           ('l4', 'b'): (0.4, 0.4, r),
+                           ('l5', 'b'): (0.1, 0.2, r)}
         self.ap = {'l1', 'l2', 'l3', 'l4', 'l5', 'l6'}
         self.regions = {   ('l1', 'b'): (0.2, 0.8, r),
                            ('l2', 'b'): (0.8, 0.8, r),
@@ -47,8 +47,8 @@ class problemFormulation(object):
                         # ('o4', 'b'): (0.3, 0.6, 0.1)
                       }
         # self.init_state = ((0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1))
+        # self.init_state = ((0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1))
         self.init_state = ((0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1))
-        # self.init_state = ((0.8, 0.1),(0.8, 0.1),(0.8, 0.1))
         # self.init_state = ((0.8, 0.1),(0.8, 0.1))
         # self.init_state = ((0.8, 0.1), )
         self.uni_cost = 0.1
@@ -109,12 +109,40 @@ class problemFormulation(object):
 
         # self.formula = '<>(l3 && []<>l4)'
         # self.formula = '<> (l11) &&   [](<> ( l21 && <> (l31 && <> l41 ) ) )'
-        # self.formula = '<>l4_1 && []<>(l3_1 && <> l1_1) && (!l1_1 U l2_1)  && []!l5_1'
+        # ---------------------------- case 1 --------------------------------
+        # self.formula = '<> e1 && []<> (e2 && <> e3) && (!e3 U e4)  && []!e5'
+        # self.formula_comp = {1: '(l4_1)',
+        #                      2: '(l3_1)',
+        #                      3: '(l1_1)',
+        #                      4: '(l2_1)',
+        #                      5: '(l5_1)',
+        #                      }
+        # #---------------------------- case 2 --------------------------------
         # self.formula = '[]<>l1_1 && [](l1_1 -> X(!l1_1 U l2_2))'
+        self.formula = '[]<> e1 && [](e1 -> X(!e1 U e2))'
+        self.formula_comp = {1: '(l1_1)',
+                             2: '(l2_2)'}
+
         # self.formula = '[]<>(l1_1 && l1_2) && []<>(l2_2 && l2_3)'
-        self.formula = '[]<>(l1_1 && l1_2) && []<>(l2_2 && l2_3) && []<>(l3_3 && l3_4) && []<>(l4_1 && <>(l5_4 && <>l6_3))'\
-                       '&& []<>(l4_5 && l4_6) && []<>(l5_6 && l5_7) && []<>(l6_7 && l6_8) && []<>(l1_5 && <>(l2_8 && <>l3_7))'
-        #
+        # self.formula = '[]<>(l1_1 && l1_2) && []<>(l2_2 && l2_3) && []<>(l3_3 && l3_4) && []<>(l4_1 && <>(l5_4 && <>l6_3))'
+        # ---------------------------- case 3 --------------------------------
+        self.formula = '[]<> e1 && []<> e2 && []<> e3 && []<>(e4 && <>(e5 && <> e6))'
+        self.formula_comp = {1: '(l1_1 && l1_2)',
+                             2: '(l2_2 && l2_3)',
+                             3: '(l3_3 && l3_4)',
+                             4: '(l4_1)',
+                             5: '(l5_4)',
+                             6: '(l6_3)'}
+        # self.formula = '[]<> e1 && []<> e2 && []<> e3 && []<>(e4 && <>(e5 && <> e6)) && []!e7 && <> e8 && !e3 U e8'
+        # self.formula_comp = {1: '(l1_1) && (l3_1 || l2_1)',
+        #                      2: '(l2_2) && (l2_3 || l3_2)',
+        #                      3: '(l3_3 && l3_4)',
+        #                      4: '(l4_1)',
+        #                      5: '(l5_4)',
+        #                      6: '(l6_3)',
+        #                      7: '(l4_5 && l4_6)',
+        #                      8: '(l5_7 && l5_8)',
+        #                      }
         # self.formula = '[]<> l11 && [](l11 -> l22) && (l31 && <>l42)'
         # self.formula = '<>l4 && []<>l1 && [](l1 -> X(!l1 U l2)) && []<>l3 && []!l5'
         #self.formula = '<>l4 && []<>l1 && []<>l5'  # formula 1
@@ -124,4 +152,4 @@ class problemFormulation(object):
         #self.formula = 'gb U b'
     def Formulation(self):
         # print('Task specified by LTL formula: ' + self.formula)
-        return self.workspace, self.regions, self.obs, self.init_state, self.uni_cost, self.formula
+        return self.workspace, self.regions, self.obs, self.init_state, self.uni_cost, self.formula, self.formula_comp

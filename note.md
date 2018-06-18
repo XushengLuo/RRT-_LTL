@@ -171,7 +171,7 @@ optimal in the sense R^2N  not R^2 * R^2 * R^2
 ## with visibility graph and without gaussian-unguided 
 [90.8272    8.2564]
 
-
+step_size = 0.25N, gaussdian d = 1/3, steer, q_rand in p_near, weight = 0.8, 
 
 maximum iteration 140
 Time for prefix path: 68.485708\

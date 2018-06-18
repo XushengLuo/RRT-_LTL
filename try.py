@@ -255,8 +255,127 @@ import matplotlib.pyplot as plt
 #         n = n + 1
 # print(n/100000)
 #--------------------------------------------------------------------------------------------------------
-import itertools
+# import re
+# def PutNotInside(str):
+#     substr = re.findall("(!\(.*?\))", str)  # ['!(p1 && p2)', '!(p4 && p5)']
+#     for s in substr:
+#         oldstr = s.strip().strip('!').strip('(').strip(')')
+#         nstr = ''
+#         for ss in oldstr.split():
+#             if '&&' in ss:
+#                 nstr = nstr + ' or '
+#             elif 'or' in ss:
+#                 nstr = nstr + ' && '
+#             else:
+#                 nstr = nstr + '!' + ss
+#         str = str.replace(s, nstr)
+#     return str
+# x = 'p3 && !(p1 && p2) && !(p4 && p5)'
+# print(PutNotInside(x))
 
-stuff = [1, 2, 3]
-for subset in itertools.combinations(stuff, 2):
-    print(subset)
+# from sympy.logic.inference import satisfiable
+# from sympy import symbols
+# # x, y, z = symbols('x,y,z')
+# # p1,p2,p3,p4,p5 = symbols('p1,p2,p3,p4,p5')
+# # y = Symbol('l3_1')
+# # print(satisfiable(p3 & ~(p1 & p2) & (~(p4 & p5))))
+# # print(satisfiable())
+
+import  re
+def RobotRegion(exp, robot):
+    """
+    pair of robot and corresponding in the expression
+    :param exp: logical expression
+    :param robot: # of robots
+    :return: dic of robot index : regions
+    exp = 'l1_1 & l3_1 & l4_1 & l4_6 | l3_4 & l5_6'
+    {1: ['l1_1', 'l3_1', 'l4_1'], 4: ['l3_4'], 6: ['l4_6', 'l5_6']}
+    """
+
+    robot_region_dict = dict()
+    for r in range(robot):
+        findall = re.findall(r'l\d+?_{0}'.format(r + 1), exp)
+        if findall:
+            robot_region_dict[str(r+1)] = findall
+
+    return robot_region_dict
+
+def FeasTruthTable(exp, robot_region):
+    """
+
+    :param exp:
+    :return:
+    """
+    sgl_value = []
+    for key, value in robot_region.items():
+        if len(value) == 1:
+            sgl_value.append(value[0])
+
+    for prod in itertools.product(*robot_region.values()):
+        # set one specific item to be true
+        for true_rb_rg in prod:
+            # set the other to be false
+            value_cp = list(robot_region[true_rb_rg.split('_')[1]])
+            if len(value_cp) > 1:
+                value_cp.remove(true_rb_rg)
+                # replace the rest with same robot to be ~
+                for v_remove in value_cp:
+                    exp = exp.replace(v_remove, '~' + true_rb_rg)
+
+        exp = to_cnf(exp)
+        # all value in expression
+        value_in_exp = [value.name for value in exp.atoms()]
+        # all single value in expression
+        sgl_value_in_exp = [value for value in value_in_exp if value in sgl_value]
+        not_sgl_value_in_exp = [value for value in value_in_exp if value not in sgl_value]
+        subs1 = {true_rb_rg: True for true_rb_rg in not_sgl_value_in_exp}
+        for p in itertools.product(*[[True, False]]*len(sgl_value_in_exp)):
+            subs2 = {sgl_value_in_exp[i]:p[i] for i in range(len(sgl_value_in_exp))}
+            subs  = {**subs1, **subs2}
+            if exp.subs(subs):
+                return subs
+    return []
+# def multireplace(string, replacements):
+#     """
+#     Given a string and a replacement map, it returns the replaced string.
+#     :param str string: string to execute replacements on
+#     :param dict replacements: replacement dictionary {value to find: value to replace}
+#     :rtype: str
+#     """
+#     # Place longer ones first to keep shorter substrings from matching where the longer ones should take place
+#     # For instance given the replacements {'ab': 'AB', 'abc': 'ABC'} against the string 'hey abc', it should produce
+#     # 'hey ABC' and not 'hey ABc'
+#     substrs = sorted(replacements, key=len, reverse=True)
+#
+#     # Create a big OR regex that matches any of the substrings to replace
+#     regexp = re.compile('|'.join(map(re.escape, substrs)))
+#
+#     # For each match, look up the new string in the replacements
+#     return regexp.sub(lambda match: replacements[match.group(0)], string)
+# #
+import itertools
+from sympy.logic.boolalg import to_cnf
+# from sympy import Symbol
+#
+# x = Symbol('x')
+
+exp = '(l1_1 & l3_1 & l4_1 & l4_6 ) | ~(l4_3 & l3_5 & l2_1)'
+robot_region = RobotRegion(exp,6)
+truth_table = FeasTruthTable(exp, robot_region)
+print(truth_table)
+print(exp)
+# # all combinitions of possible robot, region pair
+
+
+
+
+
+
+
+
+# str = multireplace(str, dict):
+# print(str)
+# from sympy.logic.boolalg import to_cnf
+# str = to_cnf(str)
+# print(satisfiable(str))
+

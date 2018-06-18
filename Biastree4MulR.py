@@ -125,7 +125,8 @@ class tree(object):
         """
         # print(min(self.gamma * np.power(np.log(self.tree.number_of_nodes()+1)/self.tree.number_of_nodes(),1./(self.dim*self.robot)), self.step_size)/3)
         # d = self.get_truncated_normal(0, min(self.gamma * np.power(np.log(self.tree.number_of_nodes()+1)/self.tree.number_of_nodes(),1./(self.dim*self.robot)), self.step_size)/3, 0, np.inf)
-        d = self.get_truncated_normal(0, self.step_size/3, 0, np.inf)
+        # d = self.get_truncated_normal(0, self.step_size/3, 0, np.inf)
+        d = self.get_truncated_normal(0, 1/3, 0, np.inf)
         # d = self.get_truncated_normal(0, 1, 0, np.inf)
         d = d.rvs()
         # # print('d=',d)
@@ -133,7 +134,7 @@ class tree(object):
         #     angle = np.random.uniform(-np.pi/2, np.pi/2, 1) + np.arctan2(center[1]-x[1], center[0]-x[0])
         # else:
         #     angle = np.random.uniform(np.pi/2, 3*np.pi/2, 1) + np.arctan2(center[1]-x[1], center[0]-x[0])
-        angle = np.random.normal(0, np.pi/12/3, 1) + np.arctan2(target[1] - x[1], target[0] - x[0])
+        angle = np.random.normal(0, np.pi/12/3/3, 1) + np.arctan2(target[1] - x[1], target[0] - x[0])
         x_rand = np.add(x , np.append(d*np.cos(angle), d*np.sin(angle)))
         x_rand = [self.trunc(x) for x in x_rand]
         return tuple(x_rand)
@@ -151,6 +152,83 @@ class tree(object):
         angle = np.random.uniform(-np.pi, np.pi, 1)
         x_rand = np.add(x, np.append(d * np.cos(angle), d * np.sin(angle)))
         return tuple([self.trunc(x) for x in x_rand])
+
+    def buchi_guided_sample_by_label(self, x_rand, b_label, x_label, regions):
+
+        if b_label.strip().strip('(').strip(')') == '1':
+            return []
+        # not or be in some place
+        else:
+            # label of current position
+            blabel = b_label.split('||')[0]
+            # blabel = random.choice(b_label.split('||'))
+            atomic_label = blabel.split('&&')
+            for a in atomic_label:
+                # a = a.strip().strip('(').strip(')')
+                a = a.strip().strip('(').strip(')').split('or')[0].strip()
+                # if in wrong position, sample randomly
+                if '!' in a:
+                    if a[1:] in x_label:
+                        xi_rand = []
+                        for i in range(self.dim):
+                            xi_rand.append(uniform(0, self.ts['workspace'][i]))
+                        ind = int(a[1:].split('_')[1]) - 1
+                        x_rand[ind] = tuple(xi_rand)
+                else:
+                    # move towards target position
+                    if not a in x_label:
+                        ind = a.split('_')
+                        weight = 0.8
+                        if np.random.uniform(0, 1, 1) <= weight:
+                            tg = self.target(x_rand[int(ind[1]) - 1], ind[0], regions)
+                            x_rand[int(ind[1]) - 1] = self.gaussian_guided(x_rand[int(ind[1]) - 1], tg)
+                        else:
+                            xi_rand = []
+                            for i in range(self.dim):
+                                xi_rand.append(uniform(0, self.ts['workspace'][i]))
+                            x_rand[int(ind[1]) - 1] = tuple(xi_rand)
+
+        return x_rand
+
+    def buchi_guided_sample_by_truthvalue(self, truth, x_rand, q_rand, x_label, regions):
+        """
+        sample guided by truth value
+        :param truth: the value making transition occur
+        :param x_rand: random selected node
+        :param x_label: label of x_rand
+        :param regions: regions
+        :return: new sampled point
+        """
+        if truth == '1':
+            return [], []
+        # not or be in some place
+        else:
+            for key in truth:
+                # if in wrong position, sample randomly
+                if not truth[key] and key in x_label:
+                    xi_rand = []
+                    for i in range(self.dim):
+                        xi_rand.append(uniform(0, self.ts['workspace'][i]))
+                    ind = int(key.split('_')[1]) - 1
+                    x_rand[ind] = tuple(xi_rand)
+                elif truth[key]:
+                    # move towards target position
+                    if not key in x_label:
+                        ind = key.split('_')
+                        weight = 1
+                        if np.random.uniform(0, 1, 1) <= weight:
+                            tg = self.target(x_rand[int(ind[1]) - 1], ind[0], regions)
+                            x_rand[int(ind[1]) - 1] = self.gaussian_guided(x_rand[int(ind[1]) - 1], tg)
+                        else:
+                            xi_rand = []
+                            for i in range(self.dim):
+                                xi_rand.append(uniform(0, self.ts['workspace'][i]))
+                            x_rand[int(ind[1]) - 1] = tuple(xi_rand)
+
+
+            #   x_rand                  x_nearest
+        return self.mulp2sglp(x_rand), q_rand
+        # return x_rand
 
     def sample(self, buchi_graph, min_qb_dict, regions):
         """
@@ -171,7 +249,6 @@ class tree(object):
             q_rand = q_min2final[np.random.randint(0, len(q_min2final))]
         elif p_rand > self.p or not q_min2final:
             q_rand = q_minNot2final[np.random.randint(0, len(q_minNot2final))]
-        # print(q_rand[0][2])
         # find feasible succssor of buchi state in q_rand
         Rb_q_rand = []
         x_label = []
@@ -182,7 +259,8 @@ class tree(object):
             x_label.append(l)
 
         for b_state in buchi_graph.succ[q_rand[1]]:
-            if self.t_satisfy_b(x_label, buchi_graph.edges[(q_rand[1], b_state)]['label']):
+            # if self.t_satisfy_b(x_label, buchi_graph.edges[(q_rand[1], b_state)]['label']):
+            if self.t_satisfy_b_truth(x_label, buchi_graph.edges[(q_rand[1], b_state)]['truth']):
                 Rb_q_rand.append(b_state)
         # if empty
         if not Rb_q_rand:
@@ -205,51 +283,20 @@ class tree(object):
         # sample b_min and b_decr
         b_min = M_cand[np.random.randint(0, len(M_cand))]
         b_decr = decr_dict[b_min][np.random.randint(0, len(decr_dict[b_min]))]
-        # print(b_min, b_decr)
-        b_label = buchi_graph.edges[(b_min, b_decr)]['label']
+
+
+        # b_label = buchi_graph.edges[(b_min, b_decr)]['label']
+        # x_rand = list(q_rand[0])
+        #
+        # return self.buchi_guided_sample_by_label(x_rand, b_label, x_label, regions)
+
+        truth = buchi_graph.edges[(b_min, b_decr)]['truth']
         x_rand = list(q_rand[0])
-        # all Gaussian sample
-        if b_label.strip().strip('(').strip(')') == '1':
-            # Gaussian sampling
-            # for i in range(self.robot):
-            #     x_rand[i] = self.gaussian_unguided(x_rand[i])
-            # x_rand = list(q_rand[0])
-            return []
-        # not or be in some place
-        else:
-            # label of current position
-            blabel = b_label.split('||')[0]
-            # blabel = random.choice(b_label.split('||'))
-            atomic_label = blabel.split('&&')
-            for a in atomic_label:
-                a = a.strip().strip('(').strip(')')
-                # if in wrong position, sample randomly
-                if '!' in a:
-                    if a[1:] in x_label:
-                        xi_rand = []
-                        for i in range(self.dim):
-                            xi_rand.append(uniform(0, self.ts['workspace'][i]))
-                        ind = int(a[1:].split('_')[1])-1
-                        x_rand[ind] = tuple(xi_rand)
-                else:
-                    # move towards target position
-                    if not a in x_label:
-                        ind = a.split('_')
-                        weight = 0.8
-                        if np.random.uniform(0, 1, 1) <= weight:
-                            tg = self.target(x_rand[int(ind[1]) - 1], ind[0], regions)
-                            x_rand[int(ind[1]) - 1] = self.gaussian_guided(x_rand[int(ind[1]) - 1], tg)
-                        else:
-                            xi_rand = []
-                            for i in range(self.dim):
-                                xi_rand.append(uniform(0, self.ts['workspace'][i]))
-                            x_rand[int(ind[1]) - 1] = tuple(xi_rand)
-            # gaussian sample if not changed
-            # for i in range(self.robot):
-            #     if x_rand[i] == q_rand[0][i]:
-            #         x_rand[i] = self.gaussian_unguided(x_rand[i])
+        return self.buchi_guided_sample_by_truthvalue(truth, x_rand, q_rand, x_label, regions)
+
+
             #   x_rand                  x_nearest
-        return self.mulp2sglp(x_rand), self.mulp2sglp(q_rand[0])
+        # return self.mulp2sglp(x_rand), self.mulp2sglp(q_rand[0])
 
         # return x_rand
 
@@ -313,8 +360,9 @@ class tree(object):
                 self.tree.add_edge(q_min, q_n)
                 self.add_group(q_n)
                 self.goals.append(q_n)
-                # self.goals.append(q_new)
-            if self.seg == 'suf' and self.init in near_v and obs_check[(q_new[0], self.init[0])] and self.checkTranB(q_new[1], label, self.init[1]):
+
+            if self.seg == 'suf' and self.obs_check([self.init], q_new[0], label, 'final')[(q_new[0], self.init[0])] and self.checkTranB(q_new[1], label, self.init[1]):
+            # if self.seg == 'suf' and self.init in near_v and obs_check[(q_new[0], self.init[0])] and self.checkTranB(q_new[1], label, self.init[1]):
                 self.goals.append(q_new)
         return added
 
@@ -332,6 +380,8 @@ class tree(object):
                 # update the cost of node in the subtree rooted at near_vertex
                 if delta_c > 0:
                     # self.tree.nodes[near_vertex]['cost'] = c
+                    if not list(self.tree.pred[near_vertex].keys()):
+                        print('empty')
                     self.tree.remove_edge(list(self.tree.pred[near_vertex].keys())[0], near_vertex)
                     self.tree.add_edge(q_new, near_vertex)
                     edges = dfs_labeled_edges(self.tree, source=near_vertex)
@@ -352,11 +402,13 @@ class tree(object):
                 p_near.append(vertex)
         return p_near
 
-    def obs_check(self, q_near, x_new, label):
+    def obs_check(self, q_near, x_new, label, stage):
         """
         check whether obstacle free along the line from x_near to x_new
         :param q_near: states in the near ball, tuple (mulp, buchi)
         :param x_new: new state form: multiple point
+        :param label: label of x_new
+        :param stage: regular stage or final stage, deciding whether it's goal state
         :return: dict (x_near, x_new): true (obs_free)
         """
         # x_new =  ((0.8944144022556246, 0.33267910821176216),)
@@ -373,8 +425,13 @@ class tree(object):
                     mid_label = self.label(mid)
                     if mid_label != '':
                         mid_label = mid_label + '_' + str(r+1)
-                    if 'o' in mid_label or (mid_label != self.tree.nodes[x]['label'][r] and mid_label != label[r]):
-                        # obstacle             pass through one region more than once
+                    if stage == 'reg' and ('o' in mid_label or (mid_label != self.tree.nodes[x]['label'][r] and mid_label != label[r])):
+                        #                      obstacle             pass through one region more than once
+                        obs_check_dict[(x_new, x[0])] = False
+                        flag = False
+                        break
+                    elif stage == 'final' and ('o' in mid_label or (mid_label != self.tree.nodes[x]['label'][r] and mid_label != label[r] and mid_label != '')):
+                        #                         obstacle             cannot pass through one region more than once expcet unlabeled region
                         obs_check_dict[(x_new, x[0])] = False
                         flag = False
                         break
@@ -431,8 +488,12 @@ class tree(object):
         if q_b_new not in b_state_succ:
              return False
 
-        b_label = self.buchi_graph.edges[(b_state, q_b_new)]['label']
-        if self.t_satisfy_b(x_label, b_label):
+        # b_label = self.buchi_graph.edges[(b_state, q_b_new)]['label']
+        # if self.t_satisfy_b(x_label, b_label):
+        #     return True
+
+        truth = self.buchi_graph.edges[(b_state, q_b_new)]['truth']
+        if self.t_satisfy_b_truth(x_label, truth):
             return True
 
     def t_satisfy_b(self, x_label, b_label):
@@ -467,6 +528,28 @@ class tree(object):
             if t_s_b:
                 return t_s_b
         return t_s_b
+
+    def t_satisfy_b_truth(self, x_label, truth):
+        """
+        check whether transition enabled under current label
+        :param x_label: current label
+        :param truth: truth value making transition enabled
+        :return: true or false
+        """
+        if truth == '1':
+            return True
+
+        true_label = [truelabel for truelabel in truth.keys() if truth[truelabel]]
+        for label in true_label:
+            if label not in x_label:
+                return False
+
+        false_label = [falselabel for falselabel in truth.keys() if not truth[falselabel]]
+        for label in false_label:
+            if label in x_label:
+                return False
+
+        return True
 
     def findpath(self, goals):
         """
@@ -522,16 +605,16 @@ def construction_tree(tree, buchi_graph, min_qb_dict, regions, n_max):
 
     for n in range(n_max):
         # sample form: multiple
-        # x_new= tuple(tree.sample(buchi_graph, min_qb_dict, regions))
-        x_rand, x_nearest = tree.sample(buchi_graph, min_qb_dict, regions)
+        x_new , q_rand = tree.sample(buchi_graph, min_qb_dict, regions)
+
+        # x_rand, _ = tree.sample(buchi_graph, min_qb_dict, regions)
         # couldn't find
-        if not x_rand:
+        if not x_new:
             continue
         # nearest
         # x_nearest = tree.nearest(x_rand)
         # steer
-        x_new = tree.steer(x_rand, x_nearest)
-
+        x_new = tree.steer(x_new, tree.mulp2sglp(q_rand[0]))
         # label
         label = []
         o_id = True
@@ -550,8 +633,11 @@ def construction_tree(tree, buchi_graph, min_qb_dict, regions, n_max):
             continue
         # near state
         near_v = tree.near(tree.mulp2sglp(x_new))
+
+        if q_rand not in near_v:
+            near_v = near_v + [q_rand]
         # check obstacle free
-        obs_check = tree.obs_check(near_v, x_new, label)
+        obs_check = tree.obs_check(near_v, x_new, label, 'reg')
 
         # iterate over each buchi state
         for b_state in buchi_graph.nodes:
