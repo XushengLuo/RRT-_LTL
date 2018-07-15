@@ -128,17 +128,28 @@ average(3)\
 
 ![](http://chart.googleapis.com/chart?cht=tx&chl=\delta=0.15)\
 [2.0995    1.6377]
+[0.5327    0.0150    1.3885    0.3261]
+[0.7146    0.0154    1.5782    0.4054]  p_rand = 0.9 p_new = 0.8 steer with collision checking threshold = 0.02
 ![](http://chart.googleapis.com/chart?cht=tx&chl=\delta=0.12)\
 [2.5912    1.8584]
+[0.5050    0.0224    1.4861    0.4283]
+[0.6442    0.0406    1.6939    0.6125]  p_rand = 0.9 p_new = 0.8 steer with collision checking threshold = 0.02
 ![](http://chart.googleapis.com/chart?cht=tx&chl=\delta=0.1)\
 [2.9799    2.0888]
+[0.4288    0.0251    1.4790    0.4776]
+[0.5524    0.0337    1.6342    0.6762] p_rand = 0.9 p_new = 0.8 steer with collision checking threshold = 0.02
 ![](http://chart.googleapis.com/chart?cht=tx&chl=\delta=0.07)\
 [ 5.7907    2.1939]
+[0.8579    0.0659    1.5286    0.5598]
+[0.8098    0.0398    1.6969    0.5593] p_rand = 0.9 p_new = 0.8 steer with collision checking threshold = 0.02
 ![](http://chart.googleapis.com/chart?cht=tx&chl=\delta=0.04)\
 [ 8.4991    1.9986]
+[1.1983    0.1476    1.5647    0.5124]
+[1.3890    0.1294    1.7517    0.4568] p_rand = 0.9 p_new = 0.8 steer with collision checking threshold = 0.02
 ![](http://chart.googleapis.com/chart?cht=tx&chl=\delta=0.02)\
 [ 20.1242    2.1395]
-
+[2.9609    0.3383    1.5904    0.4744]
+[6.5478    0.2358    1.6506    0.4672] p_rand = 0.9 p_new = 0.8 steer with collision checking threshold = 0.02
 1000* [1.0439    0.7391    0.7704    0.7617    2.9527    1.2332    2.9692    1.3565    0.6031    0.2992    1.0070, 0.7625    1.0026    0.2817]
 
 optimal in the sense R^2N  not R^2 * R^2 * R^2 
@@ -162,16 +173,67 @@ optimal in the sense R^2N  not R^2 * R^2 * R^2
 [104.2536   12.2077]
 ### without guaissian sampling (r/3) when 1 and with mixture dist (0.8, 0.2) and gaussian angle (pi/15/3) and p = 0.8
 [52.9886    8.7406] (23)
-[10.6162
-   63.0761
-    3.9007
-    4.8869
-]
+[10.6162   63.0761    3.9007   4.8869]
 ## run until first plan
 ## with visibility graph and without gaussian-unguided 
 [90.8272    8.2564]
 
-step_size = 0.25N, gaussdian d = 1/3, steer, q_rand in p_near, weight = 0.8, 
+step_size = 0.25N, gaussdian d = 1/3, steer, q_rand in p_near, weight = 0.9, 
+[9.5937   11.6222    3.5711    4.5432]
+[7.7036   17.6877    3.8589    5.4077] p_rand = 0.9 p_new = 0.9 steer with collision avoidance
+[8.7462   20.9265    3.9743    5.0540] p_rand = 0.9 p_new = 0.9 nearest, steer with collision avoidance
+multi-robots do not let one visit multiple regions
+[9.6499   22.1783    3.9949    5.0702] p_rand = 0.9 p_new = 0.8 steer with collision checking threshold = 0.02
+
+
+
+## case 5 
+[76.3156   51.9871    5.2310    5.1186]
+[97.9722   69.3431    5.3680    5.1190] angle 0.9
+[50.1547   39.1667    5.3998    5.2825] p_rand = 1 p_new = 0.9 o failure \
+[33.3548   35.0367    5.0226    4.7155] p_rand = 1 p_new = 1 but 4 failure \
+[not good] p_rand = 0.9 = p_new = 0.9 
+
+[373.6470   93.9945    6.5791    5.5308] p_rand = 0.9 p_new = 0.9 nearest, steer with collision
+[57.4903   58.1793    5.0610    4.8449] p_rand = 0.9 p_new = 1 steer, no collision checking
+[56.0552   45.0558    4.9624    4.9589] p_rand = 0.9 p_new = 1 steer, with collision checking
+
+[73.5116   73.4337    5.7027    5.4105] p_rand = 0.9 p_new = 0.8 steer with collision checking threshold = 0.02
+
+[ 71.6124   72.5875    5.9591    5.4992] 16 robots
+## case 6
+#### l3_10 && l3_11
+[67.5203   62.1045    5.3210    5.1431] p_rand = 0.9 p_new = 0.95 steer with collision checking\
+[65.2368   63.8054    5.4534    5.5354] p_rand = 1 p_new = 0.95 steer with collision checking\
+[89.1664   82.7844    5.2637    4.9735] p_rand = 0.9 p_new = 0.95 steer nearest with collision checking
+### l3_10 || l3_11
+[284.6477   86.2239    5.5073    5.0000] p_rand = 0.9 p_new = 0.95 steer nearest with collision checking
+[253.6178   45.8304    5.4885    4.6919] p_ranf = 0.9 p_new = 0.95 steer with collision checking
+[208.4485   66.1449    5.6913    5.2344] p_rand = 0.9 p_new = 0.8 steer with collision checking threshold = 0.02
+
+[159.8360   94.2636    6.0756    5.1744] 16 robots
+## case 7 
+
+[323.3305  164.5208    5.5025    5.6280] p_rand = 0.9 p_new = 0.9 steer\
+[220.5626  178.7192    5.3763    5.5291] p_rand = 0.95 p_new = 0.9\
+[213.7200  174.3745    5.5608    5.2411] no more than 1000s p_rand = 0.9 p_new = 0.9 no steer\
+
+### l3_10 || l3_11 threshold = 0.02
+[416.2756  127.8903    5.7027    5.1173] p_ranf = 0.9 p_new = 0.95 steer with collision checking
+[176.4928  242.2897    5.6539    5.8199] p_rand = 0.9 p_new = 0.8 steer with collision checking threshold = 0.02
+
+[281.7545  247.3154    5.7677    5.5857] (16 robots)
+
+## case 8 
+[1139.5174	208.4402	7.2050	5.8126] p_rand = 0.9 p_new = 0.95 steer with collision checking threshold=0.02
+#### l3_10 || l3_11
+[745.5695  331.4813    7.8290    5.8686] p_rand = 0.9 p_new = 0.8 steer with collision checking  threshold = 0.02
+
+[979.5933  236.4079    7.9289    6.0906] 16 robots
+
+## case 9
+[1.3116    0.3091    0.0104    0.0059]*1000 (13) (20 robots) p_rand = 0.9 p_new = 0.8 steer with collision checking  threshold = 0.02
+
 
 maximum iteration 140
 Time for prefix path: 68.485708\

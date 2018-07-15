@@ -8,7 +8,9 @@ import numpy as np
 from networkx.classes.digraph import DiGraph
 import pyvisgraph as vg
 import itertools
-from sympy.logic.boolalg import to_cnf
+from sympy.logic.boolalg import to_cnf, Or
+from sympy import satisfiable
+
 
 class buchi_graph(object):
     """ construct buchi automaton graph
@@ -16,9 +18,10 @@ class buchi_graph(object):
         formula: LTL formula specifying task
     """
 
-    def __init__(self, formula, formula_comp):
+    def __init__(self, formula, formula_comp, exclusion):
         self.formula = formula
         self.formula_comp = formula_comp
+        self.exclusion = exclusion
 
     def formulaParser(self):
         """replace letter with symbol
@@ -66,10 +69,17 @@ class buchi_graph(object):
             state_if_fi = re.findall(state + r':\n\tif(.*?)fi', self.buchi_str, re.DOTALL)
             if state_if_fi:
                 relation_group = re.findall(r':: (\(.*?\)) -> goto (\w+)\n\t', state_if_fi[0])
-                for (label, state_dest) in relation_group:
+                for (labell, state_dest) in relation_group:
+                    # whether the edge is feasible in terms of unit atomic proposition
+                    label = self.InitialDelInfesEdge(labell)
+                    if not label or label.isspace():
+                        continue
                     # add edge
                     for k in order_key:
-                        label = label.replace('e{0}'.format(k), self.formula_comp[k])
+                        if k >= 10:
+                            label = label.replace('e_{0}'.format(k), self.formula_comp[k])
+                        else:
+                            label = label.replace('e{0}'.format(k), self.formula_comp[k])
                     # if '!' in label:
                     #     label = self.PutNotInside(label)
                     self.buchi_graph.add_edge(state, state_dest, label=label)
@@ -123,7 +133,7 @@ class buchi_graph(object):
 
         robot_region_dict = dict()
         for r in range(robot):
-            findall = re.findall(r'l\d+?_{0}'.format(r + 1), exp)
+            findall = re.findall(r'(l\d+?_{0})[^0-9]'.format(r + 1), exp)
             if findall:
                 robot_region_dict[str(r + 1)] = findall
 
@@ -142,7 +152,6 @@ class buchi_graph(object):
         for key, value in robot_region.items():
             if len(value) == 1:
                 sgl_value.append(value[0])
-
 
         # set all to be false
         exp1 = to_cnf(exp)
@@ -164,7 +173,7 @@ class buchi_graph(object):
                     for v_remove in value_cp:
                         exp1 = exp1.replace(v_remove, '~' + true_rb_rg)
 
-
+            # simplify
             exp1 = to_cnf(exp1)
             # all value in expression
             value_in_exp = [value.name for value in exp1.atoms()]
@@ -174,8 +183,13 @@ class buchi_graph(object):
             not_sgl_value_in_exp = [value for value in value_in_exp if value not in sgl_value]
 
             subs1 = {true_rb_rg: True for true_rb_rg in not_sgl_value_in_exp}
+
+            tf = [False, True]
+            # if type(exp1) == Or:
+            #     tf = [False, True]
+
             if len(sgl_value_in_exp):
-                for p in itertools.product(*[[True, False]] * len(sgl_value_in_exp)):
+                for p in itertools.product(*[tf] * len(sgl_value_in_exp)):
                     subs2 = {sgl_value_in_exp[i]: p[i] for i in range(len(sgl_value_in_exp))}
                     subs = {**subs1, **subs2}
                     if exp1.subs(subs):
@@ -186,7 +200,6 @@ class buchi_graph(object):
 
         return []
 
-
     def DelInfesEdge(self, robot):
         """
         Delete infeasible edge
@@ -194,16 +207,26 @@ class buchi_graph(object):
         :param robot: # robot
         """
         TobeDel = []
+        print(self.buchi_graph.number_of_edges())
+        i = 0
         for edge in self.buchi_graph.edges():
+            i = i+1
+            print(i)
             b_label = self.buchi_graph.edges[edge]['label']
-            exp = b_label.replace('||', '|').replace('&&', '&').replace('!', '~')
-            robot_region = self.RobotRegion(exp, robot)
-            truth_table = self.FeasTruthTable(exp, robot_region)
-            if not truth_table:
-                TobeDel.append(edge)
+            if b_label != '(1)':
+                exp = b_label.replace('||', '|').replace('&&', '&').replace('!', '~')
+                # robot_region = self.RobotRegion(exp, robot)
+                # truth_table = self.FeasTruthTable(exp, robot_region)
+                truth = satisfiable(exp, algorithm="dpll")
+                truth_table = dict()
+                for key, value in truth.items():
+                    truth_table[key.name] = value
+                if not truth_table:
+                    TobeDel.append(edge)
+                else:
+                    self.buchi_graph.edges[edge]['truth'] = truth_table
             else:
-                self.buchi_graph.edges[edge]['truth'] = truth_table
-
+                self.buchi_graph.edges[edge]['truth'] = '1'
             # feas = True
             # # split label with ||
             # b_label = b_label.split('||')   # first layer by ||   e1 && (e2 or e3) || e4 -> [e1 && (e2 or e3), e4]
@@ -226,6 +249,24 @@ class buchi_graph(object):
 
         for edge in TobeDel:
             self.buchi_graph.remove_edge(edge[0], edge[1])
+        print(self.buchi_graph.number_of_edges())
+
+    def InitialDelInfesEdge(self, orig_label):
+        div_by_or = orig_label.split(') || (')
+
+        for item in div_by_or:
+            feas = True
+            for excl in self.exclusion:
+                # mutual exclusion term exist
+                if excl[0] in item and excl[1] in item and '!{0}'.format(excl[0]) not in item and '!{0}'.format(excl[1]) not in item:
+                    feas = False
+                    break
+            if not feas:
+                item = item.strip('(').strip(')')
+                item = '(' + item + ')'
+                orig_label = orig_label.replace(' '+item+' ||', '').replace(item+' || ','').replace(' || '+item,'').replace(item,'')
+
+        return orig_label
 
     def MinLen(self):
         """
@@ -236,13 +277,14 @@ class buchi_graph(object):
         min_qb_dict = dict()
         for node1 in self.buchi_graph.nodes():
             for node2 in self.buchi_graph.nodes():
-                if node1 != node2:
+                if node1 != node2 and 'accept' in node2:
                     try:
                         l, _ = nx.algorithms.single_source_dijkstra(self.buchi_graph, source=node1, target=node2)
                     except nx.exception.NetworkXNoPath:
                         l = np.inf
                         # path = []
-                else:
+                    min_qb_dict[(node1, node2)] = l
+                elif node1 == node2 and 'accept' in node2:
                     l = np.inf
                     # path = []
                     for succ in self.buchi_graph.succ[node1]:
@@ -254,10 +296,9 @@ class buchi_graph(object):
                         if l0 < l:
                             l = l0 + 1
                             # path = path0
-                min_qb_dict[(node1, node2)] = l
+                    min_qb_dict[(node1, node2)] = l
 
         return min_qb_dict
-
 
     # def MinLen_Cost(self):
     #     """
@@ -320,7 +361,6 @@ class buchi_graph(object):
         for acpt in accept:
             if min_qb[(self.buchi_graph.graph['init'][0], acpt)] == np.inf or min_qb[(acpt, acpt)] == np.inf:
                 self.buchi_graph.graph['accept'].remove(acpt)
-
 
     def PutNotInside(self, str):
         """

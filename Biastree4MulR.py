@@ -11,7 +11,7 @@ import random
 class tree(object):
     """ construction of prefix and suffix tree
     """
-    def __init__(self, n_robot, acpt, ts, buchi_graph, init, seg, step_size):
+    def __init__(self, n_robot, acpt, ts, buchi_graph, init, seg, step_size, no):
         """
         :param acpt:  accepting state
         :param ts: transition system
@@ -28,7 +28,9 @@ class tree(object):
         self.step_size = step_size
         self.dim = len(self.ts['workspace'])
         uni_ball = [1, 2, 3.142, 4.189, 4.935, 5.264, 5.168, 4.725, 4.059, 3.299, 2.550]
-        self.gamma = np.ceil(4 * np.power(1/uni_ball[self.robot*self.dim], 1./(self.dim*self.robot)))   # unit workspace
+        # uni_v = uni_ball[self.robot*self.dim]
+        uni_v = np.power(np.pi, self.robot*self.dim/2) / math.gamma(self.robot*self.dim/2+1)
+        self.gamma = np.ceil(4 * np.power(1/uni_v, 1./(self.dim*self.robot)))   # unit workspace
         self.tree = DiGraph(type='PBA', init=init)
         self.group = dict()
         label = []
@@ -42,13 +44,16 @@ class tree(object):
         self.tree.add_node(init, cost=0, label=label)
         self.add_group(init)
         # probability
-        self.p = 0.8
-
+        self.p = 0.9
+        # threshold for collision avoidance
+        self.threshold = 0.02
         # polygon obstacle
         polys = [[vg.Point(0.4, 1.0), vg.Point(0.4, 0.7), vg.Point(0.6, 0.7), vg.Point(0.6, 1.0)],
                  [vg.Point(0.3, 0.2), vg.Point(0.3, 0.0), vg.Point(0.7, 0.0), vg.Point(0.7, 0.2)]]
         self.g = vg.VisGraph()
         self.g.build(polys, status=False)
+        # region that has ! preceding it
+        self.no = no
 
     def add_group(self, q_state):
         """
@@ -104,6 +109,18 @@ class tree(object):
         else:
             return value
 
+    def collision_avoidance(self, x, index):
+        """
+        check whether any robots are collision-free from index-th robot
+        :param x: all robots
+        :param index: index-th robot
+        :return: true collision free
+        """
+        for i in range(len(x)):
+            if i != index and np.linalg.norm(np.subtract(x[i], x[index])) <= self.threshold:
+                return False
+        return True
+
     def target(self, init, target, regions):
         """
         find the closest vertex in the short path from init to target
@@ -123,18 +140,12 @@ class tree(object):
         :param target: target point
         :return: new point
         """
-        # print(min(self.gamma * np.power(np.log(self.tree.number_of_nodes()+1)/self.tree.number_of_nodes(),1./(self.dim*self.robot)), self.step_size)/3)
-        # d = self.get_truncated_normal(0, min(self.gamma * np.power(np.log(self.tree.number_of_nodes()+1)/self.tree.number_of_nodes(),1./(self.dim*self.robot)), self.step_size)/3, 0, np.inf)
-        # d = self.get_truncated_normal(0, self.step_size/3, 0, np.inf)
+
         d = self.get_truncated_normal(0, 1/3, 0, np.inf)
-        # d = self.get_truncated_normal(0, 1, 0, np.inf)
         d = d.rvs()
-        # # print('d=',d)
-        # if np.random.uniform(0,1,1) <= self.p:
-        #     angle = np.random.uniform(-np.pi/2, np.pi/2, 1) + np.arctan2(center[1]-x[1], center[0]-x[0])
-        # else:
-        #     angle = np.random.uniform(np.pi/2, 3*np.pi/2, 1) + np.arctan2(center[1]-x[1], center[0]-x[0])
+        # d = np.linalg.norm(np.subtract(x, target))
         angle = np.random.normal(0, np.pi/12/3/3, 1) + np.arctan2(target[1] - x[1], target[0] - x[0])
+        # angle = np.arctan2(target[1] - x[1], target[0] - x[0])
         x_rand = np.add(x , np.append(d*np.cos(angle), d*np.sin(angle)))
         x_rand = [self.trunc(x) for x in x_rand]
         return tuple(x_rand)
@@ -205,25 +216,55 @@ class tree(object):
         else:
             for key in truth:
                 # if in wrong position, sample randomly
-                if not truth[key] and key in x_label:
-                    xi_rand = []
-                    for i in range(self.dim):
-                        xi_rand.append(uniform(0, self.ts['workspace'][i]))
-                    ind = int(key.split('_')[1]) - 1
-                    x_rand[ind] = tuple(xi_rand)
-                elif truth[key]:
-                    # move towards target position
-                    if not key in x_label:
-                        ind = key.split('_')
-                        weight = 1
-                        if np.random.uniform(0, 1, 1) <= weight:
-                            tg = self.target(x_rand[int(ind[1]) - 1], ind[0], regions)
-                            x_rand[int(ind[1]) - 1] = self.gaussian_guided(x_rand[int(ind[1]) - 1], tg)
-                        else:
-                            xi_rand = []
-                            for i in range(self.dim):
-                                xi_rand.append(uniform(0, self.ts['workspace'][i]))
-                            x_rand[int(ind[1]) - 1] = tuple(xi_rand)
+                # if not truth[key] and key in x_label:
+                #     xi_rand = []
+                #     for i in range(self.dim):
+                #         xi_rand.append(uniform(0, self.ts['workspace'][i]))
+                #     ind = key.split('_')
+                #     x_rand[int(ind[1]) - 1] = tuple(xi_rand)
+                # elif truth[key]:
+                #     # move towards target position
+                #     if not key in x_label:
+                #         ind = key.split('_')
+                #         weight = 1
+                #         if np.random.uniform(0, 1, 1) <= weight:
+                #             tg = self.target(x_rand[int(ind[1]) - 1], ind[0], regions)
+                #             # tg = self.target(orig_x_rand, ind[0], regions)
+                #             x_rand[int(ind[1]) - 1] = self.gaussian_guided(x_rand[int(ind[1]) - 1], tg)
+                #         else:
+                #             xi_rand = []
+                #             for i in range(self.dim):
+                #                 xi_rand.append(uniform(0, self.ts['workspace'][i]))
+                #             x_rand[int(ind[1]) - 1] = tuple(xi_rand)
+                ind = key.split('_')
+                orig_x_rand = x_rand[int(ind[1]) - 1]  # save
+                while 1:
+                    x_rand[int(ind[1]) - 1] = orig_x_rand  # recover
+                    # if in wrong position, sample randomly
+                    if not truth[key] and key in x_label:
+                        xi_rand = []
+                        for i in range(self.dim):
+                            xi_rand.append(uniform(0, self.ts['workspace'][i]))
+                        # ind = key.split('_')
+                        x_rand[int(ind[1])-1] = tuple(xi_rand)
+                    elif truth[key]:
+                        # move towards target position
+                        if not key in x_label:
+                            # ind = key.split('_')
+                            weight = 0.8
+                            if np.random.uniform(0, 1, 1) <= weight:
+                                # tg = self.target(x_rand[int(ind[1]) - 1], ind[0], regions)
+                                tg = self.target(orig_x_rand, ind[0], regions)
+                                x_rand[int(ind[1]) - 1] = self.gaussian_guided(orig_x_rand, tg)
+                            else:
+                                xi_rand = []
+                                for i in range(self.dim):
+                                    xi_rand.append(uniform(0, self.ts['workspace'][i]))
+                                x_rand[int(ind[1]) - 1] = tuple(xi_rand)
+                    else:
+                        break
+                    if self.collision_avoidance(x_rand, int(ind[1]) - 1):
+                        break
 
 
             #   x_rand                  x_nearest
@@ -291,6 +332,7 @@ class tree(object):
         # return self.buchi_guided_sample_by_label(x_rand, b_label, x_label, regions)
 
         truth = buchi_graph.edges[(b_min, b_decr)]['truth']
+        # print(truth)
         x_rand = list(q_rand[0])
         return self.buchi_guided_sample_by_truthvalue(truth, x_rand, q_rand, x_label, regions)
 
@@ -300,21 +342,40 @@ class tree(object):
 
         # return x_rand
 
+    # def nearest(self, x_rand):
+    #     """
+    #     find the nearest vertex in the tree
+    #     :param: x_rand randomly sampled point form: single point ()
+    #     :return: nearest vertex form: single point ()
+    #     """
+    #     min_dis = math.inf
+    #     x_nearest = x_rand
+    #     for vertex in self.tree.nodes:
+    #         x_vertex = self.mulp2sglp(vertex[0])
+    #         dis = np.linalg.norm(np.subtract(x_rand, x_vertex))
+    #         if dis < min_dis:
+    #             x_nearest = x_vertex
+    #             min_dis = dis
+    #     return x_nearest
+
     def nearest(self, x_rand):
         """
-        find the nearest vertex in the tree
+        find the nearest class of vertices in the tree
         :param: x_rand randomly sampled point form: single point ()
-        :return: nearest vertex form: single point ()
+        :return: nearest class of vertices form: single point ()
         """
         min_dis = math.inf
-        x_nearest = x_rand
+        q_nearest = []
         for vertex in self.tree.nodes:
             x_vertex = self.mulp2sglp(vertex[0])
             dis = np.linalg.norm(np.subtract(x_rand, x_vertex))
             if dis < min_dis:
-                x_nearest = x_vertex
+                q_nearest = list()
+                q_nearest.append(vertex)
                 min_dis = dis
-        return x_nearest
+            elif dis == min_dis:
+                q_nearest.append(vertex)
+        return q_nearest
 
     def steer(self, x_rand, x_nearest):
         """
@@ -360,6 +421,9 @@ class tree(object):
                 self.tree.add_edge(q_min, q_n)
                 self.add_group(q_n)
                 self.goals.append(q_n)
+
+            # if self.seg == 'suf' and self.checkTranB(q_new[1], label, self.init[1]):
+            #     print('final')
 
             if self.seg == 'suf' and self.obs_check([self.init], q_new[0], label, 'final')[(q_new[0], self.init[0])] and self.checkTranB(q_new[1], label, self.init[1]):
             # if self.seg == 'suf' and self.init in near_v and obs_check[(q_new[0], self.init[0])] and self.checkTranB(q_new[1], label, self.init[1]):
@@ -430,8 +494,9 @@ class tree(object):
                         obs_check_dict[(x_new, x[0])] = False
                         flag = False
                         break
-                    elif stage == 'final' and ('o' in mid_label or (mid_label != self.tree.nodes[x]['label'][r] and mid_label != label[r] and mid_label != '')):
-                        #                         obstacle             cannot pass through one region more than once expcet unlabeled region
+                    # elif stage == 'final' and ('o' in mid_label or (mid_label != self.tree.nodes[x]['label'][r] and mid_label != label[r] and mid_label != '')):
+                    #                             obstacle             cannot pass through one region more than once expcet unlabeled region
+                    elif stage == 'final' and ('o' in mid_label or (mid_label != self.tree.nodes[x]['label'][r] and mid_label != label[r] and mid_label in self.no)):
                         obs_check_dict[(x_new, x[0])] = False
                         flag = False
                         break
@@ -603,17 +668,21 @@ def construction_tree(tree, buchi_graph, min_qb_dict, regions, n_max):
     if tree.seg == 'suf' and tree.checkTranB(tree.init[1], tree.tree.nodes[tree.init]['label'], tree.init[1]):
         return {0:[0, []]}, sz
 
-    for n in range(n_max):
+    # for n in range(n_max):
+    while 1:
         # sample form: multiple
         x_new , q_rand = tree.sample(buchi_graph, min_qb_dict, regions)
-
+        # print(x_new)
         # x_rand, _ = tree.sample(buchi_graph, min_qb_dict, regions)
         # couldn't find
         if not x_new:
             continue
         # nearest
-        # x_nearest = tree.nearest(x_rand)
+
+        # q_nearest = tree.nearest(x_new)
+        # x_new = tree.steer(x_new, tree.mulp2sglp(q_nearest[0][0]))
         # steer
+
         x_new = tree.steer(x_new, tree.mulp2sglp(q_rand[0]))
         # label
         label = []
@@ -631,11 +700,15 @@ def construction_tree(tree, buchi_graph, min_qb_dict, regions, n_max):
             label.append(l)
         if not o_id:
             continue
+        # print(label)
         # near state
         near_v = tree.near(tree.mulp2sglp(x_new))
-
+        # add q_rand
         if q_rand not in near_v:
             near_v = near_v + [q_rand]
+        # add q_nearest
+        # if q_nearest[0] not in near_v:
+        #     near_v = near_v + q_nearest
         # check obstacle free
         obs_check = tree.obs_check(near_v, x_new, label, 'reg')
 

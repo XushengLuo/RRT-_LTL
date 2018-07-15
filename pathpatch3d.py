@@ -175,128 +175,108 @@ import networkx as nx
 
 #-------------------------------------------------------------------------------------------------------------
 # delta vs time
-# xs = [0.15, 0.12, 0.1, 0.07, 0.04, 0.02]
-# y1 = [2.576, 5.0, 6.06, 21.34, 294.9866, 1786.18, ]
-# y2 = [18.0867, 36.3658, 93.8261, 747.1555, 5185.8660, 31320.182514]
-#
-#
-# plt.rc('text', usetex=True)
-# plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
-# fig = plt.figure()
+
+xs = [0.15, 0.12, 0.1, 0.07, 0.04, 0.02]
+y1 = [2.576, 5.0, 6.06, 21.34, 294.9866, 1786.18, ]
+y2 = [18.0867, 36.3658, 93.8261, 747.1555, 5185.8660, 31320.182514]
+
+
+plt.rc('text', usetex=True)
+plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
+fig = plt.figure()
 # # f, (ax1, ax2) = plt.subplots(2, 1, sharex=True)
-# ax = fig.add_subplot(111)    # The big subplot
-# x = range(len(xs))
-#
-# # ax.plot(x, y1, 'r--d')
-# # ax.plot(x, y2, 'b--d')
-# # ax.set_ylabel(r'Time(s)')
-# # ax.set_xlabel(r'$\delta$')
-# # ax.set_xticks(x)
-# # ax.set_xticklabels(xs)
-# # for i in range(3,len(x)):
-# #     ymin, ymax = plt.ylim()
-# #     xmin, xmax = plt.xlim()
-# #     plt.axvline(x=x[i], ls = '--', lw = 0.5, color = 'k', ymin= 0, ymax=(y1[i]-ymin)/(ymax-ymin))
-# #     plt.axhline(y=y1[i], ls='--', lw = 0.5, color='k', xmin=0, xmax=(x[i] - xmin) / (xmax - xmin))
-# #     plt.axvline(x=x[i], ls='--', lw=0.5, color='k', ymin=0, ymax=(y2[i] - ymin) / (ymax - ymin))
-# #     plt.axhline(y=y2[i], ls='--', lw=0.5, color='k', xmin=0, xmax=(x[i] - xmin) / (xmax - xmin))
-# #
-# # plt.savefig(r'delta_vs_time.png', bbox_inches='tight', dpi=600)
-# # plt.show()
-#
-# ax1 = fig.add_subplot(211)
-# ax2 = fig.add_subplot(212)
-# # ax, ax2 = f.add_subplots(2, 1, sharex=True)
-# # Turn off axis lines and ticks of the big subplot
-# ax.spines['top'].set_color('none')
-# ax.spines['bottom'].set_color('none')
-# ax.spines['left'].set_color('none')
-# ax.spines['right'].set_color('none')
-# ax.tick_params(labelcolor='w', top='off', bottom='off', left='off', right='off')
-#
-# # hide the spines between ax and ax2
-# ax1.spines['bottom'].set_visible(False)
-# ax2.spines['top'].set_visible(False)
-# ax1.spines['top'].set_color('none')
-# ax1.spines['right'].set_color('none')
-# ax2.spines['right'].set_color('none')
-# # ax1.get_xaxis().set_visible(False)
-# ax1.tick_params(labeltop='off')  # don't put tick labels at the top
-# ax2.xaxis.tick_bottom()
-# ax1.xaxis.tick_top()
-# empty_string_labels = ['']*len(x)
-# ax1.set_xticklabels(empty_string_labels)
-# s = 5
-# ax1.plot(x, y1, 'r--d', markersize = s, label='Algorithm 1')
-# ax1.plot(x, y2, 'b--s', markersize = s, label='Sparse RRG')
-# ax1.legend()
-# ax2.plot(x, y1, 'r--d', markersize = s)
-# ax2.plot(x, y2, 'b--s', markersize = s)
-#
-# # zoom-in / limit the view to different portions of the data
-# ax1.set_ylim(4000, 35000)  # outliers only
-# ax2.set_ylim(-100, 2000)  # most of the data
-# ax1.set_yticks([4000,  10000, 16000, 22000,  28000, 34000])
-# ax2.set_yticks([0,  500, 1000, 1500,  2000])
-# ax.set_ylabel(r'Time(s)',)
-# ax.yaxis.set_label_coords(-0.1,0.5)
-# ax.set_xlabel(r'$\delta$')
-# # ax2.set_xticklabels(x)
-# # plt.xticks(x, xs)
-# ax2.set_xticks(x)
-# ax2.set_xticklabels(xs)
-# ax1.grid(linestyle='--')
-# ax2.grid(linestyle='--')
-# # plt.xticks([0.15, 0.12, 0.10, 0.07, 0.04], ["0.15", "0.12", "0.10", "0.07", "0.04"])
-# ymin, ymax = plt.ylim()
-# xmin, xmax = plt.xlim()
-# # for i in range(4,len(x)):
-# #     ax1.axvline(x=x[i], ls = '--', lw = 0.5, color = 'k', ymin= 0, ymax=(y1[i]-ymin)/(ymax-ymin))
-# #     plt.axhline(y=y1[i], ls='--', lw = 0.5, color='k', xmin=0, xmax=(x[i] - xmin) / (xmax - xmin))
-# #     plt.axvline(x=x[i], ls='--', lw=0.5, color='k', ymin=0, ymax=(y2[i] - ymin) / (ymax - ymin))
-# #     plt.axhline(y=y2[i], ls='--', lw=0.5, color='k', xmin=0, xmax=(x[i] - xmin) / (xmax - xmin))
-#
-# # plt.text(x[0]+50, y[0]-0.04, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[0]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[0]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[0]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-# # plt.text(x[1]+30, y[1]+0.025, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[1]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[1]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[1]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-# # plt.text(x[2], y[2]+0.025, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[2]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[2]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[2]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-# # plt.text(x[3]+60, y[3]+0.01, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[3]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[3]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[3]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-# d = .015  # how big to make the diagonal lines in axes coordinates
-# # arguments to pass to plot, just so we don't keep repeating them
-# kwargs = dict(transform=ax1.transAxes, color='k', clip_on=False)
-# ax1.plot((-d, +d), (-d, +d), **kwargs)        # top-left diagonal
-# # ax1.plot((1 - d, 1 + d), (-d, +d), **kwargs)  # top-right diagonal
-#
-#
-# kwargs.update(transform=ax2.transAxes)  # switch to the bottom axes
-# ax2.plot((-d, +d), (1 - d, 1 + d), **kwargs)  # bottom-left diagonal
-# # ax2.plot((1 - d, 1 + d), (1 - d, 1 + d), **kwargs)  # bottom-right diagonal
-# # plt.text(x[4]-120, y[4]+0.04, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[4]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[4]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[4]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-#
-# plt.savefig(r'/Users/chrislaw/Box Sync/RRL_LTL_cntsSpace/figures/runTime_r.png', bbox_inches='tight', dpi=600)
-# plt.show()
+ax = fig.add_subplot(111)    # The big subplot
+x = range(len(xs))
+
+ax1 = fig.add_subplot(211)
+ax2 = fig.add_subplot(212)
+
+# Turn off axis lines and ticks of the big subplot
+ax.spines['top'].set_color('none')
+ax.spines['bottom'].set_color('none')
+ax.spines['left'].set_color('none')
+ax.spines['right'].set_color('none')
+ax.tick_params(labelcolor='w', top='off', bottom='off', left='off', right='off')
+
+# hide the spines between ax and ax2
+ax1.spines['bottom'].set_visible(False)
+ax2.spines['top'].set_visible(False)
+ax1.spines['top'].set_color('none')
+ax1.spines['right'].set_color('none')
+ax2.spines['right'].set_color('none')
+
+ax1.tick_params(labeltop='off')  # don't put tick labels at the top
+ax2.xaxis.tick_bottom()
+ax1.xaxis.tick_top()
+empty_string_labels = ['']*len(x)
+ax1.set_xticklabels(empty_string_labels)
+s = 5
+ax1.plot(x, y1, 'r--d', markersize = s, label=r'$\mathrm{Unbiased\; TL}-\mathrm{RRT}^*$')
+ax1.plot(x, y2, 'b--s', markersize = s, label='Sparse RRG')
+ax1.legend()
+ax2.plot(x, y1, 'r--d', markersize = s)
+ax2.plot(x, y2, 'b--s', markersize = s)
+
+
+
+
+# zoom-in / limit the view to different portions of the data
+ax1.set_ylim(4000, 35000)  # outliers only
+ax2.set_ylim(-100, 2000)  # most of the data
+ax1.set_yticks([4000,  10000, 16000, 22000,  28000, 34000])
+ax2.set_yticks([0,  500, 1000, 1500,  2000])
+ax.set_ylabel(r'Time(s)',)
+ax.yaxis.set_label_coords(-0.1,0.5)
+ax.set_xlabel(r'$\delta$')
+
+
+ax2.set_xticks(x)
+ax2.set_xticklabels(xs)
+ax1.grid(linestyle='--')
+ax2.grid(linestyle='--')
+# plt.xticks([0.15, 0.12, 0.10, 0.07, 0.04], ["0.15", "0.12", "0.10", "0.07", "0.04"])
+ymin, ymax = plt.ylim()
+xmin, xmax = plt.xlim()
+
+d = .015  # how big to make the diagonal lines in axes coordinates
+# arguments to pass to plot, just so we don't keep repeating them
+kwargs = dict(transform=ax1.transAxes, color='k', clip_on=False)
+ax1.plot((-d, +d), (-d, +d), **kwargs)        # top-left diagonal
+
+
+kwargs.update(transform=ax2.transAxes)  # switch to the bottom axes
+ax2.plot((-d, +d), (1 - d, 1 + d), **kwargs)  # bottom-left diagonal
+
+plt.savefig(r'/Users/chrislaw/Box Sync/RRL_LTL_cntsSpace/figures/runTime_r.png', bbox_inches='tight', dpi=600)
+plt.show()
 
 #-----------------------------------------------------------------------------------------------------------------------------
-xs = [0.15, 0.12, 0.1, 0.07, 0.04, 0.02]
-x = range(len(xs))
-y0 = [1.64, 1.86, 2.09, 2.19, 2.00, 2.14]
-y1 = [3.01, 3.06, 3.29, 3.11, 3.57, 3.33]
-y2 = [6.41, 6.21, 6.36, 6.5, 6.18, 7.72]
-# y = np.subtract(y1, y0)
-# yy = np.subtract(y2, y0)
-f = plt.figure(1)
-plt.rc('text', usetex=True)
-plt.rc('font', family='serif')
-
-ax = f.add_subplot(111)
-ax.plot(x, y0, 'r--d', label=r'$J_b(\tau)$')
-ax.plot(x, y1, 'b--d', label = r'$J_u(\tau)$')
-ax.plot(x, y2, 'g--s', label = r'$J_s(\tau)$')
-ax.set_xticks(x)
-ax.set_ylim(1.5, 8)
-ax.set_xticklabels(xs)
-ax.set_xlabel(r'$\delta$')
-ax.set_ylabel(r'$J(\tau)$')
-ax.legend()
+# xs = [0.15, 0.12, 0.1, 0.07, 0.04, 0.02]
+# x = range(len(xs))
+# # y0 = [1.64, 1.86, 2.09, 2.19, 2.00, 2.14]
+# y0 = [1.7146, 1.9144,    1.9566,    2.0884,    2.0771,    2.0648]
+# y0 = [i * 0.5 for i in y0]
+# y1 = [3.01, 3.06, 3.29, 3.11, 3.57, 3.33]
+# y1 = [i * 0.5 for i in y1]
+# y2 = [6.41, 6.21, 6.36, 6.5, 6.18, 7.72]
+# y2 = [i * 0.5 for i in y2]
+#
+# # y = np.subtract(y1, y0)
+# # yy = np.subtract(y2, y0)
+# f = plt.figure(1)
+# plt.rc('text', usetex=True)
+# plt.rc('font', family='serif')
+#
+# ax = f.add_subplot(111)
+# ax.plot(x, y0, 'r--d', label=r'$\mathrm{Biased\; TL}-\mathrm{RRT}^*$')
+# ax.plot(x, y1, 'b--d', label = r'$\mathrm{Unbiased\; TL}-\mathrm{RRT}^*$')
+# ax.plot(x, y2, 'g--s', label = r'$\mathrm{Sparse\; RRG}$')
+# ax.set_xticks(x)
+# ax.set_ylim(0.7, 4)
+# ax.set_xticklabels(xs)
+# ax.set_xlabel(r'$\delta$')
+# ax.set_ylabel(r'$J(\tau)$')
+# ax.legend()
 # ax.tick_params('y', colors='r')
 
 # ax2 = ax.twinx()
@@ -305,8 +285,8 @@ ax.legend()
 # ax2.set_ylabel(r'$J(\tau)$')
 
 # ax2.tick_params('y', colors='b')
-plt.savefig(r'/Users/chrislaw/Box Sync/RRL_LTL_cntsSpace/figures/delta_dis.png', bbox_inches='tight', dpi=600)
-plt.show()
+# plt.savefig(r'/Users/chrislaw/Box Sync/RRL_LTL_cntsSpace/figures/delta_dis.png', bbox_inches='tight', dpi=600)
+# plt.show()
 
 
 

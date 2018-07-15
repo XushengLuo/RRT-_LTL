@@ -1,16 +1,17 @@
-import matplotlib.pyplot as plt
-from matplotlib import rc
-import numpy as np
-from mpl_toolkits.mplot3d import Axes3D
-from WorkspacePlot import region_plot
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.patches import Circle, PathPatch
-# register Axes3D class with matplotlib by importing Axes3D
-from mpl_toolkits.mplot3d import Axes3D
-import mpl_toolkits.mplot3d.art3d as art3d
-from matplotlib.text import TextPath
-from matplotlib.transforms import Affine2D
+# import matplotlib.pyplot as plt
+# from matplotlib import rc
+# import numpy as np
+# from mpl_toolkits.mplot3d import Axes3D
+# from WorkspacePlot import region_plot
+# import numpy as np
+# import matplotlib.pyplot as plt
+# from matplotlib.patches import Circle, PathPatch
+# # register Axes3D class with matplotlib by importing Axes3D
+# from mpl_toolkits.mplot3d import Axes3D
+# import mpl_toolkits.mplot3d.art3d as art3d
+# from matplotlib.text import TextPath
+# from matplotlib.transforms import Affine2D
+
 
 # fig = plt.figure()
 # ax = fig.gca(projection='3d')
@@ -182,12 +183,11 @@ from matplotlib.transforms import Affine2D
 #
 # print(sufpath)
 
-#--------------------------------------------------------------------------------------------------------
-import matplotlib.pyplot as plt
-
-
+# --------------------------------------------------------------------------------------------------------
+# import matplotlib.pyplot as plt
 # x= [200, 300, 400, 500, 1000]
-# y = [2.53, 2.39, 2.33 ,2.30, 2.21]
+# # y = [2.53, 2.39, 2.33 ,2.30, 2.21]
+# y = [1.2650 ,   1.1950 ,   1.1650,    1.1500 ,   1.1050]
 # tpre = [9.22, 22.15, 38.85, 57.43, 182.78]
 # tsuf = ['72.6s', '362.2s', '0.34h','0.65h', '6.56h']
 # p = [23, 48, 87, 105, 259]
@@ -205,11 +205,11 @@ import matplotlib.pyplot as plt
 #     plt.axvline(x=x[i], ls = '--', lw = 0.5, color = 'k', ymin= 0, ymax=(y[i]-ymin)/(ymax-ymin))
 #     plt.axhline(y=y[i], ls='--', lw = 0.5, color='k', xmin=0, xmax=(x[i] - xmin) / (xmax - xmin))
 #
-# plt.text(x[0]+50, y[0]-0.04, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[0]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[0]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[0]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-# plt.text(x[1]+30, y[1]+0.025, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[1]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[1]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[1]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-# plt.text(x[2], y[2]+0.025, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[2]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[2]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[2]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-# plt.text(x[3]+60, y[3]+0.01, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[3]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[3]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[3]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-# plt.text(x[4]-120, y[4]+0.04, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[4]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[4]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[4]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+# plt.text(x[0]+50, y[0]-0.02, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[0]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[0]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[0]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+# plt.text(x[1]+30, y[1]+0.0125, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[1]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[1]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[1]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+# plt.text(x[2], y[2]+0.0125, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[2]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[2]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[2]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+# plt.text(x[3]+60, y[3]+0.005, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[3]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[3]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[3]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+# plt.text(x[4]-120, y[4]+0.02, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[4]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[4]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[4]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
 # plt.savefig(r'/Users/chrislaw/Box Sync/RRL_LTL_cntsSpace/figures/CostMaxNumIter.png', bbox_inches='tight', dpi=600)
 # #
 # plt.show()
@@ -217,22 +217,23 @@ import matplotlib.pyplot as plt
 
 
 # plt.show()
-#-------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------
 # import  pickle
 # import networkx as nx
 # import numpy as np
 # n_pre = []
 # n_suf = []
-# for i in [0,1,2,3,4,5,6,7,8,10,11,13,14,15,16]:
-#     with open('data/data_opt_path_b_010_{0}.0'.format(i), 'rb') as filehandle:
+# for i in range(20):
+#     if i not in [0, 5, 13]:
+#         with open('data/data_opt_path_b_case3_010_{0}.0'.format(i), 'rb') as filehandle:
 #         # store the data as binary data stream
-#         (opt_path_pre, opt_path_suf) = pickle.load(filehandle)
-#         tree_pre = pickle.load(filehandle)
-#         tree_suf = pickle.load(filehandle)
-#         buchi_state = pickle.load(filehandle)
-#         sz = pickle.load(filehandle)
-#         n_pre.append(tree_pre.tree.number_of_nodes())
-#         n_suf.append(tree_suf.tree.number_of_nodes())
+#             (opt_path_pre, opt_path_suf) = pickle.load(filehandle)
+#             tree_pre = pickle.load(filehandle)
+#             tree_suf = pickle.load(filehandle)
+#             buchi_state = pickle.load(filehandle)
+#             sz = pickle.load(filehandle)
+#             n_pre.append(tree_pre.tree.number_of_nodes())
+#             n_suf.append(tree_suf.tree.number_of_nodes())
 # print(np.mean(n_pre))
 # print(np.mean(n_suf))
 # -------------------------------------------------------------------------------------------
@@ -254,7 +255,7 @@ import matplotlib.pyplot as plt
 #     if d < 4*3:
 #         n = n + 1
 # print(n/100000)
-#--------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 # import re
 # def PutNotInside(str):
 #     substr = re.findall("(!\(.*?\))", str)  # ['!(p1 && p2)', '!(p4 && p5)']
@@ -281,60 +282,60 @@ import matplotlib.pyplot as plt
 # # print(satisfiable(p3 & ~(p1 & p2) & (~(p4 & p5))))
 # # print(satisfiable())
 
-import  re
-def RobotRegion(exp, robot):
-    """
-    pair of robot and corresponding in the expression
-    :param exp: logical expression
-    :param robot: # of robots
-    :return: dic of robot index : regions
-    exp = 'l1_1 & l3_1 & l4_1 & l4_6 | l3_4 & l5_6'
-    {1: ['l1_1', 'l3_1', 'l4_1'], 4: ['l3_4'], 6: ['l4_6', 'l5_6']}
-    """
-
-    robot_region_dict = dict()
-    for r in range(robot):
-        findall = re.findall(r'l\d+?_{0}'.format(r + 1), exp)
-        if findall:
-            robot_region_dict[str(r+1)] = findall
-
-    return robot_region_dict
-
-def FeasTruthTable(exp, robot_region):
-    """
-
-    :param exp:
-    :return:
-    """
-    sgl_value = []
-    for key, value in robot_region.items():
-        if len(value) == 1:
-            sgl_value.append(value[0])
-
-    for prod in itertools.product(*robot_region.values()):
-        # set one specific item to be true
-        for true_rb_rg in prod:
-            # set the other to be false
-            value_cp = list(robot_region[true_rb_rg.split('_')[1]])
-            if len(value_cp) > 1:
-                value_cp.remove(true_rb_rg)
-                # replace the rest with same robot to be ~
-                for v_remove in value_cp:
-                    exp = exp.replace(v_remove, '~' + true_rb_rg)
-
-        exp = to_cnf(exp)
-        # all value in expression
-        value_in_exp = [value.name for value in exp.atoms()]
-        # all single value in expression
-        sgl_value_in_exp = [value for value in value_in_exp if value in sgl_value]
-        not_sgl_value_in_exp = [value for value in value_in_exp if value not in sgl_value]
-        subs1 = {true_rb_rg: True for true_rb_rg in not_sgl_value_in_exp}
-        for p in itertools.product(*[[True, False]]*len(sgl_value_in_exp)):
-            subs2 = {sgl_value_in_exp[i]:p[i] for i in range(len(sgl_value_in_exp))}
-            subs  = {**subs1, **subs2}
-            if exp.subs(subs):
-                return subs
-    return []
+# import  re
+# def RobotRegion(exp, robot):
+#     """
+#     pair of robot and corresponding in the expression
+#     :param exp: logical expression
+#     :param robot: # of robots
+#     :return: dic of robot index : regions
+#     exp = 'l1_1 & l3_1 & l4_1 & l4_6 | l3_4 & l5_6'
+#     {1: ['l1_1', 'l3_1', 'l4_1'], 4: ['l3_4'], 6: ['l4_6', 'l5_6']}
+#     """
+#
+#     robot_region_dict = dict()
+#     for r in range(robot):
+#         findall = re.findall(r'l\d+?_{0}'.format(r + 1), exp)
+#         if findall:
+#             robot_region_dict[str(r+1)] = findall
+#
+#     return robot_region_dict
+#
+# def FeasTruthTable(exp, robot_region):
+#     """
+#
+#     :param exp:
+#     :return:
+#     """
+#     sgl_value = []
+#     for key, value in robot_region.items():
+#         if len(value) == 1:
+#             sgl_value.append(value[0])
+#
+#     for prod in itertools.product(*robot_region.values()):
+#         # set one specific item to be true
+#         for true_rb_rg in prod:
+#             # set the other to be false
+#             value_cp = list(robot_region[true_rb_rg.split('_')[1]])
+#             if len(value_cp) > 1:
+#                 value_cp.remove(true_rb_rg)
+#                 # replace the rest with same robot to be ~
+#                 for v_remove in value_cp:
+#                     exp = exp.replace(v_remove, '~' + true_rb_rg)
+#
+#         exp = to_cnf(exp)
+#         # all value in expression
+#         value_in_exp = [value.name for value in exp.atoms()]
+#         # all single value in expression
+#         sgl_value_in_exp = [value for value in value_in_exp if value in sgl_value]
+#         not_sgl_value_in_exp = [value for value in value_in_exp if value not in sgl_value]
+#         subs1 = {true_rb_rg: True for true_rb_rg in not_sgl_value_in_exp}
+#         for p in itertools.product(*[[True, False]]*len(sgl_value_in_exp)):
+#             subs2 = {sgl_value_in_exp[i]:p[i] for i in range(len(sgl_value_in_exp))}
+#             subs  = {**subs1, **subs2}
+#             if exp.subs(subs):
+#                 return subs
+#     return []
 # def multireplace(string, replacements):
 #     """
 #     Given a string and a replacement map, it returns the replaced string.
@@ -353,29 +354,43 @@ def FeasTruthTable(exp, robot_region):
 #     # For each match, look up the new string in the replacements
 #     return regexp.sub(lambda match: replacements[match.group(0)], string)
 # #
-import itertools
-from sympy.logic.boolalg import to_cnf
-# from sympy import Symbol
+# import itertools
+# from sympy.logic.boolalg import to_cnf
+# # from sympy import Symbol
+# #
+# # x = Symbol('x')
 #
-# x = Symbol('x')
-
-exp = '(l1_1 & l3_1 & l4_1 & l4_6 ) | ~(l4_3 & l3_5 & l2_1)'
-robot_region = RobotRegion(exp,6)
-truth_table = FeasTruthTable(exp, robot_region)
-print(truth_table)
-print(exp)
+# exp = '(l1_1 & l3_1 & l4_1 & l4_6 ) | ~(l4_3 & l3_5 & l2_1)'
+# robot_region = RobotRegion(exp,6)
+# truth_table = FeasTruthTable(exp, robot_region)
+# print(truth_table)
+# print(exp)
 # # all combinitions of possible robot, region pair
-
-
-
-
-
-
-
 
 # str = multireplace(str, dict):
 # print(str)
 # from sympy.logic.boolalg import to_cnf
 # str = to_cnf(str)
 # print(satisfiable(str))
+# ---------------------------------------------------------------------------------------------------------------------
+import datetime
 
+def check_prime(number):
+    for divisor in range(2, int(number ** 0.5) + 1):
+        if number % divisor == 0:
+            return False
+    return True
+
+def Primes(max):
+    number = 1
+    while number < max:
+        number += 1
+        if check_prime(number):
+            yield number
+
+start = datetime.datetime.now()
+primes = Primes(1000000)
+print(primes)
+for x in primes:
+    pass
+print((datetime.datetime.now()-start).total_seconds())
