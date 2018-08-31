@@ -1,5 +1,5 @@
 import numpy as np
-from Problem import problemFormulation
+from z_Problem import problemFormulation
 from WorkspacePlot import region_plot
 import matplotlib.pyplot as plt
 from Buchi import buchi_graph

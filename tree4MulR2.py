@@ -1,3 +1,7 @@
+
+"""
+using L1-norm to calculate cost
+"""
 from random import uniform
 from networkx.classes.digraph import DiGraph
 from networkx.algorithms import dfs_labeled_edges

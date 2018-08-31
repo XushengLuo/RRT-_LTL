@@ -1,5 +1,5 @@
 from Buchi import buchi_graph
-from Problem import problemFormulation
+from z_Problem import problemFormulation
 import datetime
 from tree import tree, construction_tree
 from WorkspacePlot import region_plot, path_plot

@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from WorkspacePlot import region_plot
-from Problem import problemFormulation
+from z_Problem import problemFormulation
 # x = np.linspace(0, 2*np.pi, 10)
 # y = np.sin(x)
 workspace, regions, obs, init_state, uni_cost, formula = problemFormulation().Formulation()

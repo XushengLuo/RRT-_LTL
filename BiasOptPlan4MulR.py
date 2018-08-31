@@ -1,14 +1,25 @@
+"""
+__author__ = chrislaw
+__project__ = RRT*_LTL
+__date__ = 8/30/18
+"""
+
+"""
+biaed samping optimal task planning for multi-robots
+"""
+
 import Buchi
 from Problem import problemFormulation
 import datetime
 from Biastree4MulR import tree, construction_tree
 from collections import OrderedDict
 import numpy as np
-# from WorkspacePlot import region_plot, path_plot, layer_plot
-#import matplotlib.pyplot as plt
+from WorkspacePlot import region_plot, path_plot, layer_plot
+import matplotlib.pyplot as plt
 import networkx as nx
 import pickle
 import sys
+
 # +------------------------------------------+
 # |     construct transition system graph    |
 # +------------------------------------------+
@@ -36,23 +47,23 @@ buchi_state = dict(zip(list(buchi_graph.nodes()), range(1, buchi_graph.number_of
 # # # # # #
 print((datetime.datetime.now() - start1).total_seconds())
 # # #
-# # with open('data/buchi_case9_false', 'wb') as filehandle:
-# #     # store the data as binary data stream
-# #     pickle.dump(buchi_graph, filehandle)
-# #     pickle.dump(buchi_state, filehandle)
-# #     pickle.dump(min_qb, filehandle)
-# with open('data/buchi_case9_false', 'rb') as filehandle:
+# with open('data/buchi_case2_false', 'wb') as filehandle:
+#     # store the data as binary data stream
+#     pickle.dump(buchi_graph, filehandle)
+#     pickle.dump(buchi_state, filehandle)
+#     pickle.dump(min_qb, filehandle)
+# with open('data/buchi_case2_false', 'rb') as filehandle:
 #     # store the data as binary data stream
 #     buchi_graph = pickle.load(filehandle)
 #     buchi_state = pickle.load(filehandle)
 #     min_qb = pickle.load(filehandle)
-# # print(buchi_graph.number_of_nodes())
-# # print(buchi_graph.number_of_edges())
+# print(buchi_graph.number_of_nodes())
+# print(buchi_graph.number_of_edges())
 # +------------------------------------------+
 # |            construct prefix path         |
 # +------------------------------------------+
 # print(1)
-n_max = 100000000
+n_max = 1000
 n_robot = len(init_state)
 step_size = 0.25*n_robot
 cost_path = OrderedDict()
@@ -80,7 +91,7 @@ for b_init in buchi_graph.graph['init']:
     # print(cost_path_pre[0][1])
     if len(tree_pre.goals):
         pre_time = (datetime.datetime.now() - start).total_seconds()
-        print('Time for prefix path: {0}'.format(pre_time))
+        # print('Time for prefix path: {0}'.format(pre_time))
         # print('{0} accepting goals found'.format(len(tree_pre.goals)))
 
         # write into file
@@ -147,10 +158,10 @@ for b_init in buchi_graph.graph['init']:
     # print('Total cost = prefix Cost + suffix Cost: {0} = {1} + {2}'.format(opt_cost[0]+opt_cost[1], opt_cost[0], opt_cost[1]))
     suf_time = (datetime.datetime.now() - start).total_seconds()
     # print('Time to find the surfix path: {0}'.format(suf_time))
-    print(pre_time, suf_time, opt_cost[0], opt_cost[1])
+    print(pre_time, suf_time, opt_cost[0], opt_cost[1], pre_time + suf_time, (opt_cost[0] + opt_cost[1])/2)
     # plot optimal path
 
-    # path_plot((opt_path_pre, opt_path_suf), regions, obs, tree_pre.robot, tree_pre.dim)
+    path_plot((opt_path_pre, opt_path_suf), regions, obs, tree_pre.robot, tree_pre.dim)
     # draw 3D layer graph
     # layer_plot(tree_pre.tree, opt_path_pre, buchi_state)
     # layer_plot(tree_suf.tree, opt_path_suf, buchi_state)
@@ -174,4 +185,4 @@ for b_init in buchi_graph.graph['init']:
     # plt.xlabel(r'Iteration $n$')
     # plt.ylabel(r"$|V_T^n|$")
     # plt.savefig('size_VS_n.png', bbox_inches='tight', dpi=600)
-    # plt.show()
+    plt.show()

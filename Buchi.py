@@ -215,8 +215,6 @@ class buchi_graph(object):
             b_label = self.buchi_graph.edges[edge]['label']
             if b_label != '(1)':
                 exp = b_label.replace('||', '|').replace('&&', '&').replace('!', '~')
-                # robot_region = self.RobotRegion(exp, robot)
-                # truth_table = self.FeasTruthTable(exp, robot_region)
                 truth = satisfiable(exp, algorithm="dpll")
                 truth_table = dict()
                 for key, value in truth.items():
@@ -227,25 +225,6 @@ class buchi_graph(object):
                     self.buchi_graph.edges[edge]['truth'] = truth_table
             else:
                 self.buchi_graph.edges[edge]['truth'] = '1'
-            # feas = True
-            # # split label with ||
-            # b_label = b_label.split('||')   # first layer by ||   e1 && (e2 or e3) || e4 -> [e1 && (e2 or e3), e4]
-            # for label in b_label:
-            #     feas = True
-            #     for sublabel in label.split('or'):     # second layer by or  e1 && (e2 or e3) -> [e1 && (e2, e3)]
-            #         # sublabel = re.sub("!(\().*?(\))", "\g<1>\g<2>", sublabel)   # replace word with !
-            #         for r in range(robot):
-            #             if len(re.findall(r'l.+?_{0}'.format(r+1), sublabel.replace('!l', ''))) > 1:
-            #             # if len(re.findall(r'l.+?_{0}'.format(r + 1), sublabel)) > 1:
-            #                 feas = False
-            #                 break
-            #         if not feas:
-            #             break
-            #     if feas:
-            #         break
-
-            # if not feas:
-            #     TobeDel.append(edge)
 
         for edge in TobeDel:
             self.buchi_graph.remove_edge(edge[0], edge[1])
@@ -381,3 +360,10 @@ class buchi_graph(object):
                     nstr = nstr + '!' + ss
             str = str.replace(s, nstr)
         return str
+
+    def label2sat(self):
+        for edge in self.buchi_graph.edges():
+            label = self.buchi_graph.edges[edge]['label']
+            label = label.replace('||', '|').replace('&&', '&').replace('!', '~')
+            exp1 = to_cnf(label)
+            self.buchi_graph.edges[edge]['label'] = exp1

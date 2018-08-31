@@ -7,6 +7,45 @@ from matplotlib.patches import Circle, PathPatch
 import mpl_toolkits.mplot3d.art3d as art3d
 import networkx as nx
 
+# def region_plot(regions, flag, ax):
+#     """
+#     plot the workspace
+#     :param regions: regions
+#     :param flag: regions or obstacle
+#     :param ax: figure axis
+#     :param d: 2D or 3D
+#     :return: none
+#     """
+#
+#     ax.set_xlim((0, 1))
+#     ax.set_ylim((0, 1))
+#     plt.rc('text', usetex=True)
+#     plt.rc('font', family='serif')
+#     plt.gca().set_aspect('equal', adjustable='box')
+#     plt.grid(b=True, which='major', color='k', linestyle='--')
+#     for key in regions.keys():
+#         if key[1] == 'b':
+#             circle = plt.Circle(regions[key][0:-1], regions[key][-1], color='b', fill=(flag!='region'))
+#             ax.add_artist(circle)
+#             ax.text(regions[key][0], regions[key][1], r'${}_{}$'.format(key[0][0], key[0][1:]), fontsize=16)
+#         if key[1] == 'p':
+#             x = []
+#             y = []
+#             patches = []
+#             for i in range(len(regions[key])-1):
+#                 x0, y0 = intersection(regions[key][i], regions[key][i+1])
+#                 x.append(x0)
+#                 y.append(y0)
+#             x0, y0 = intersection(regions[key][0], regions[key][-1])
+#             x.append(x0)
+#             y.append(y0)
+#             polygon = Polygon(np.column_stack((x,y)), True)
+#             patches.append(polygon)
+#             p = PatchCollection(patches)
+#             ax.add_collection(p)
+#             ax.text(np.mean(x), np.mean(y), r'${}_{}$'.format(key[0][0], key[0][1:]), fontsize=16)
+
+
 def region_plot(regions, flag, ax):
     """
     plot the workspace
@@ -24,26 +63,23 @@ def region_plot(regions, flag, ax):
     plt.gca().set_aspect('equal', adjustable='box')
     plt.grid(b=True, which='major', color='k', linestyle='--')
     for key in regions.keys():
-        if key[1] == 'b':
-            circle = plt.Circle(regions[key][0:-1], regions[key][-1], color='b', fill=(flag!='region'))
+        coords = list(regions[key].exterior.coords)
+        if len(coords)>10:
+            circle = plt.Circle(regions[key].centroid.coords[0],  np.fabs(coords[0][0] - regions[key].centroid.coords[0][0]), color='b', fill=(flag!='region'))
             ax.add_artist(circle)
-            ax.text(regions[key][0], regions[key][1], r'${}_{}$'.format(key[0][0], key[0][1:]), fontsize=16)
-        if key[1] == 'p':
+            ax.text(regions[key].centroid.x, regions[key].centroid.y, r'${}_{}$'.format(key[0], key[1:]), fontsize=16)
+        else:
             x = []
             y = []
             patches = []
-            for i in range(len(regions[key])-1):
-                x0, y0 = intersection(regions[key][i], regions[key][i+1])
-                x.append(x0)
-                y.append(y0)
-            x0, y0 = intersection(regions[key][0], regions[key][-1])
-            x.append(x0)
-            y.append(y0)
+            for point in list(regions[key].exterior.coords)[:-1]:
+                x.append(point[0])
+                y.append(point[1])
             polygon = Polygon(np.column_stack((x,y)), True)
             patches.append(polygon)
             p = PatchCollection(patches)
             ax.add_collection(p)
-            ax.text(np.mean(x), np.mean(y), r'${}_{}$'.format(key[0][0], key[0][1:]), fontsize=16)
+            ax.text(np.mean(x), np.mean(y), r'${}_{}$'.format(key[0], key[1:]), fontsize=16)
 
 
 def intersection(l1, l2):

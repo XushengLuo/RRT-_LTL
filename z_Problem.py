@@ -1,10 +1,3 @@
-"""
-__author__ = chrislaw
-__project__ = RRT*_LTL
-__date__ = 8/30/18
-"""
-
-from shapely.geometry import Point, Polygon
 
 class problemFormulation(object):
     def __init__(self):
@@ -31,28 +24,41 @@ class problemFormulation(object):
 
         self.workspace = (1, 1)
         # !! no whitespace in atomic proposation      b:ball s:square
-        r = 0.07
+        r = 0.02
         self.ap = {'l1', 'l2', 'l3', 'l4', 'l5'}
+        self.regions = {   ('l1', 'b') : (0.2, 0.8, r),
+                           ('l2', 'b') : (0.8, 0.8, r),
+                           ('l3', 'b') : (0.8, 0.4, r),
+                           ('l4', 'b') : (0.4, 0.4, r),
+                           ('l5', 'b') : (0.1, 0.2, r)}
 
-        # describe regions using shapely library
-        self.regions = {'l1': Point(0.2, 0.8).buffer(r),
-                        'l2': Point(0.8, 0.8).buffer(r),
-                        'l3': Point(0.8, 0.4).buffer(r),
-                        'l4': Point(0.4, 0.4).buffer(r),
-                        'l5': Point(0.1, 0.2).buffer(r),
-                        # 'l6': Point(0.1, 0.5).buffer(r)
-                        }
-        self.obs = {'o1': Polygon([(0.3, 0), (0.7, 0), (0.7, 0.2), (0.3, 0.2)]),
-                    'o2': Polygon([(0.4, 0.7), (0.6, 0.7), (0.6, 1.0), (0.4, 1.0)])}
+
+
+        # self.ap = {'l1', 'l2', 'l3', 'l4', 'l5', 'l6'}
+        # self.regions = {('l1', 'b'): (0.2, 0.8, r),
+        #                 ('l2', 'b'): (0.8, 0.8, r),
+        #                 ('l3', 'b'): (0.8, 0.4, r),
+        #                 ('l4', 'b'): (0.4, 0.4, r),
+        #                 ('l5', 'b'): (0.1, 0.2, r),
+        #                 ('l6', 'b'): (0.1, 0.5, r)}
+
+
+
+        self.obs = {('o1', 'p'): ((0, 1, -1), (1, 0, -0.6), (0, -1, 0.7), (-1, 0, 0.4)),  # coefficient <=0
+                    ('o2', 'p'): ((0, 1, -0.2), (1, 0, -0.7), (0, -1, 0), (-1, 0, 0.3)),
+                    # ('o3', 'p'): ((1, 1, -1), (-1, 1, 0.2), (0, -1, 0.2)),
+                    # ('o4', 'b'): (0.3, 0.6, 0.1)
+                    }
+
 
         init_state = []
-        for i in range(2):
-            init_state.append((0.8, 0.1))
-        self.init_state = tuple(init_state)
+        # for i in range(2):
+        #     init_state.append((0.8, 0.1))
+        # self.init_state = tuple(init_state)
         # self.init_state = ((0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1))
         # self.init_state = ((0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1))
         # self.init_state = ((0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1))
-        # self.init_state = ((0.8, 0.1), (0.9, 0.1))
+        self.init_state = ((0.8, 0.1),(0.9, 0.1))
         # self.init_state = ((0.8, 0.1), )
         self.uni_cost = 0.1
 
@@ -114,19 +120,25 @@ class problemFormulation(object):
         # self.formula = '<> (l11) &&   [](<> ( l21 && <> (l31 && <> l41 ) ) )'
         # ---------------------------- case 1 --------------------------------
         # self.formula = '<> l4_1 && []<> (l3_1 && <> l1_1) && (!l1_1 U l2_1)  && []!l5_1'
-        self.formula = '<> e1 && []<> (e2  && <> e3) && (!e3 U e4)  && []!e5'
-
-        self.formula_comp = {1: '(l4_1)',
-                             2: '(l3_1)',
-                             3: '(l1_1)',
-                             4: '(l2_1)',
-                             5: '(l5_1)',
-                             }
-        self.exclusion = [('e1','e2'), ('e1','e3'),('e1','e3'),('e1','e4'),('e1','e5'),('e2','e3'),('e2','e4'),('e2','e5'),('e3','e4'),('e3','e5'),('e4','e5')]
-        self.no = ['l5_1','l1_1']
+        # self.formula = '<> e1 && []<> (e2  && <> e3) && (!e3 U e4)  && []!e5'
+        #
+        # self.formula_comp = {1: '(l4_1)',
+        #                      2: '(l3_1)',
+        #                      3: '(l1_1)',
+        #                      4: '(l2_1)',
+        #                      5: '(l5_1)',
+        #                      }
+        # self.exclusion = [('e1','e2'), ('e1','e3'),('e1','e3'),('e1','e4'),('e1','e5'),('e2','e3'),('e2','e4'),('e2','e5'),('e3','e4'),('e3','e5'),('e4','e5')]
+        # self.no = ['l5_1','l1_1']
         # #---------------------------- case 2 --------------------------------
         # self.formula = '[]<>l1_1 && [](l1_1 -> X(!l1_1 U l2_2))'
+        # self.formula = '[]<> e1 && [](e1 -> X(!e1 U e2))'
         self.formula = '[]<> e1 && []<> e2 && []<> (e3 && <> e4)'
+        # self.formula_comp = {1: '(l3_1)',
+        #                      2: '(l4_2)',
+        #                      3: '(l2_1)',
+        #                      4: '(l2_2)'}
+
         self.formula_comp = {1: '(l1_1)',
                              2: '(l2_2)',
                              3: '(l4_1)',
@@ -135,6 +147,8 @@ class problemFormulation(object):
         self.exclusion = []
         self.no = []
 
+        # self.formula = '[]<>(l1_1 && l1_2) && []<>(l2_2 && l2_3)'
+        # self.formula = '[]<>(l1_1 && l1_2) && []<>(l2_2 && l2_3) && []<>(l3_3 && l3_4) && []<>(l4_1 && <>(l5_4 && <>l6_3))'
         # ---------------------------- case 3 --------------------------------
         # self.formula = '[]<> e1 && []<> e2 && []<> e3 && []<>(e4 && <>(e5 && <> e6))'
         # self.formula_comp = {1: '(l1_1 && l1_2)',

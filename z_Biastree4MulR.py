@@ -1,12 +1,3 @@
-"""
-__author__ = chrislaw
-__project__ = RRT*_LTL
-__date__ = 8/30/18
-"""
-"""
-construct trees for biased sampling optimal task planning for multi-robots
-"""
-
 from random import uniform
 from networkx.classes.digraph import DiGraph
 from networkx.algorithms import dfs_labeled_edges
@@ -15,8 +6,6 @@ import numpy as np
 from scipy.stats import truncnorm
 from collections import OrderedDict
 import pyvisgraph as vg
-from shapely.geometry import Point, Polygon, LineString
-
 import random
 
 class tree(object):
@@ -140,7 +129,7 @@ class tree(object):
         :param regions: regions
         :return: closest vertex
         """
-        tg = regions[target].centroid.coords[0]
+        tg = regions[((target, 'b'))][:2]
         shortest = self.g.shortest_path(vg.Point(init[0], init[1]), vg.Point(tg[0], tg[1]))
         return (shortest[1].x, shortest[1].y)
 
@@ -486,36 +475,31 @@ class tree(object):
         :param stage: regular stage or final stage, deciding whether it's goal state
         :return: dict (x_near, x_new): true (obs_free)
         """
+        # x_new =  ((0.8944144022556246, 0.33267910821176216),)
+        # label = ['l3_1']
+        # q_near = [(((0.8, 0.1),), 'T0_init'), (((0.9115062737314963, 0.10325925485437781),), 'T0_init')]
 
         obs_check_dict = {}
-        checked = set()
-
         for x in q_near:
-            if x[0] in checked:
-                continue
-            checked.add(x[0])
             obs_check_dict[(x_new, x[0])] = True
             flag = True       # indicate whether break and jump to outer loop
             for r in range(self.robot):
-                # the line connecting two points crosses an obstacle
-                for (obs, boundary) in iter(self.ts['obs'].items()):
-                    if LineString([Point(x[0][r]), Point(x_new[r])]).intersects(boundary):
+                for i in range(1, 11):
+                    mid = tuple(np.asarray(x[0][r]) + i/10. * np.subtract(x_new[r], x[0][r]))
+                    mid_label = self.label(mid)
+                    if mid_label != '':
+                        mid_label = mid_label + '_' + str(r+1)
+                    if stage == 'reg' and ('o' in mid_label or (mid_label != self.tree.nodes[x]['label'][r] and mid_label != label[r])):
+                        #                      obstacle             pass through one region more than once
                         obs_check_dict[(x_new, x[0])] = False
                         flag = False
                         break
-
-                if not flag:
-                    break
-
-                for (region, boundary) in iter(self.ts['region'].items()):
-                    if LineString([Point(x[0][r]), Point(x_new[r])]).intersects(boundary) \
-                            and region + '_' + str(r + 1) != label[r] \
-                            and region + '_' + str(r + 1) != self.tree.nodes[x]['label'][r]:
-                        if stage == 'reg' or (stage == 'final' and region in self.no):
-                            obs_check_dict[(x_new, x[0])] = False
-                            flag = False
-                            break
-
+                    # elif stage == 'final' and ('o' in mid_label or (mid_label != self.tree.nodes[x]['label'][r] and mid_label != label[r] and mid_label != '')):
+                    #                             obstacle             cannot pass through one region more than once expcet unlabeled region
+                    elif stage == 'final' and ('o' in mid_label or (mid_label != self.tree.nodes[x]['label'][r] and mid_label != label[r] and mid_label in self.no)):
+                        obs_check_dict[(x_new, x[0])] = False
+                        flag = False
+                        break
                 if not flag:
                     break
 
@@ -527,18 +511,33 @@ class tree(object):
         :param x: position
         :return: label
         """
-
-        point = Point(x)
         # whether x lies within obstacle
         for (obs, boundary) in iter(self.ts['obs'].items()):
-            if point.within(boundary):
-                return obs
+            if obs[1] == 'b' and np.linalg.norm(np.subtract(x, boundary[0:-1])) <= boundary[-1]:
+                return obs[0]
+            elif obs[1] == 'p':
+                dictator = True
+                for i in range(len(boundary)):
+                    if np.dot(x, boundary[i][0:-1]) + boundary[i][-1] > 0:
+                        dictator = False
+                        break
+                if dictator == True:
+                    return obs[0]
+
 
         # whether x lies within regions
-        for (region, boundary) in iter(self.ts['region'].items()):
-            if point.within(boundary):
-                return region
-        # x lies within unlabeled region
+        for (regions, boundary) in iter(self.ts['region'].items()):
+            if regions[1] == 'b' and np.linalg.norm(x - np.asarray(boundary[0:-1])) <= boundary[-1]:
+                return regions[0]
+            elif regions[1] == 'p':
+                dictator = True
+                for i in range(len(boundary)):
+                    if np.dot(x, np.asarray(boundary[i][0:-1])) + boundary[i][-1] > 0:
+                        dictator = False
+                        break
+                if dictator == True:
+                    return regions[0]
+
         return ''
 
     def checkTranB(self, b_state, x_label, q_b_new):

@@ -1,15 +1,14 @@
 """
-tree construction for TL-RRT*
+Tree construction for TL-RRT
 """
+
 from random import uniform
 from networkx.classes.digraph import DiGraph
 from networkx.algorithms import dfs_labeled_edges
 import math
 import numpy as np
 from collections import OrderedDict
-from shapely.geometry import Point, Polygon, LineString
-from sympy.logic.boolalg import to_cnf
-import datetime
+
 
 class tree(object):
     """ construction of prefix and suffix tree
@@ -44,8 +43,6 @@ class tree(object):
 
         self.tree.add_node(init, cost=0, label=label)
         self.no = no
-        # threshold for collision avoidance
-        self.threshold = 0.02
 
     def sample(self):
         """
@@ -57,18 +54,6 @@ class tree(object):
             x_rand.append(uniform(0, self.ts['workspace'][i]))
 
         return tuple(x_rand)
-
-    def collision_avoidance(self, point, x_rand):
-        """
-        check whether any robots are collision-free from index-th robot
-        :param point: sampled point
-        :param x_rand: robot has been checked collision free
-        :return: true collision free
-        """
-        for robot in x_rand:
-            if np.linalg.norm(np.subtract(point, robot)) <= self.threshold:
-                return False
-        return True
 
     def nearest(self, x_rand):
         """
@@ -112,76 +97,34 @@ class tree(object):
         else:
             return tuple(np.asarray(x_nearest) + self.step_size * (np.subtract(x_rand, x_nearest))/np.linalg.norm(np.subtract(x_rand, x_nearest)))
 
-    def extend(self, q_new, near_v, label, obs_check):
-        """
-        :param: q_new: new state form: tuple (mulp, buchi)
-        :param: near_v: near state form: tuple (mulp, buchi)
-        :param: obs_check: check obstacle free  form: dict { (mulp, mulp): True }
-        :return: extending the tree
-        """
-        added = 0
-        cost = np.inf
-        q_min = ()
-        for near_vertex in near_v:
-            if q_new != near_vertex and obs_check[(q_new[0], near_vertex[0])] and self.checkTranB(near_vertex[1], self.tree.nodes[near_vertex]['label'], q_new[1]):
-                c = self.tree.nodes[near_vertex]['cost'] + np.linalg.norm(np.subtract(self.mulp2sglp(q_new[0]), self.mulp2sglp(near_vertex[0])))      # don't consider control
-                if c < cost:
-                    added = 1
-                    q_min = near_vertex
-                    cost = c
-        if added == 1:
-            self.tree.add_node(q_new, cost = cost, label=label)
-            self.tree.add_edge(q_min, q_new)
-            if self.seg == 'pre' and q_new[1] in self.acpt:
-                q_n = list(list(self.tree.pred[q_new].keys())[0])
-                cost = self.tree.nodes[tuple(q_n)]['cost']
-                label = self.tree.nodes[tuple(q_n)]['label']
-                q_n[1] = q_new[1]
-                q_n = tuple(q_n)
-                self.tree.add_node(q_n, cost = cost, label = label)
-                self.tree.add_edge(q_min, q_n)
-                self.goals.append(q_n)
-                # self.goals.append(q_new)
-            # if self.seg == 'suf' and self.init in near_v and obs_check[(q_new[0], self.init[0])]  and  self.checkTranB(q_new[1], label, self.init[1]):
-            if self.seg == 'suf' and self.obs_check([self.init], q_new[0], label, 'final')[(q_new[0], self.init[0])] and self.checkTranB(q_new[1], label, self.init[1]):
+    def extend(self, q_new, q_nearest, label, obs_check):
+        for v_nearest in q_nearest:
+            # print(v_nearest)
+            if obs_check[(q_new[0], v_nearest[0])] and self.checkTranB(v_nearest[1],
+                                                                       self.tree.nodes[v_nearest]['label'], q_new[1]):
+                if 'T1_S4' in v_nearest:
+                    print(self.tree.nodes[v_nearest]['label'])
+                    if 'l3_1' in self.tree.nodes[v_nearest]['label']:
+                        print(2)
+                cost = self.tree.nodes[v_nearest]['cost'] + np.linalg.norm(np.subtract(self.mulp2sglp(q_new[0]),self.mulp2sglp(v_nearest[0])))
 
-                self.goals.append(q_new)
-        return added
-
-    def rewire(self, q_new, near_v, obs_check):
-        """
-        :param: q_new: new state form: tuple (mul, buchi)
-        :param: near_v: near state form: tuple (mul, buchi)
-        :param: obs_check: check obstacle free form: dict { (mulp, mulp): True }
-        :return: rewiring the tree
-        """
-        for near_vertex in near_v:
-            if obs_check[(q_new[0], near_vertex[0])] and self.checkTranB(q_new[1], self.tree.nodes[q_new]['label'], near_vertex[1]):
-                c = self.tree.nodes[q_new]['cost'] + np.linalg.norm(np.subtract(self.mulp2sglp(q_new[0]), self.mulp2sglp(near_vertex[0])))      # without considering control
-                delta_c = self.tree.nodes[near_vertex]['cost'] - c
-                # update the cost of node in the subtree rooted at near_vertex
-                if delta_c > 0:
-                    # self.tree.nodes[near_vertex]['cost'] = c
-                    self.tree.remove_edge(list(self.tree.pred[near_vertex].keys())[0], near_vertex)
-                    self.tree.add_edge(q_new, near_vertex)
-                    edges = dfs_labeled_edges(self.tree, source=near_vertex)
-                    for _, v, d in edges:
-                        if d == 'forward':
-                            self.tree.nodes[v]['cost'] = self.tree.nodes[v]['cost'] - delta_c
-
-    def near(self, x_new):
-        """
-        find the states in the near ball
-        :param x_new: new point form: single point
-        :return: p_near: near state, form: tuple (mulp, buchi)
-        """
-        p_near = []
-        r = min(self.gamma * np.power(np.log(self.tree.number_of_nodes()+1)/self.tree.number_of_nodes(),1./(self.dim*self.robot)), self.step_size)
-        for vertex in self.tree.nodes:
-            if np.linalg.norm(np.subtract(x_new, self.mulp2sglp(vertex[0]))) <= r:
-                p_near.append(vertex)
-        return p_near
-
+                self.tree.add_node(q_new, cost=cost, label=label)
+                self.tree.add_edge(v_nearest, q_new)
+                if self.seg == 'pre' and q_new[1] in self.acpt:
+                    q_n = list(list(self.tree.pred[q_new].keys())[0])
+                    cost = self.tree.nodes[tuple(q_n)]['cost']
+                    label = self.tree.nodes[tuple(q_n)]['label']
+                    q_n[1] = q_new[1]
+                    q_n = tuple(q_n)
+                    self.tree.add_node(q_n, cost=cost, label=label)
+                    self.tree.add_edge(v_nearest, q_n)
+                    self.goals.append(q_n)
+                    # self.goals.append(q_new)
+                # if self.seg == 'suf' and self.init in near_v and obs_check[(q_new[0], self.init[0])]  and  self.checkTranB(q_new[1], label, self.init[1]):
+                if self.seg == 'suf' and self.obs_check([self.init], q_new[0], label, 'final')[
+                    (q_new[0], self.init[0])] and self.checkTranB(q_new[1], label, self.init[1]):
+                    self.goals.append(q_new)
+                break
 
     def obs_check(self, q_near, x_new, label, stage):
         """
@@ -192,34 +135,24 @@ class tree(object):
         """
 
         obs_check_dict = {}
-        checked = set()
-
         for x in q_near:
-            if x[0] in checked:
-                continue
-            checked.add(x[0])
             obs_check_dict[(x_new, x[0])] = True
-            flag = True  # indicate whether break and jump to outer loop
+            flag = True       # indicate whether break and jump to outer loop
             for r in range(self.robot):
-                # the line connecting two points crosses an obstacle
-                for (obs, boundary) in iter(self.ts['obs'].items()):
-                    if LineString([Point(x[0][r]), Point(x_new[r])]).intersects(boundary):
+                for i in range(1, 11):
+                    mid = tuple(np.asarray(x[0][r]) + i/10. * np.subtract(x_new[r], x[0][r]))
+                    mid_label = self.label(mid)
+                    if mid_label != '':
+                        mid_label = mid_label +  '_' + str(r+1)
+                    if stage == 'reg' and ('o' in mid_label or (mid_label != self.tree.nodes[x]['label'][r] and mid_label != label[r])):
+                        # obstacle             pass through one region more than once
                         obs_check_dict[(x_new, x[0])] = False
                         flag = False
                         break
-
-                if not flag:
-                    break
-
-                for (region, boundary) in iter(self.ts['region'].items()):
-                    if LineString([Point(x[0][r]), Point(x_new[r])]).intersects(boundary) \
-                            and region + '_' + str(r + 1) != label[r] \
-                            and region + '_' + str(r + 1) != self.tree.nodes[x]['label'][r]:
-                        if stage == 'reg' or (stage == 'final' and region in self.no):
-                            obs_check_dict[(x_new, x[0])] = False
-                            flag = False
-                            break
-
+                    elif stage == 'final' and ('o' in mid_label or (mid_label != self.tree.nodes[x]['label'][r] and mid_label != label[r] and mid_label in self.no)):
+                        obs_check_dict[(x_new, x[0])] = False
+                        flag = False
+                        break
                 if not flag:
                     break
 
@@ -232,18 +165,33 @@ class tree(object):
         :param x: position
         :return: label
         """
-
-        point = Point(x)
         # whether x lies within obstacle
         for (obs, boundary) in iter(self.ts['obs'].items()):
-            if point.within(boundary):
-                return obs
+            if obs[1] == 'b' and np.linalg.norm(np.subtract(x, boundary[0:-1])) <= boundary[-1]:
+                return obs[0]
+            elif obs[1] == 'p':
+                dictator = True
+                for i in range(len(boundary)):
+                    if np.dot(x, boundary[i][0:-1]) + boundary[i][-1] > 0:
+                        dictator = False
+                        break
+                if dictator == True:
+                    return obs[0]
+
 
         # whether x lies within regions
-        for (region, boundary) in iter(self.ts['region'].items()):
-            if point.within(boundary):
-                return region
-        # x lies within unlabeled region
+        for (regions, boundary) in iter(self.ts['region'].items()):
+            if regions[1] == 'b' and np.linalg.norm(x - np.asarray(boundary[0:-1])) <= boundary[-1]:
+                return regions[0]
+            elif regions[1] == 'p':
+                dictator = True
+                for i in range(len(boundary)):
+                    if np.dot(x, np.asarray(boundary[i][0:-1])) + boundary[i][-1] > 0:
+                        dictator = False
+                        break
+                if dictator == True:
+                    return regions[0]
+
         return ''
 
     def checkTranB(self, b_state, x_label, q_b_new):
@@ -264,13 +212,13 @@ class tree(object):
             return True
 
 
+
     def t_satisfy_b(self, x_label, b_label):
         """ decide whether label of self.ts_graph can satisfy label of self.buchi_graph
             :param x_label: label of x
             :param b_label: label of buchi state
             :return t_s_b: true if satisfied
         """
-
         t_s_b = True
         # split label with ||
         b_label = b_label.split('||')
@@ -296,11 +244,7 @@ class tree(object):
             # either one of || holds
             if t_s_b:
                 return t_s_b
-
         return t_s_b
-
-
-
 
     def findpath(self, goals):
         """
@@ -355,19 +299,9 @@ def construction_tree(tree, buchi_graph, n_max):
 
         # sample form: multiple
         x_rand = list()
-        x_rand.append(tree.sample())
-        for i in range(1, tree.robot):
-            while 1:
-                point = tree.sample()
-                if tree.collision_avoidance(point, x_rand):
-                    x_rand.append(tree.sample())
-                    break
-
+        for i in range(tree.robot):
+            x_rand.append(tree.sample())
         x_rand = tree.mulp2sglp(tuple(x_rand))
-        # nearest
-        # x_nearest = tree.nearest(x_rand)
-        # steer
-        # x_new = tree.steer(x_rand, x_nearest)
 
         q_nearest = tree.nearest(x_rand)
         x_new = tree.steer(x_rand, tree.mulp2sglp(q_nearest[0][0]))
@@ -390,13 +324,8 @@ def construction_tree(tree, buchi_graph, n_max):
         if not o_id:
             continue
 
-        # near state
-        near_v = tree.near(tree.mulp2sglp(x_new))
-        # add q_rand
-        if q_nearest[0] not in near_v:
-            near_v = near_v + q_nearest
         # check obstacle free
-        obs_check = tree.obs_check(near_v, x_new, label, 'reg')
+        obs_check = tree.obs_check([q_nearest[0]], x_new, label, 'reg')
 
         # iterate over each buchi state
         for b_state in buchi_graph.nodes:
@@ -405,10 +334,7 @@ def construction_tree(tree, buchi_graph, n_max):
             q_new = (x_new, b_state)
 
             # extend
-            added = tree.extend(q_new, near_v, label, obs_check)
-            # rewire
-            if added == 1:
-                tree.rewire(q_new, near_v, obs_check)
+            tree.extend(q_new, q_nearest, label, obs_check)
 
         # number of nodes
         sz.append(tree.tree.number_of_nodes())

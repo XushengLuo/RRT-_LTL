@@ -14,7 +14,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import mpl_toolkits.mplot3d.art3d as art3d
 from matplotlib.text import TextPath
 from matplotlib.transforms import Affine2D
-from Problem import problemFormulation
+from z_Problem import problemFormulation
 from matplotlib.patches import Polygon
 import pickle
 import networkx as nx
