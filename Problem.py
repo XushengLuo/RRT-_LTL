@@ -31,7 +31,7 @@ class problemFormulation(object):
 
         self.workspace = (1, 1)
         # !! no whitespace in atomic proposation      b:ball s:square
-        r = 0.07
+        r = 0.1
         self.ap = {'l1', 'l2', 'l3', 'l4', 'l5'}
 
         # describe regions using shapely library
@@ -46,7 +46,7 @@ class problemFormulation(object):
                     'o2': Polygon([(0.4, 0.7), (0.6, 0.7), (0.6, 1.0), (0.4, 1.0)])}
 
         init_state = []
-        for i in range(2):
+        for i in range(1):
             init_state.append((0.8, 0.1))
         self.init_state = tuple(init_state)
         # self.init_state = ((0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1),(0.8, 0.1))
@@ -126,14 +126,14 @@ class problemFormulation(object):
         self.no = ['l5_1','l1_1']
         # #---------------------------- case 2 --------------------------------
         # self.formula = '[]<>l1_1 && [](l1_1 -> X(!l1_1 U l2_2))'
-        self.formula = '[]<> e1 && []<> e2 && []<> (e3 && <> e4)'
-        self.formula_comp = {1: '(l1_1)',
-                             2: '(l2_2)',
-                             3: '(l4_1)',
-                             4: '(l4_2)'}
-
-        self.exclusion = []
-        self.no = []
+        # self.formula = '[]<> e1 && []<> e2 && []<> (e3 && <> e4)'
+        # self.formula_comp = {1: '(l1_1)',
+        #                      2: '(l2_2)',
+        #                      3: '(l4_1)',
+        #                      4: '(l4_2)'}
+        #
+        # self.exclusion = []
+        # self.no = []
 
         # ---------------------------- case 3 --------------------------------
         # self.formula = '[]<> e1 && []<> e2 && []<> e3 && []<>(e4 && <>(e5 && <> e6))'

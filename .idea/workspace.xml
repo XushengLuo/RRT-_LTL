@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="004b840c-21b3-4ebe-896b-58c942e56764" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SMT_planning.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tri.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data_pre_tree" afterPath="$PROJECT_DIR$/data_pre_tree" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data_suf_tree" afterPath="$PROJECT_DIR$/data_suf_tree" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path0.png" afterPath="$PROJECT_DIR$/path0.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BiasOptPlan4MulR.py" afterPath="$PROJECT_DIR$/BiasOptPlan4MulR.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Problem.py" afterPath="$PROJECT_DIR$/Problem.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SMT_planning.py" afterPath="$PROJECT_DIR$/SMT_planning.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run_all.sh" afterPath="$PROJECT_DIR$/run_all.sh" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,7 +28,7 @@
         <entry file="file://$PROJECT_DIR$/note.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="3045">
+              <first_editor relative-caret-position="0">
                 <caret line="203" column="62" lean-forward="false" selection-start-line="203" selection-start-column="62" selection-end-line="203" selection-end-column="62" />
                 <folding />
               </first_editor>
@@ -30,33 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WorkspacePlot.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WorkspacePlot.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="975">
-              <caret line="72" column="18" lean-forward="false" selection-start-line="72" selection-start-column="18" selection-end-line="72" selection-end-column="18" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OptPlan.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OptPlan.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="11" column="46" lean-forward="false" selection-start-line="11" selection-start-column="46" selection-end-line="11" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Problem.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Problem.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="33" column="16" lean-forward="false" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+            <state relative-caret-position="-2479">
+              <caret line="122" column="41" lean-forward="true" selection-start-line="122" selection-start-column="41" selection-end-line="122" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -65,7 +50,7 @@
       <file leaf-file-name="tree4MulR.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tree4MulR.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3465">
+            <state relative-caret-position="141">
               <caret line="272" column="0" lean-forward="false" selection-start-line="272" selection-start-column="0" selection-end-line="272" selection-end-column="0" />
               <folding>
                 <element signature="e#38#64#0" expanded="true" />
@@ -80,26 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Buchi.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Buchi.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3555">
-              <caret line="345" column="64" lean-forward="true" selection-start-line="345" selection-start-column="64" selection-end-line="345" selection-end-column="64" />
-              <folding>
-                <element signature="e#25#42#0" expanded="true" />
-                <element signature="e#3313#4797#0" expanded="false" />
-                <element signature="e#4846#5429#0" expanded="false" />
-                <element signature="e#5488#7692#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="OptPlan4MulR.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OptPlan4MulR.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
-              <caret line="8" column="60" lean-forward="true" selection-start-line="8" selection-start-column="60" selection-end-line="8" selection-end-column="60" />
+              <caret line="8" column="60" lean-forward="false" selection-start-line="8" selection-start-column="60" selection-end-line="8" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -108,10 +78,32 @@
       <file leaf-file-name="SMT_planning.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SMT_planning.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="157" column="24" lean-forward="true" selection-start-line="157" selection-start-column="24" selection-end-line="157" selection-end-column="24" />
+            <state relative-caret-position="149">
+              <caret line="286" column="64" lean-forward="true" selection-start-line="286" selection-start-column="64" selection-end-line="286" selection-end-column="64" />
               <folding>
                 <element signature="e#143#159#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="z3.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/z3/z3.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="138">
+              <caret line="325" column="0" lean-forward="false" selection-start-line="325" selection-start-column="0" selection-end-line="325" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Tri.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tri.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="74" column="26" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="74" selection-end-column="26" />
+              <folding>
+                <element signature="e#72#87#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -120,47 +112,10 @@
       <file leaf-file-name="BiasOptPlan4MulR.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BiasOptPlan4MulR.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="47" column="57" lean-forward="true" selection-start-line="47" selection-start-column="57" selection-end-line="47" selection-end-column="57" />
+            <state relative-caret-position="210">
+              <caret line="43" column="22" lean-forward="true" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
               <folding>
                 <element signature="e#135#147#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Biastree4MulR.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Biastree4MulR.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2040">
-              <caret line="313" column="28" lean-forward="false" selection-start-line="313" selection-start-column="24" selection-end-line="313" selection-end-column="28" />
-              <folding>
-                <element signature="e#156#182#0" expanded="true" />
-                <element signature="e#2337#2582#0" expanded="false" />
-                <element signature="e#2337#2446#1" expanded="false" />
-                <element signature="e#2645#3251#0" expanded="false" />
-                <element signature="e#3291#3770#0" expanded="false" />
-                <element signature="e#3845#3932#0" expanded="false" />
-                <element signature="e#3970#4088#0" expanded="false" />
-                <element signature="e#5028#5657#0" expanded="false" />
-                <element signature="e#5703#6194#0" expanded="false" />
-                <element signature="e#6284#7910#0" expanded="false" />
-                <element signature="e#8010#11359#0" expanded="false" />
-                <element signature="e#8010#8269#1" expanded="false" />
-                <element signature="e#11426#11519#1" expanded="false" />
-                <element signature="e#14514#14542#0" expanded="false" />
-                <element signature="e#15129#15769#0" expanded="false" />
-                <element signature="e#15819#16335#0" expanded="false" />
-                <element signature="e#16400#18387#0" expanded="false" />
-                <element signature="e#16400#16653#1" expanded="false" />
-                <element signature="e#18445#19800#0" expanded="false" />
-                <element signature="e#18445#18694#1" expanded="false" />
-                <element signature="e#19837#20356#0" expanded="false" />
-                <element signature="e#19837#20007#1" expanded="false" />
-                <element signature="e#24773#25419#0" expanded="false" />
-                <element signature="e#25460#26219#0" expanded="false" />
-                <element signature="e#26261#26532#0" expanded="false" />
-                <element signature="e#26574#26900#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -177,9 +132,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>'_'</find>
-      <find>l =</find>
-      <find>self.no</find>
       <find>final</find>
       <find>obs_check</find>
       <find>tree.obs_check</find>
@@ -207,6 +159,9 @@
       <find>label</find>
       <find>'o</find>
       <find>dateti</find>
+      <find>spiral</find>
+      <find>face</find>
+      <find>n_for</find>
     </findStrings>
     <replaceStrings>
       <replace>,</replace>
@@ -238,20 +193,22 @@
         <option value="$PROJECT_DIR$/WorkspacePlot.py" />
         <option value="$PROJECT_DIR$/BiasOptPlan4MulR_shape.py" />
         <option value="$PROJECT_DIR$/Problem1.py" />
-        <option value="$PROJECT_DIR$/BiasOptPlan4MulR.py" />
         <option value="$PROJECT_DIR$/Biastree4MulR.py" />
         <option value="$PROJECT_DIR$/Buchi.py" />
         <option value="$PROJECT_DIR$/note.md" />
-        <option value="$PROJECT_DIR$/Problem.py" />
         <option value="$PROJECT_DIR$/tree4MulR.py" />
         <option value="$PROJECT_DIR$/OptPlan4MulR.py" />
+        <option value="$PROJECT_DIR$/Tri.py" />
+        <option value="$PROJECT_DIR$/Problem.py" />
+        <option value="$PROJECT_DIR$/BiasOptPlan4MulR.py" />
         <option value="$PROJECT_DIR$/SMT_planning.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="y" value="23" />
     <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="height" value="800" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -361,23 +318,6 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="FeasPlan4MulR" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="RRT*_LTL" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/FeasPlan4MulR.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
     <configuration name="OptPlan4MulR" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -412,20 +352,37 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+    <configuration name="Tri" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="RRT*_LTL" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Tri.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.BiasOptPlan4MulR" />
       <item index="1" class="java.lang.String" itemvalue="Python.OptPlan4MulR" />
-      <item index="2" class="java.lang.String" itemvalue="Python.FeasPlan4MulR" />
-      <item index="3" class="java.lang.String" itemvalue="Python.BiasOptPlan4MulR_shape" />
-      <item index="4" class="java.lang.String" itemvalue="Python.SMT_planning" />
+      <item index="2" class="java.lang.String" itemvalue="Python.BiasOptPlan4MulR_shape" />
+      <item index="3" class="java.lang.String" itemvalue="Python.SMT_planning" />
+      <item index="4" class="java.lang.String" itemvalue="Python.Tri" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.SMT_planning" />
-        <item index="1" class="java.lang.String" itemvalue="Python.OptPlan4MulR" />
-        <item index="2" class="java.lang.String" itemvalue="Python.BiasOptPlan4MulR_shape" />
-        <item index="3" class="java.lang.String" itemvalue="Python.BiasOptPlan4MulR" />
-        <item index="4" class="java.lang.String" itemvalue="Python.FeasPlan4MulR" />
+        <item index="1" class="java.lang.String" itemvalue="Python.BiasOptPlan4MulR_shape" />
+        <item index="2" class="java.lang.String" itemvalue="Python.Tri" />
+        <item index="3" class="java.lang.String" itemvalue="Python.OptPlan4MulR" />
+        <item index="4" class="java.lang.String" itemvalue="Python.BiasOptPlan4MulR" />
       </list>
     </recent_temporary>
   </component>
@@ -455,18 +412,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="1" y="23" width="1440" height="800" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16380544" sideWeight="0.49272728" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27238807" sideWeight="0.50572246" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27238807" sideWeight="0.49427754" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22434017" sideWeight="0.49427754" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26865673" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37686568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40615836" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18168813" sideWeight="0.5072727" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -545,6 +502,11 @@
           <line>365</line>
           <option name="timeStamp" value="595" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SMT_planning.py</url>
+          <line>256</line>
+          <option name="timeStamp" value="619" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -556,53 +518,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="596" />
+      <option name="time" value="620" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="928">
-          <caret line="1598" column="0" lean-forward="false" selection-start-line="1598" selection-start-column="0" selection-end-line="1598" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SampGaus.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="148" column="0" lean-forward="false" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/pyvisgraph/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/pyvisgraph/graph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="38" column="37" lean-forward="true" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/pyvisgraph/vis_graph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-374">
-          <caret line="58" column="49" lean-forward="false" selection-start-line="58" selection-start-column="38" selection-end-line="58" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/3D.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -782,7 +702,7 @@
         <state relative-caret-position="975">
           <caret line="72" column="18" lean-forward="false" selection-start-line="72" selection-start-column="18" selection-end-line="72" selection-end-column="18" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -857,7 +777,7 @@
         <state relative-caret-position="2040">
           <caret line="313" column="28" lean-forward="false" selection-start-line="313" selection-start-column="24" selection-end-line="313" selection-end-column="28" />
           <folding>
-            <element signature="e#156#182#0" expanded="true" />
+            <element signature="e#156#182#0" expanded="false" />
             <element signature="e#2337#2582#0" expanded="false" />
             <element signature="e#2337#2446#1" expanded="false" />
             <element signature="e#2645#3251#0" expanded="false" />
@@ -912,22 +832,12 @@
     <entry file="file://$PROJECT_DIR$/Buchi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3555">
-          <caret line="345" column="64" lean-forward="true" selection-start-line="345" selection-start-column="64" selection-end-line="345" selection-end-column="64" />
+          <caret line="345" column="64" lean-forward="false" selection-start-line="345" selection-start-column="64" selection-end-line="345" selection-end-column="64" />
           <folding>
-            <element signature="e#25#42#0" expanded="true" />
+            <element signature="e#25#42#0" expanded="false" />
             <element signature="e#3313#4797#0" expanded="false" />
             <element signature="e#4846#5429#0" expanded="false" />
             <element signature="e#5488#7692#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BiasOptPlan4MulR.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="47" column="57" lean-forward="true" selection-start-line="47" selection-start-column="57" selection-end-line="47" selection-end-column="57" />
-          <folding>
-            <element signature="e#135#147#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -941,7 +851,7 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="3045">
+          <first_editor relative-caret-position="0">
             <caret line="203" column="62" lean-forward="false" selection-start-line="203" selection-start-column="62" selection-end-line="203" selection-end-column="62" />
             <folding />
           </first_editor>
@@ -949,17 +859,67 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Problem.py">
+    <entry file="file:///usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/posixpath.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="16" lean-forward="false" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+        <state relative-caret-position="211">
+          <caret line="159" column="0" lean-forward="false" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/matplotlib/pyplot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="446">
+          <caret line="1057" column="0" lean-forward="false" selection-start-line="1057" selection-start-column="0" selection-end-line="1057" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/triangle/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="371" column="0" lean-forward="false" selection-start-line="371" selection-start-column="0" selection-end-line="371" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/triangle/plot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/z3/z3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="325" column="0" lean-forward="false" selection-start-line="325" selection-start-column="0" selection-end-line="325" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tri.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="74" column="26" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="74" selection-end-column="26" />
+          <folding>
+            <element signature="e#72#87#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OptPlan4MulR.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="60" lean-forward="false" selection-start-line="8" selection-start-column="60" selection-end-line="8" selection-end-column="60" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tree4MulR.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3465">
+        <state relative-caret-position="141">
           <caret line="272" column="0" lean-forward="false" selection-start-line="272" selection-start-column="0" selection-end-line="272" selection-end-column="0" />
           <folding>
             <element signature="e#38#64#0" expanded="true" />
@@ -973,18 +933,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OptPlan4MulR.py">
+    <entry file="file://$PROJECT_DIR$/Problem.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="60" lean-forward="true" selection-start-line="8" selection-start-column="60" selection-end-line="8" selection-end-column="60" />
+        <state relative-caret-position="-2479">
+          <caret line="122" column="41" lean-forward="true" selection-start-line="122" selection-start-column="41" selection-end-line="122" selection-end-column="41" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BiasOptPlan4MulR.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="43" column="22" lean-forward="true" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
+          <folding>
+            <element signature="e#135#147#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SMT_planning.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="157" column="24" lean-forward="true" selection-start-line="157" selection-start-column="24" selection-end-line="157" selection-end-column="24" />
+        <state relative-caret-position="149">
+          <caret line="286" column="64" lean-forward="true" selection-start-line="286" selection-start-column="64" selection-end-line="286" selection-end-column="64" />
           <folding>
             <element signature="e#143#159#0" expanded="true" />
           </folding>

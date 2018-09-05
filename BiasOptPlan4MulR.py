@@ -68,6 +68,7 @@ n_robot = len(init_state)
 step_size = 0.25*n_robot
 cost_path = OrderedDict()
 
+start = datetime.datetime.now()
 
 for b_init in buchi_graph.graph['init']:
     # initialization
@@ -81,7 +82,6 @@ for b_init in buchi_graph.graph['init']:
      |                Prefix Path                   |
      #----------------------------------------------#
     """
-    start = datetime.datetime.now()
     init = (init_state, b_init)
     acpt = buchi_graph.graph['accept']
     tree_pre = tree(n_robot, acpt, ts, buchi_graph, init, 'pre', step_size, no)
