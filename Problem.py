@@ -6,6 +6,7 @@ __date__ = 8/30/18
 
 from shapely.geometry import Point, Polygon
 
+
 class problemFormulation(object):
     def __init__(self):
         # +----------------------------------------------+
@@ -31,18 +32,48 @@ class problemFormulation(object):
 
         self.workspace = (1, 1)
         # !! no whitespace in atomic proposation      b:ball s:square
-        r = 0.1
-        self.ap = {'l1', 'l2', 'l3', 'l4', 'l5'}
+        r = 0.2
+        self.ap = {'l1', 'l2', 'l3', 'l4', 'l5', 'l6'}
 
         # describe regions using shapely library
-        self.regions = {'l1': Point(0.2, 0.8).buffer(r),
-                        'l2': Point(0.8, 0.8).buffer(r),
-                        'l3': Point(0.8, 0.4).buffer(r),
-                        'l4': Point(0.4, 0.4).buffer(r),
-                        'l5': Point(0.1, 0.2).buffer(r),
-                        # 'l6': Point(0.1, 0.5).buffer(r)
+        # self.regions = {'l1': Point(0.2, 0.8).buffer(r),
+        #                 'l2': Point(0.8, 0.8).buffer(r),
+        #                 'l3': Point(0.8, 0.4).buffer(r),
+        #                 'l4': Point(0.4, 0.4).buffer(r),
+        #                 'l5': Point(0.1, 0.2).buffer(r),
+        #                 # 'l6': Point(0.1, 0.5).buffer(r)
+        #                 }
+        center = [(0.2, 0.8), (0.8, 0.8), (0.8, 0.4), (0.4, 0.4), (0.1, 0.2), (0.1, 0.5)]
+        # self.regions = {'l1': Polygon([(center[0][0] - r, center[0][1] - r), (center[0][0] + r, center[0][1] - r),
+        #                                (center[0][0] + r, center[0][1] + r), (center[0][0] - r, center[0][1] + r)]),
+        #                 'l2': Polygon([(center[1][0] - r, center[1][1] - r), (center[1][0] + r, center[1][1] - r),
+        #                                (center[1][0] + r, center[1][1] + r), (center[1][0] - r, center[1][1] + r)]),
+        #                 'l3': Polygon([(center[2][0] - r, center[2][1] - r), (center[2][0] + r, center[2][1] - r),
+        #                                (center[2][0] + r, center[2][1] + r), (center[2][0] - r, center[2][1] + r)]),
+        #                 'l4': Polygon([(center[3][0] - r, center[3][1] - r), (center[3][0] + r, center[3][1] - r),
+        #                                (center[3][0] + r, center[3][1] + r), (center[3][0] - r, center[3][1] + r)]),
+        #                 'l5': Polygon([(center[4][0] - r, center[4][1] - r), (center[4][0] + r, center[4][1] - r),
+        #                                (center[4][0] + r, center[4][1] + r), (center[4][0] - r, center[4][1] + r)]),
+        #                 'l6': Polygon([(center[5][0] - r, center[5][1] - r), (center[5][0] + r, center[5][1] - r),
+        #                                (center[5][0] + r, center[5][1] + r), (center[5][0] - r, center[5][1] + r)])
+        #                 }
+        center = [(0.1, 0.7), (0.7, 0.7), (0.7, 0.3), (0.3, 0.3), (0, 0.1), (0, 0.4)]
+
+        self.regions = {'l1': Polygon([(center[0][0], center[0][1]), (center[0][0] + r, center[0][1]),
+                                       (center[0][0], center[0][1] + r)]),
+                        'l2': Polygon([(center[1][0], center[1][1]), (center[1][0] + r, center[1][1]),
+                                       (center[1][0], center[1][1] + r)]),
+                        'l3': Polygon([(center[2][0], center[2][1]), (center[2][0] + r, center[2][1]),
+                                       (center[2][0], center[2][1] + r)]),
+                        'l4': Polygon([(center[3][0], center[3][1]), (center[3][0] + r, center[3][1]),
+                                       (center[3][0], center[3][1] + r)]),
+                        'l5': Polygon([(center[4][0], center[4][1]), (center[4][0] + r, center[4][1]),
+                                       (center[4][0], center[4][1] + r)]),
+                        'l6': Polygon([(center[5][0], center[5][1]), (center[5][0] + r, center[5][1]),
+                                       (center[5][0], center[5][1] + r)]),
                         }
-        self.obs = {'o1': Polygon([(0.3, 0), (0.7, 0), (0.7, 0.2), (0.3, 0.2)]),
+
+        self.obs = {'o1': Polygon([(0.3, 0.0), (0.7, 0.0), (0.7, 0.2), (0.3, 0.2)]),
                     'o2': Polygon([(0.4, 0.7), (0.6, 0.7), (0.6, 1.0), (0.4, 1.0)])}
 
         init_state = []
@@ -159,18 +190,6 @@ class problemFormulation(object):
         # self.formula_comp = {
         #     1: '(l1_1 && (l1_2 || l1_3) && (l1_10 || l1_13) && l1_4)',
         #     2: '(l2_4 && (l2_5 || l2_6) && (l2_11 || l2_14) && l2_7)',
-        #     3: '(l3_7 && (l3_8 || l3_9) && (l3_12 || l3_15))',
-        #     4: '(l4_1)',
-        #     5: '(l5_4)',
-        #     6: '(l6_7)'}
-        # self.exclusion = [('e1', 'e2'), ('e1', 'e4'), ('e1', 'e5'), ('e2', 'e3'), ('e2', 'e5'), ('e2', 'e6'),
-        #                   ('e3', 'e6')]
-        # self.no = []
-
-        # self.formula = '[]<> e1 && []<> e2 && []<> e3 && []<>(e4 && <>(e5 && <> e6))'
-        # self.formula_comp = {
-        #     1: '(l1_1 && (l1_2 || l1_3) && (l1_10 || l1_13) && l1_4)',
-        #     2: '(l2_4 && (l2_5 || l2_6) && (l2_11 || l2_14) && l2_7)',
         #     3: '(l3_7 && (l3_8 || l3_9) && (l3_12 || l3_15) && l3_16)',
         #     4: '(l4_1)',
         #     5: '(l5_4)',
@@ -214,6 +233,8 @@ class problemFormulation(object):
         # self.no = ['l6_7', 'l3_10', 'l3_11']
         # ---------------------------- case 8 --------------------------------
         # self.formula = '[]<> e1 && []<> e2 && []<> e3 && []<>(e4 && <>(e5 && <> e6)) && []!e7 && [](e6 -> X(!e6 U e4)) && <> e8'
+        # self.formula = '[]<> e1 && []<> e2 && []<> e3 && []<>(e4 && <>(e5 && <> e6)) && []!e7 && <> e8'
+        #
         # self.formula_comp = {
         #     1: '(l1_1 && (l1_2 || l1_3) && (l1_10 || l1_13) && l1_4)',
         #     2: '(l2_4 && (l2_5 || l2_6) && (l2_11 || l2_14) && l2_7)',
@@ -225,11 +246,11 @@ class problemFormulation(object):
         #     8: '(l4_3 && l5_6 && l6_9)'}
         # # #
         # self.exclusion = [('e1', 'e2'), ('e1', 'e4'), ('e1','e5'), ('e2','e3'), ('e2','e5'), ('e2','e6'), ('e3','e6')]
-        # self.no = ['l6_7','l3_10','l3_11']
+        # self.no = ['l3_10','l3_11'] #, 'l6_7',
         # ---------------------------- case 9 --------------------------------
         # self.formula = '[]<> e1 && []<> e2 && []<> e3 && []<>(e4 && <>(e5 && <> e6)) && []!e7 && [](e6 -> X(!e6 U e4)) && <> e8 && [](e5 -> X(!e5 U e4))'
         # self.formula = '[]<> e1 && []<> e2 && []<> e3 && []<>(e4 && <>(e5 && <> e6)) ' \
-        #                '&& []!e7 && [](e6 -> X(!e6 U e4)) && <> e8 && []<>e9 '
+        #                '&& []!e7 && <> e8 && []<>e9 && (!e8 U e9)'
         # self.formula_comp = {
         #     1: '(l1_1 && (l1_2 || l1_3) && (l1_10 || l1_13) && l1_4)',
         #     2: '(l2_4 && (l2_5 || l2_6) && (l2_11 || l2_14) && l2_7)',

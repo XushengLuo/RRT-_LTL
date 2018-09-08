@@ -65,19 +65,21 @@ def region_plot(regions, flag, ax):
     for key in regions.keys():
         coords = list(regions[key].exterior.coords)
         if len(coords)>10:
-            circle = plt.Circle(regions[key].centroid.coords[0],  np.fabs(coords[0][0] - regions[key].centroid.coords[0][0]), color='b', fill=(flag!='region'))
+            color = '0.75' if flag != 'region' else 'c'
+            circle = plt.Circle(regions[key].centroid.coords[0],  np.fabs(coords[0][0] - regions[key].centroid.coords[0][0]), color=color, fill=(flag!='region'))
             ax.add_artist(circle)
             ax.text(regions[key].centroid.x, regions[key].centroid.y, r'${}_{}$'.format(key[0], key[1:]), fontsize=16)
         else:
+            color = '0.75' if flag != 'region' else 'c'
             x = []
             y = []
             patches = []
             for point in list(regions[key].exterior.coords)[:-1]:
                 x.append(point[0])
                 y.append(point[1])
-            polygon = Polygon(np.column_stack((x,y)), True)
+            polygon = Polygon(np.column_stack((x, y)), True)
             patches.append(polygon)
-            p = PatchCollection(patches)
+            p = PatchCollection(patches, facecolors=color, edgecolors=color)
             ax.add_collection(p)
             ax.text(np.mean(x), np.mean(y), r'${}_{}$'.format(key[0], key[1:]), fontsize=16)
 

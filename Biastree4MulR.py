@@ -722,9 +722,9 @@ def construction_tree(tree, buchi_graph, min_qb_dict, regions, n_max):
             # extend
             added = tree.extend(q_new, near_v, label, obs_check)
             # rewire
-            if added == 1:
-                # print(q_new)
-                tree.rewire(q_new, near_v, obs_check)
+            # if added == 1:
+            #     # print(q_new)
+            #     tree.rewire(q_new, near_v, obs_check)
 
         # number of nodes
         sz.append(tree.tree.number_of_nodes())
