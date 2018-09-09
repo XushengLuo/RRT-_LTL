@@ -24,6 +24,8 @@ import triangle
 import triangle.plot as plot
 import matplotlib.pyplot as plt
 from WorkspacePlot import region_plot
+from itertools import repeat
+
 
 def BoolVar2Int(b):
     return If(b, 1, 0)
@@ -68,28 +70,6 @@ def until_aux(subformula, k, L):
 
 
 def contain(v_a, v_b, v_c):
-    # lhs = np.array([[(v_b[0] - v_a[0])*(-1), (v_b[1] - v_a[1])*(-1), -1, 0, 0, 0, 0, 0, 0, 0],
-    #                 [v_b[0] - v_a[0], v_b[1] - v_a[1], 0, -1, 0, 0, 0, 0, 0, 0],
-    #                 [(v_c[0] - v_a[0])*(-1), (v_c[1] - v_a[1])*(-1), 0, 0, -1, 0, 0, 0, 0, 0],
-    #                 [v_c[0] - v_a[0], v_c[1] - v_a[1], 0, 0, 0, -1, 0, 0, 0, 0],
-    #                 [0, 0, 1, 0, 0, 0, -1, 0, 0, 0],
-    #                 [0, 0, -1, 0, 0, 0, -1, 0, 0, 0],
-    #                 [0, 0, 0, 1, 0, 0, 0, -1, 0, 0],
-    #                 [0, 0, 0, -1, 0, 0, 0, -1, 0, 0],
-    #                 [0, 0, 0, 0, 1, 0, 0, 0, -1, 0],
-    #                 [0, 0, 0, 0, -1, 0, 0, 0, -1, 0],
-    #                 [0, 0, 0, 0, 0, 1, 0, 0, 0, -1],
-    #                 [0, 0, 0, 0, 0, -1, 0, 0, 0, -1.0],
-    #                 ]
-    #                 )
-    # rhs = np.array([(v_a[0] * (v_b[0] - v_a[0]) + v_a[1] * (v_b[1] - v_a[1])) * (-1),
-    #                 v_a[0] * (v_b[0] - v_a[0]) + v_a[1] * (v_b[1] - v_a[1]) + np.power(v_b[0] - v_a[0], 2) + np.power(
-    #                     v_b[1] - v_a[1], 2),
-    #                 (v_a[0] * (v_c[0] - v_a[0]) + v_a[1] * (v_c[1] - v_a[1])) * (-1),
-    #                 v_a[0] * (v_c[0] - v_a[0]) + v_a[1] * (v_c[1] - v_a[1]) + np.power(v_c[0] - v_a[0], 2) + np.power(
-    #                     v_c[1] - v_a[1], 2),0, 0, 0, 0, 0, 0, 0, 0.0])
-    # sense = ["L", "L", "L", "L", "L", "L", "L", "L", "L", "L", "L", "L"]
-
     x_a = v_a[0]
     y_a = v_a[1]
     x_b = v_b[0]
@@ -282,16 +262,16 @@ def case_3(n_Robot, n_Region, n_Horizon, region_dict, s):
     n_formula = 12 + 2 + 2
     formula = BoolVector('f', n_formula * n_Horizon)
 
-    # []<> (l1_1 && (l1_2 || l1_3) && (l1_10 || l1_13) && l1_4)
+    # []<> (l1_1 && (l1_2 || l1_3) && (l1_4 || l1_5) && l1_6)
     formulaCounter = 0
     region = region_dict["l1"]
     formula_1 = [formula[formulaCounter * n_Horizon + horizonCounter] == And(
         Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 0 * n_Region + region],
         Or(Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 1 * n_Region + region],
            Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 2 * n_Region + region]),
-        Or(Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 9 * n_Region + region],
-           Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 12 * n_Region + region]),
-        Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 3 * n_Region + region]) for horizonCounter in
+        Or(Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 3 * n_Region + region],
+           Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 4 * n_Region + region]),
+        Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 5 * n_Region + region]) for horizonCounter in
                  range(n_Horizon)]
     always_eventually_1 = [
         Or([And(loop[i],
@@ -299,16 +279,16 @@ def case_3(n_Robot, n_Region, n_Horizon, region_dict, s):
                     for horizonCounter in range(i, n_Horizon)])) for i in range(1, n_Horizon)])]
     s.add(formula_1 + always_eventually_1)
 
-    # []<> (l2_4 && (l2_5 || l2_6) && (l2_11 || l2_14) && l2_7)
+    # []<> (l2_6 && (l2_7 || l2_8) && (l2_9 || l2_10) && l2_11)
     formulaCounter = formulaCounter + 1
     region = region_dict["l2"]
     formula_2 = [formula[formulaCounter * n_Horizon + horizonCounter] == And(
-        Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 3 * n_Region + region],
-        Or(Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 4 * n_Region + region],
-           Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 5 * n_Region + region]),
-        Or(Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 10 * n_Region + region],
-           Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 13 * n_Region + region]),
-        Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 6 * n_Region + region]) for horizonCounter in
+        Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 5 * n_Region + region],
+        Or(Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 6 * n_Region + region],
+           Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 7 * n_Region + region]),
+        Or(Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 8 * n_Region + region],
+           Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 9 * n_Region + region]),
+        Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 10 * n_Region + region]) for horizonCounter in
                  range(n_Horizon)]
     always_eventually_2 = [
         Or([And(loop[i],
@@ -316,14 +296,14 @@ def case_3(n_Robot, n_Region, n_Horizon, region_dict, s):
                     for horizonCounter in range(i, n_Horizon)])) for i in range(1, n_Horizon)])]
     s.add(formula_2 + always_eventually_2)
 
-    # []<> (l3_7 && (l3_8 || l3_9) && (l3_12 || l3_15) && l3_16)
+    # []<> (l3_11 && (l3_12 || l3_13) && (l3_14 || l3_15) && l3_16)
     formulaCounter = formulaCounter + 1
     region = region_dict["l3"]
     formula_3 = [formula[formulaCounter * n_Horizon + horizonCounter] == And(
-        Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 6 * n_Region + region],
-        Or(Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 7 * n_Region + region],
-           Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 8 * n_Region + region]),
+        Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 10 * n_Region + region],
         Or(Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 11 * n_Region + region],
+           Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 12 * n_Region + region]),
+        Or(Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 13 * n_Region + region],
            Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 14 * n_Region + region]),
         Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 15 * n_Region + region]) for horizonCounter in
                  range(n_Horizon)]
@@ -333,27 +313,27 @@ def case_3(n_Robot, n_Region, n_Horizon, region_dict, s):
                     for horizonCounter in range(i, n_Horizon)])) for i in range(1, n_Horizon)])]
     s.add(formula_3 + always_eventually_3)
 
-    # <> l6_7
-    robot1 = 6
+    # <> l6_11
+    robot1 = 10
     region = region_dict["l6"]
     formulaCounter = formulaCounter + 1
     formula_3 = [formula[formulaCounter * n_Horizon + horizonCounter] for horizonCounter in range(n_Horizon)] + [
         formula[(formulaCounter + 1) * n_Horizon + horizonCounter] == Robot_Region_Horizon[n_Robot * n_Region *
                                                                                            horizonCounter + robot1 * n_Region + region]
         for horizonCounter in range(n_Horizon)]
-    # l5_4 && <> l6_7
-    robot2 = 3
+    # l5_6 && <> l6_11
+    robot2 = 5
     region = region_dict["l5"]
     formula_4 = [formula[(formulaCounter + 2) * n_Horizon + horizonCounter] ==
                  And(Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + robot2 * n_Region + region],
                      until(formula[formulaCounter * n_Horizon: (formulaCounter + 2) * n_Horizon], horizonCounter + 1,
                            n_Horizon)) for horizonCounter in range(n_Horizon)]
-    # <> (l5_4 && <> l6_7)
+    # <> (l5_6 && <> l6_11)
     formula_5 = [formula[(formulaCounter + 3) * n_Horizon + horizonCounter] for horizonCounter in range(n_Horizon)] + [
         formula[(formulaCounter + 4) * n_Horizon + horizonCounter] == formula[
             (formulaCounter + 2) * n_Horizon + horizonCounter]
         for horizonCounter in range(n_Horizon)]
-    # l4_1 && <> (l5_4 && <> l6_7)
+    # l4_1 && <> (l5_6 && <> l6_11)
     robot3 = 0
     region = region_dict["l4"]
     formula_6 = [formula[(formulaCounter + 5) * n_Horizon + horizonCounter] ==
@@ -362,38 +342,38 @@ def case_3(n_Robot, n_Region, n_Horizon, region_dict, s):
                            horizonCounter + 1,
                            n_Horizon)) for horizonCounter in range(n_Horizon)]
 
-    # []<> (l4_1 && <> (l5_4 && <> l6_7))
+    # []<> (l4_1 && <> (l5_6 && <> l6_11))
     always_eventually = [
         Or([And(loop[i],
                 Or([formula[(formulaCounter + 5) * n_Horizon + horizonCounter]
                     for horizonCounter in range(i, n_Horizon)])) for i in range(1, n_Horizon)])]
     s.add(formula_3 + formula_4 + formula_5 + formula_6 + always_eventually)
 
-    # [] !(l3_10 || l3_11)
+    # [] !(l3_4 || l3_9)
     region = region_dict["l3"]
     formulaCounter = formulaCounter + 6
     formula_7 = [
         formula[formulaCounter * n_Horizon + horizonCounter] == Not(Or(Robot_Region_Horizon[n_Robot * n_Region *
-                                                                                            horizonCounter + 9 * n_Region + region],
+                                                                                            horizonCounter + 3 * n_Region + region],
                                                                        Robot_Region_Horizon[n_Robot * n_Region *
-                                                                                            horizonCounter + 10 * n_Region + region]))
+                                                                                            horizonCounter + 8 * n_Region + region]))
         for horizonCounter in range(n_Horizon)]
     always_not = [always(formula[formulaCounter * n_Horizon: (formulaCounter + 1) * n_Horizon], 1, n_Horizon)]
     s.add(formula_7 + always_not)
 
-    # <> (l4_3 && l5_6 && l6_9)
+    # <> (l4_3 && l5_8 && l6_13)
     formulaCounter = formulaCounter + 1
     formula_8 = [formula[formulaCounter * n_Horizon + horizonCounter] for horizonCounter in range(n_Horizon)] + [
         formula[(formulaCounter + 1) * n_Horizon + horizonCounter] == And(
             Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 2 * n_Region + region_dict["l4"]],
-            Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 5 * n_Region + region_dict["l5"]],
-            Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 8 * n_Region + region_dict["l6"]])
+            Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 7 * n_Region + region_dict["l5"]],
+            Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 12 * n_Region + region_dict["l6"]])
         for horizonCounter in range(n_Horizon)]
     eventually = [until(formula[formulaCounter * n_Horizon: (formulaCounter + 2) * n_Horizon], 1, n_Horizon)]
 
     s.add(formula_8 + eventually)
 
-    # []<> (l2_17 && l2_18 && l4_19 & l4_20)
+    # # []<> (l2_17 && l2_18 && l4_19 & l4_20)
     formulaCounter = formulaCounter + 2
     formula_9 = [formula[formulaCounter * n_Horizon + horizonCounter] == And(
         Robot_Region_Horizon[n_Robot * n_Region * horizonCounter + 16 * n_Region + region_dict["l2"]],
@@ -408,7 +388,7 @@ def case_3(n_Robot, n_Region, n_Horizon, region_dict, s):
                     for horizonCounter in range(i, n_Horizon)])) for i in range(1, n_Horizon)])]
     s.add(formula_9 + always_eventually_4)
 
-    # !(l4_3 && l5_6 && l6_9) U (l2_17 && l2_18 && l4_19 & l4_20)
+    # !(l4_3 && l5_8 && l6_13) U (l2_17 && l2_18 && l4_19 & l4_20)
     formulaCounter = formulaCounter + 1
     formula_10 = [formula[formulaCounter * n_Horizon + horizonCounter] == Not(
         formula[(formulaCounter - 2) * n_Horizon + horizonCounter]) for horizonCounter in range(n_Horizon)] + [
@@ -421,7 +401,6 @@ def case_3(n_Robot, n_Region, n_Horizon, region_dict, s):
 
 
 def tri(x, y):
-
     #
     box = triangle.get_data('box')
     #
@@ -430,16 +409,27 @@ def tri(x, y):
 
     t = triangle.triangulate(box, 'pc')
 
-    ax2 = plt.subplot(111)#, sharex=ax1, sharey=ax1)
+    ax2 = plt.subplot(111)  # , sharex=ax1, sharey=ax1)
     plot.plot(ax2, **t)
-    plt.plot(x,y, 'yo-')
+    plt.plot(x, y, 'yo-')
 
     plt.show()
 
 
+case = 3
+
+robot = {1: 1,
+         2: 2,
+         3: 20}
+n_Robot = robot[case]
+
+ite = {3: 27,
+       2: 17,
+       1: 21}
+
+
 start = datetime.datetime.now()
 
-n_Robot = 1
 L = 100
 
 Robot_Region_Horizon = []
@@ -624,6 +614,95 @@ adj_region = {0: [0],
               42: [42, 6, 13],  # l6
               }
 
+vertices = {1: (0, 0),
+            2: (0, 1),
+            3: (1, 1),
+            4: (1, 0),
+            # Inner square has these vertices:
+            # obstacle 1
+            5: (0.4, 1),
+            6: (0.6, 1),
+            7: (0.4, 0.7),
+            8: (0.6, 0.7),
+            # obstacle 2
+            9: (0.3, 0.2),
+            10: (0.7, 0.2),
+            11: (0.3, 0),
+            12: (0.7, 0),
+            # region 1
+            13: (0.1, 0.9),
+            14: (0.1, 0.7),
+            15: (0.3, 0.7),
+
+            # region 2
+            16: (0.7, 0.9),
+            17: (0.7, 0.7),
+            18: (0.9, 0.7),
+
+            # region 5
+            19: (0, 0.3),
+            20: (0, 0.1),
+            21: (0.2, 0.1),
+
+            # reg(ion 4
+            22: (0.3, 0.5),
+            23: (0.3, 0.3),
+            24: (0.5, 0.3),
+            # region 3
+
+            25: (0.7, 0.5),
+            26: (0.7, 0.3),
+            27: (0.9, 0.3),
+
+            # region 6
+            28: (0, 0.6),
+            29: (0, 0.4),
+            30: (0.2, 0.4)
+            }
+
+triangles = {19: [20, 1, 21],
+             17: [21, 11, 9],
+             18: [11, 21, 1],
+             15: [23, 19, 9],
+             20: [23, 9, 24],
+             16: [9, 19, 21],
+             14: [19, 23, 30],
+             6: [14, 28, 30],
+             2: [2, 14, 13],
+             3: [14, 2, 28],
+             8: [22, 15, 14],
+             12: [22, 30, 23],
+             4: [13, 15, 5],
+             9: [22, 7, 15],
+             7: [14, 30, 22],
+             13: [29, 19, 30],
+             1: [2, 13, 5],
+             21: [9, 10, 24],
+             36: [10, 12, 4],
+             22: [24, 10, 26],
+             34: [10, 27, 26],
+             35: [27, 10, 4],
+             31: [25, 27, 18],
+             32: [4, 18, 27],
+             23: [26, 25, 24],
+             10: [25, 7, 22],
+             24: [8, 7, 25],
+             27: [8, 16, 6],
+             5: [7, 5, 15],
+             30: [18, 17, 25],
+             28: [16, 3, 6],
+             29: [3, 16, 18],
+             33: [18, 4, 3],
+             26: [17, 16, 8],
+             25: [8, 25, 17],
+             11: [25, 22, 24],
+             37: [13, 14, 15],
+             38: [16, 17, 18],
+             39: [25, 26, 27],
+             40: [22, 23, 24],
+             41: [19, 20, 21],
+             42: [28, 29, 30]}
+
 # adj_region = {0: [0],
 #               1: [1, 2],
 #               2: [2, 1, 3],
@@ -657,7 +736,7 @@ tri_dict = {37: "l1",
 
 n_Region = len(adj_region)
 
-for n_Horizon in range(21, L):
+for n_Horizon in range(ite[case], L):
 
     s = Solver()
 
@@ -708,8 +787,14 @@ for n_Horizon in range(21, L):
                 # the * used to unpack the python list to arguments                        )
     s.add(adj)
 
-    case_1(n_Robot, n_Region, n_Horizon, region_dict, s)
-    start = datetime.datetime.now()
+    if case == 1:
+        case_1(n_Robot, n_Region, n_Horizon, region_dict, s)
+    elif case == 2:
+        case_2(n_Robot, n_Region, n_Horizon, region_dict, s)
+    elif case == 3:
+        case_3(n_Robot, n_Region, n_Horizon, region_dict, s)
+
+    # start = datetime.datetime.now()
     if s.check() == sat:
         print((datetime.datetime.now() - start).total_seconds())
         print("Success when # horizon is {0}".format(n_Horizon))
@@ -730,95 +815,7 @@ for n_Horizon in range(21, L):
                         break
             print()
 
-        vertices = {1: (0, 0),
-                    2: (0, 1),
-                    3: (1, 1),
-                    4: (1, 0),
-                    # Inner square has these vertices:
-                    # obstacle 1
-                    5: (0.4, 1),
-                    6: (0.6, 1),
-                    7: (0.4, 0.7),
-                    8: (0.6, 0.7),
-                    # obstacle 2
-                    9: (0.3, 0.2),
-                    10: (0.7, 0.2),
-                    11: (0.3, 0),
-                    12: (0.7, 0),
-                    # region 1
-                    13: (0.1, 0.9),
-                    14: (0.1, 0.7),
-                    15: (0.3, 0.7),
-
-                    # region 2
-                    16: (0.7, 0.9),
-                    17: (0.7, 0.7),
-                    18: (0.9, 0.7),
-
-                    # region 5
-                    19: (0, 0.3),
-                    20: (0, 0.1),
-                    21: (0.2, 0.1),
-
-                    # reg(ion 4
-                    22: (0.3, 0.5),
-                    23: (0.3, 0.3),
-                    24: (0.5, 0.3),
-                    # region 3
-
-                    25: (0.7, 0.5),
-                    26: (0.7, 0.3),
-                    27: (0.9, 0.3),
-
-                    # region 6
-                    28: (0, 0.6),
-                    29: (0, 0.4),
-                    30: (0.2, 0.4)
-                    }
-
-        triangles = {19: [20, 1, 21],
-                     17: [21, 11, 9],
-                     18: [11, 21, 1],
-                     15: [23, 19, 9],
-                     20: [23, 9, 24],
-                     16: [9, 19, 21],
-                     14: [19, 23, 30],
-                     6: [14, 28, 30],
-                     2: [2, 14, 13],
-                     3: [14, 2, 28],
-                     8: [22, 15, 14],
-                     12: [22, 30, 23],
-                     4: [13, 15, 5],
-                     9: [22, 7, 15],
-                     7: [14, 30, 22],
-                     13: [29, 19, 30],
-                     1: [2, 13, 5],
-                     21: [9, 10, 24],
-                     36: [10, 12, 4],
-                     22: [24, 10, 26],
-                     34: [10, 27, 26],
-                     35: [27, 10, 4],
-                     31: [25, 27, 18],
-                     32: [4, 18, 27],
-                     23: [26, 25, 24],
-                     10: [25, 7, 22],
-                     24: [8, 7, 25],
-                     27: [8, 16, 6],
-                     5: [7, 5, 15],
-                     30: [18, 17, 25],
-                     28: [16, 3, 6],
-                     29: [3, 16, 18],
-                     33: [18, 4, 3],
-                     26: [17, 16, 8],
-                     25: [8, 25, 17],
-                     11: [25, 22, 24],
-                     37: [13, 14, 15],
-                     38: [16, 17, 18],
-                     39: [25, 26, 27],
-                     40: [22, 23, 24],
-                     41: [19, 20, 21],
-                     42: [28, 29, 30]}
-
+        # break
         # vertices = {1: (0, 0.0),
         #             2: (1, 0.0),
         #             3: (1, 1.0),
@@ -830,6 +827,12 @@ for n_Horizon in range(21, L):
         #              3: [1, 2, 5]}
 
         num_decision_var = 8 * n_Robot * n_Horizon
+        #                 robot1                --------                           robot2
+        #  horizon 1      position 2 + slack_variable 3 + absolute value 3
+        #     |
+        #     |
+        #  horizon 2
+
         # Establish the Linear Programming Model
         myProblem = cplex.Cplex()
 
@@ -841,6 +844,7 @@ for n_Horizon in range(21, L):
             myProblem.variables.set_lower_bounds(8 * i + 1, 0.0)
             myProblem.variables.set_upper_bounds(8 * i + 1, 1.0)
 
+        # inside the true-labeled region
         for horizonCounter in range(n_Horizon):
             for robotCounter in range(n_Robot):
                 shift = horizonCounter * n_Robot * n_Region + robotCounter * n_Region
@@ -852,38 +856,112 @@ for n_Horizon in range(21, L):
 
                         for i in range(len(sense_type)):
                             myProblem.linear_constraints.add(
-                                lin_expr=[cplex.SparsePair(ind=[j for j in range(8 * horizonCounter,
-                                                                                 8 * horizonCounter + 8)],
-                                                           val=lhs[i])],
+                                lin_expr=[cplex.SparsePair(
+                                    ind=[j for j in range(8 * horizonCounter * n_Robot + robotCounter * 8,
+                                                          8 * horizonCounter * n_Robot + robotCounter * 8 + 8)],
+                                    val=lhs[i])],
                                 senses=[sense_type[i]],
                                 rhs=[rhs[i]])
 
                         break
-        myProblem.linear_constraints.add(
-            lin_expr=[cplex.SparsePair(ind=[0, 1],
-                                       val=[1, 0])],
-            senses=["E"],
-            rhs=[0.8])
 
-        myProblem.linear_constraints.add(
-            lin_expr=[cplex.SparsePair(ind=[0, 1],
-                                       val=[0, 1])],
-            senses=["E"],
-            rhs=[0.1])
+        nIndicatorVars = n_Robot * (n_Robot - 1) * (n_Horizon-1)//2
+        colname_ind = ["ind" + str(j + 1) for j in range(nIndicatorVars)]
+        # obj = [0.0] * nIndicatorVars
+        lb = [0.0] * nIndicatorVars
+        ub = [1.0] * nIndicatorVars
+        types = ["B"] * nIndicatorVars
+        myProblem.variables.add(lb=lb, ub=ub, types=types, names=colname_ind)
+
+        # collision avoidance
+        collisionThreshold = 0.02
+        index = 0
+        for horizonCounter in range(1, n_Horizon):
+            for robotCounter in range(n_Robot - 1):
+                for anotherrobotCounter in range(robotCounter + 1, n_Robot):
+                    # x-coordinate
+                    ic_dict = dict()
+                    ic_dict["indvar"] = index
+                    ic_dict["lin_expr"] = cplex.SparsePair(
+                        ind=[8 * horizonCounter * n_Robot + robotCounter * 8,
+                                 8 * horizonCounter * n_Robot + anotherrobotCounter * 8],
+                        val=[1.0, -1.0])
+                    ic_dict["rhs"] = collisionThreshold
+                    ic_dict["sense"] = "G"
+                    ic_dict["complemented"] = 0
+                    # ind(index) = 1 -> ...
+                    # robot.x - anotherrobot.x >= threshold
+                    myProblem.indicator_constraints.add(**ic_dict)
+
+                    ic_dict["complemented"] = 1
+                    ic_dict["lin_expr"] = cplex.SparsePair(
+                        ind=[8 * horizonCounter * n_Robot + robotCounter * 8,
+                             8 * horizonCounter * n_Robot + anotherrobotCounter * 8],
+                        val=[-1.0, 1.0])
+                    # ind(index) = 0 -> ...
+                    # anotherrobot.x - robot.x  >= threshold
+                    myProblem.indicator_constraints.add(**ic_dict)
+
+                    # y-coordinate
+                    # index = index + 1
+                    ic_dict = dict()
+                    ic_dict["indvar"] = index
+                    ic_dict["lin_expr"] = cplex.SparsePair(
+                        ind=[8 * horizonCounter * n_Robot + robotCounter * 8 + 1,
+                             8 * horizonCounter * n_Robot + anotherrobotCounter * 8 + 1],
+                        val=[1.0, -1.0])
+                    ic_dict["rhs"] = collisionThreshold
+                    ic_dict["sense"] = "G"
+                    ic_dict["complemented"] = 1
+                    # ind(index) = 1 -> ...
+                    # robot.y - anotherrobot.y >= threshold
+                    myProblem.indicator_constraints.add(**ic_dict)
+
+                    ic_dict["complemented"] = 0
+                    ic_dict["lin_expr"] = cplex.SparsePair(
+                        ind=[8 * horizonCounter * n_Robot + robotCounter * 8 + 1,
+                             8 * horizonCounter * n_Robot + anotherrobotCounter * 8 + 1],
+                        val=[-1.0, 1.0])
+                    # ind(index) = 0 -> ...
+                    # anotherrobot.y - robot.y  >= threshold
+                    myProblem.indicator_constraints.add(**ic_dict)
+
+                    index = index + 1
+        # for robotCounter in range(n_Robot):
+        #     myProblem.linear_constraints.add(
+        #         lin_expr=[cplex.SparsePair(ind=range(robotCounter * 8, robotCounter * 8 + 2),
+        #                                    val=[1, 0])],
+        #         senses=["E"],
+        #         rhs=[0.8])
+        #
+        #     myProblem.linear_constraints.add(
+        #         lin_expr=[cplex.SparsePair(ind=range(robotCounter * 8, robotCounter * 8 + 2),
+        #                                    val=[0, 1])],
+        #         senses=["E"],
+        #         rhs=[0.1])
         # Add objective function and set its sense
-        for horizonCounter in range(n_Robot * n_Horizon):
+        for i in range(n_Robot * n_Horizon):
             for j in range(5, 8):
-                myProblem.objective.set_linear([(8 * horizonCounter + j, 1)])
+                myProblem.objective.set_linear([(8 * i + j, 1)])
         myProblem.objective.set_sense(myProblem.objective.sense.minimize)
         # Solve the model and print the answer
+        start = datetime.datetime.now()
+        print(myProblem.variables.get_num())
         myProblem.solve()
+        print((datetime.datetime.now() - start).total_seconds())
         values = myProblem.solution.get_values()
-        x = []
-        y = []
 
-        for i in range(n_Robot * n_Horizon):
-            x.append(values[8*i])
-            y.append(values[8*i+1])
+        x = [[] for i in repeat(None, n_Robot)]
+        y = [[] for i in repeat(None, n_Robot)]
+
+        for robotCounter in range(n_Robot):
+            for horizonCounter in range(n_Horizon):
+                x[robotCounter].append(values[8 * n_Robot * horizonCounter + robotCounter * 8])
+                y[robotCounter].append(values[8 * n_Robot * horizonCounter + robotCounter * 8 + 1])
+
+        # for i in range(n_Robot * n_Horizon):
+        #     x.append(values[8*i])
+        #     y.append(values[8*i+1])
         # tri(x,y)
 
         workspace, regions, obs, init_state, uni_cost, formula, formula_comp, exclusion, no = problemFormulation().Formulation()
@@ -892,7 +970,11 @@ for n_Horizon in range(21, L):
         ax = plt.figure(1).gca()
         region_plot(regions, 'region', ax)
         region_plot(obs, 'obs', ax)
-        plt.plot(x, y, 'yo-')
+        color = ['r', 'y', 'b', 'k']
+        for robotCounter in range(n_Robot):
+            pre = plt.quiver(x[robotCounter][:-1], y[robotCounter][:-1], np.array(x[robotCounter][1:]) - np.array(x[robotCounter][:-1]), np.array(y[robotCounter][1:]) - np.array(y[robotCounter][:-1]), color='{0}'.format(color[robotCounter]),
+                             scale_units='xy', angles='xy', scale=1)
+            plt.plot(x[robotCounter], y[robotCounter], '{0}o-'.format(color[robotCounter]))
         plt.show()
         break
     else:
