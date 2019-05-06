@@ -7,16 +7,17 @@ __date__ = 9/3/18
 import triangle
 import triangle.plot as plot
 import matplotlib.pyplot as plt
+import datetime
 
-#
+# path '/Users/chrislaw/Library/Python/3.6/lib/python/site-packages/triangle/data/box.node'
 box = triangle.get_data('box')
 #
 ax1 = plt.subplot(121, aspect='equal')
 triangle.plot.plot(ax1, **box)
 
-
+s = datetime.datetime.now()
 t = triangle.triangulate(box, 'pc')
-
+print((datetime.datetime.now() - s).total_seconds())
 ax2 = plt.subplot(122, sharex=ax1, sharey=ax1)
 plot.plot(ax2, **t)
 

@@ -186,11 +186,19 @@
 # --------------------------------------------------------------------------------------------------------
 # import matplotlib.pyplot as plt
 # x= [200, 300, 400, 500, 1000]
-# # y = [2.53, 2.39, 2.33 ,2.30, 2.21]
 # y = [1.2650 ,   1.1950 ,   1.1650,    1.1500 ,   1.1050]
 # tpre = [9.22, 22.15, 38.85, 57.43, 182.78]
 # tsuf = ['72.6s', '362.2s', '0.34h','0.65h', '6.56h']
 # p = [23, 48, 87, 105, 259]
+
+# import matplotlib.pyplot as plt
+# x= [200, 300, 400, 500]
+# y = [1.2760 , 1.2306 , 1.1902, 1.1387]
+# tpre = [5.00, 9.12, 13.67, 20.16]
+# tsuf = ['61.32', '217.33', '566.75', '1143.81s']
+# p = [19, 39, 67, 87]
+#
+#
 # fig = plt.figure(2)
 # plt.rc('text', usetex=True)
 # plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
@@ -198,18 +206,18 @@
 # ax.plot(x, y, 'r--d')
 # plt.ylabel(r'Cost $J(\tau)$')
 # plt.xlabel(r'$n_{\mathrm{max}}^{\mathrm{pre}} = n_{\mathrm{max}}^{\mathrm{suf}}$')
-# plt.xticks([200, 300, 400, 500, 1000], ["200", "300", "400", "500", "1000"])
+# plt.xticks([200, 300, 400, 500], ["200", "300", "400", "500", "1000"])
 # ymin, ymax = plt.ylim()
 # xmin, xmax = plt.xlim()
 # for i in range(len(x)):
 #     plt.axvline(x=x[i], ls = '--', lw = 0.5, color = 'k', ymin= 0, ymax=(y[i]-ymin)/(ymax-ymin))
 #     plt.axhline(y=y[i], ls='--', lw = 0.5, color='k', xmin=0, xmax=(x[i] - xmin) / (xmax - xmin))
 #
-# plt.text(x[0]+50, y[0]-0.02, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[0]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[0]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[0]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-# plt.text(x[1]+30, y[1]+0.0125, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[1]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[1]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[1]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-# plt.text(x[2], y[2]+0.0125, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[2]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[2]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[2]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-# plt.text(x[3]+60, y[3]+0.005, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[3]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[3]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[3]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
-# plt.text(x[4]-120, y[4]+0.02, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[4]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[4]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[4]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+# plt.text(x[0]+50, y[0]-0.015, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[0]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[0]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[0]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+# plt.text(x[1]+10, y[1]+0.005, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[1]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[1]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[1]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+# plt.text(x[2]+10, y[2]+0.005, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[2]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[2]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[2]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+# plt.text(x[3]-50, y[3]+0.025, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[3]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[3]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[3]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
+# # plt.text(x[4]-120, y[4]+0.02, r'$t_{\mathrm{pre}} = \,$'+ r'{0}s'.format(tpre[4]) + '\n'+ r'$t_{\mathrm{suf}} =\, $'+ r'{0}'.format(tsuf[4]) + '\n' +r'$|\mathcal{P}|=\,$' + r'{0}'.format(p[4]), bbox={'facecolor':'grey', 'alpha':0.2, 'pad':3})
 # plt.savefig(r'/Users/chrislaw/Box Sync/RRL_LTL_cntsSpace/figures/CostMaxNumIter.png', bbox_inches='tight', dpi=600)
 # #
 # plt.show()
@@ -373,24 +381,64 @@
 # str = to_cnf(str)
 # print(satisfiable(str))
 # ---------------------------------------------------------------------------------------------------------------------
-import datetime
+# import datetime
+#
+# def check_prime(number):
+#     for divisor in range(2, int(number ** 0.5) + 1):
+#         if number % divisor == 0:
+#             return False
+#     return True
+#
+# def Primes(max):
+#     number = 1
+#     while number < max:
+#         number += 1
+#         if check_prime(number):
+#             yield number
+#
+# start = datetime.datetime.now()
+# primes = Primes(1000000)
+# print(primes)
+# for x in primes:
+#     pass
+# print((datetime.datetime.now()-start).total_seconds())
 
-def check_prime(number):
-    for divisor in range(2, int(number ** 0.5) + 1):
-        if number % divisor == 0:
-            return False
-    return True
+import numpy
 
-def Primes(max):
-    number = 1
-    while number < max:
-        number += 1
-        if check_prime(number):
-            yield number
 
-start = datetime.datetime.now()
-primes = Primes(1000000)
-print(primes)
-for x in primes:
-    pass
-print((datetime.datetime.now()-start).total_seconds())
+def uniform_geometry_pdf(p, x):
+
+    a = -p*numpy.log(p)/(1-p)
+    for i in range(1, x):
+        a -= p*numpy.power(1-p, i-1)/i
+        yield a
+
+
+def uniform_geometry(n):
+    p = 1/n
+    b = -p*numpy.log(p)/(1-p)
+    for pdf in uniform_geometry_pdf(p, n):
+        b += pdf
+        # print(sum)
+    return b
+
+
+def uniform_geometry_cdf(n, b_max):
+    p = 1/n
+    b = -p * numpy.log(p) / (1 - p)
+    if b > b_max:
+        return 1
+    index = 1
+    for pdf in uniform_geometry_pdf(p, n):
+        b += pdf
+        index += 1
+        if b > b_max:
+            return index
+
+
+def sample_uniform_geometry(group):
+    reverseGroup = group[::-1]
+    n = len(reverseGroup)
+    b = uniform_geometry(n)
+    cdf = numpy.random.uniform(0, b, 1)[0]
+    return reverseGroup[uniform_geometry_cdf(n, cdf)]

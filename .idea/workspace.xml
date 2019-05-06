@@ -2,7 +2,53 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="004b840c-21b3-4ebe-896b-58c942e56764" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UG_result.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/newnote.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/uniform_geometry.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/RRT_LTL_CntsSpace_May27_comments.pdf" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/try.py" afterPath="$PROJECT_DIR$/trial.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/buchi_case1_false" afterPath="$PROJECT_DIR$/data/buchi_case1_false" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/buchi_case2_false" afterPath="$PROJECT_DIR$/data/buchi_case2_false" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/buchi_case3_false" afterPath="$PROJECT_DIR$/data/buchi_case3_false" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/buchi_case4_false" afterPath="$PROJECT_DIR$/data/buchi_case4_false" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/buchi_case5_false" afterPath="$PROJECT_DIR$/data/buchi_case5_false" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/buchi_case6_false" afterPath="$PROJECT_DIR$/data/buchi_case6_false" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/buchi_case7_false" afterPath="$PROJECT_DIR$/data/buchi_case7_false" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/buchi_case8_false" afterPath="$PROJECT_DIR$/data/buchi_case8_false" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/buchi_case9_false" afterPath="$PROJECT_DIR$/data/buchi_case9_false" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data_pre_tree" afterPath="$PROJECT_DIR$/data_pre_tree" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data_suf_tree" afterPath="$PROJECT_DIR$/data_suf_tree" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path0.png" afterPath="$PROJECT_DIR$/path0.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path1.png" afterPath="$PROJECT_DIR$/path1.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path10.png" afterPath="$PROJECT_DIR$/path10.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path11.png" afterPath="$PROJECT_DIR$/path11.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path12.png" afterPath="$PROJECT_DIR$/path12.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path13.png" afterPath="$PROJECT_DIR$/path13.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path14.png" afterPath="$PROJECT_DIR$/path14.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path15.png" afterPath="$PROJECT_DIR$/path15.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path16.png" afterPath="$PROJECT_DIR$/path16.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path17.png" afterPath="$PROJECT_DIR$/path17.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path18.png" afterPath="$PROJECT_DIR$/path18.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path19.png" afterPath="$PROJECT_DIR$/path19.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path2.png" afterPath="$PROJECT_DIR$/path2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path3.png" afterPath="$PROJECT_DIR$/path3.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path4.png" afterPath="$PROJECT_DIR$/path4.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path5.png" afterPath="$PROJECT_DIR$/path5.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path6.png" afterPath="$PROJECT_DIR$/path6.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path7.png" afterPath="$PROJECT_DIR$/path7.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path8.png" afterPath="$PROJECT_DIR$/path8.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/path9.png" afterPath="$PROJECT_DIR$/path9.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BiasOptPlan4MulR.py" afterPath="$PROJECT_DIR$/BiasOptPlan4MulR.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Biastree4MulR.py" afterPath="$PROJECT_DIR$/Biastree4MulR.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OptPlan4MulR.py" afterPath="$PROJECT_DIR$/OptPlan4MulR.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Problem.py" afterPath="$PROJECT_DIR$/Problem.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SMT4MulR.py" afterPath="$PROJECT_DIR$/SMT4MulR.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tri.py" afterPath="$PROJECT_DIR$/Tri.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WorkspacePlot.py" afterPath="$PROJECT_DIR$/WorkspacePlot.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pathpatch3d.py" afterPath="$PROJECT_DIR$/pathpatch3d.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run_all.sh" afterPath="$PROJECT_DIR$/run_all.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tree4MulR.py" afterPath="$PROJECT_DIR$/tree4MulR.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,105 +62,40 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BiasOptPlan4MulR.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BiasOptPlan4MulR.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="31" selection-end-column="29" />
-              <folding>
-                <element signature="e#135#147#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WorkspacePlot.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WorkspacePlot.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="53">
-              <caret line="110" column="17" lean-forward="true" selection-start-line="110" selection-start-column="17" selection-end-line="110" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SMT4MulR.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/SMT4MulR.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
-              <caret line="426" column="13" lean-forward="true" selection-start-line="426" selection-start-column="13" selection-end-line="426" selection-end-column="13" />
-              <folding>
-                <element signature="e#215#231#0" expanded="true" />
-                <element signature="e#489#507#0" expanded="false" />
-                <element signature="e#527#543#0" expanded="false" />
-                <element signature="e#562#577#0" expanded="false" />
-                <element signature="e#596#612#0" expanded="false" />
-                <element signature="e#640#665#0" expanded="false" />
-                <element signature="e#702#823#0" expanded="false" />
-                <element signature="e#1361#3029#0" expanded="false" />
-                <element signature="e#3081#4006#0" expanded="false" />
-                <element signature="e#4071#8140#0" expanded="false" />
-                <element signature="e#8205#11118#0" expanded="false" />
-                <element signature="e#19878#20166#0" expanded="false" />
-                <element signature="e#20361#20384#0" expanded="false" />
-                <element signature="e#25239#26705#0" expanded="false" />
-                <element signature="e#26718#27759#0" expanded="false" />
-                <element signature="e#27773#29023#0" expanded="false" />
-                <element signature="e#29368#29503#0" expanded="false" />
-                <element signature="e#29516#29636#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/cplex/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="1098" column="41" lean-forward="false" selection-start-line="1098" selection-start-column="41" selection-end-line="1098" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/cplex/_internal/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="122" column="34" lean-forward="false" selection-start-line="122" selection-start-column="34" selection-end-line="122" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Problem.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Problem.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Problem.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="49">
-              <caret line="40" column="58" lean-forward="true" selection-start-line="40" selection-start-column="58" selection-end-line="40" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Tri.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tri.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="142" column="33" lean-forward="true" selection-start-line="142" selection-start-column="12" selection-end-line="142" selection-end-column="33" />
+            <state relative-caret-position="15">
+              <caret line="263" column="0" lean-forward="false" selection-start-line="263" selection-start-column="0" selection-end-line="263" selection-end-column="0" />
               <folding>
-                <element signature="e#72#87#0" expanded="true" />
+                <element signature="e#73#116#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_subinterfaces.py" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/cplex/_internal/_subinterfaces.py">
+      <file leaf-file-name="UG_result.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UG_result.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="3030">
+                <caret line="202" column="0" lean-forward="false" selection-start-line="202" selection-start-column="0" selection-end-line="202" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Biastree4MulR.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Biastree4MulR.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="478" column="8" lean-forward="false" selection-start-line="478" selection-start-column="8" selection-end-line="478" selection-end-column="8" />
-              <folding />
+            <state relative-caret-position="9930">
+              <caret line="730" column="20" lean-forward="false" selection-start-line="730" selection-start-column="20" selection-end-line="730" selection-end-column="20" />
+              <folding>
+                <element signature="e#156#182#0" expanded="true" />
+                <element signature="e#8283#11632#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -130,36 +111,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>pri</find>
-      <find>print</find>
-      <find>string</find>
-      <find>'o'</find>
-      <find>self.label</find>
-      <find>satisfiable</find>
-      <find>sati</find>
-      <find>to_cnf</find>
-      <find>&amp;&amp;</find>
-      <find>lab</find>
-      <find>label</find>
-      <find>'o</find>
-      <find>dateti</find>
-      <find>spiral</find>
-      <find>face</find>
-      <find>n_for</find>
-      <find>o</find>
-      <find>colli</find>
-      <find>collision</find>
-      <find>within</find>
-      <find>loop</find>
-      <find>case_0</find>
       <find>tri</find>
-      <find>.add</find>
-      <find>case_2</find>
-      <find>x[robotCounter]</find>
-      <find>y_pre</find>
+      <find>contain</find>
+      <find>num_</find>
+      <find>linear_constraints</find>
+      <find>date</find>
+      <find>colli</find>
+      <find>25</find>
+      <find>thres</find>
       <find>case</find>
-      <find>case_3</find>
-      <find>13</find>
+      <find>35</find>
+      <find>print</find>
+      <find>collision_avoidance</find>
+      <find>36</find>
+      <find>delta</find>
+      <find>tau</find>
+      <find>ite</find>
+      <find>sys.argv</find>
+      <find>sys.</find>
+      <find>ite =</find>
+      <find>ran</find>
+      <find>rand</find>
+      <find>goal</find>
+      <find>intersection</find>
+      <find>pick</find>
+      <find>min</find>
+      <find>add_group</find>
+      <find>path_pl</find>
+      <find>uniform</find>
+      <find>208</find>
+      <find>randint</find>
     </findStrings>
     <replaceStrings>
       <replace>,</replace>
@@ -179,13 +160,11 @@
         <option value="$PROJECT_DIR$/tree.py" />
         <option value="$PROJECT_DIR$/OptPlan41path.py" />
         <option value="$PROJECT_DIR$/SampGaus.py" />
-        <option value="$PROJECT_DIR$/pathpatch3d.py" />
         <option value="$PROJECT_DIR$/Biastree4MulR2.py" />
         <option value="$PROJECT_DIR$/hi.py" />
         <option value="$PROJECT_DIR$/hi1.py" />
         <option value="$PROJECT_DIR$/hi2.py" />
         <option value="$PROJECT_DIR$/hi3.py" />
-        <option value="$PROJECT_DIR$/try.py" />
         <option value="$PROJECT_DIR$/FeasPlan4MulR.py" />
         <option value="$PROJECT_DIR$/RRT4MulR.py" />
         <option value="$PROJECT_DIR$/tree4MulR2.py" />
@@ -194,20 +173,25 @@
         <option value="$PROJECT_DIR$/Problem1.py" />
         <option value="$PROJECT_DIR$/Buchi.py" />
         <option value="$PROJECT_DIR$/note.md" />
-        <option value="$PROJECT_DIR$/tree4MulR.py" />
-        <option value="$PROJECT_DIR$/OptPlan4MulR.py" />
         <option value="$PROJECT_DIR$/SMT_planning.py" />
         <option value="$PROJECT_DIR$/WorkspacePlot.py" />
-        <option value="$PROJECT_DIR$/Biastree4MulR.py" />
+        <option value="$PROJECT_DIR$/tree4MulR.py" />
+        <option value="$PROJECT_DIR$/pathpatch3d.py" />
         <option value="$PROJECT_DIR$/Problem.py" />
-        <option value="$PROJECT_DIR$/Tri.py" />
-        <option value="$PROJECT_DIR$/BiasOptPlan4MulR.py" />
+        <option value="$PROJECT_DIR$/OptPlan4MulR.py" />
         <option value="$PROJECT_DIR$/SMT4MulR.py" />
+        <option value="$PROJECT_DIR$/newnote.md" />
+        <option value="$PROJECT_DIR$/Tri.py" />
+        <option value="$PROJECT_DIR$/try.py" />
+        <option value="$PROJECT_DIR$/uniform_geometry.py" />
+        <option value="$PROJECT_DIR$/Biastree4MulR.py" />
+        <option value="$PROJECT_DIR$/BiasOptPlan4MulR.py" />
+        <option value="$PROJECT_DIR$/UG_result.md" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="718" />
+    <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -247,6 +231,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -259,11 +244,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="/usr/local/bin/pypy3" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -283,7 +267,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.SMT4MulR">
+  <component name="RunManager" selected="Python.try">
     <configuration name="BiasOptPlan4MulR_shape" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -297,23 +281,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="RRT*_LTL" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BiasOptPlan4MulR.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
-    <configuration name="Problem" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="RRT*_LTL" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Problem.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -352,37 +319,54 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="_aux_functions" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="pathpatch3d" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="/usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/cplex/_internal" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="RRT*_LTL" />
-      <option name="SCRIPT_NAME" value="/usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/cplex/_internal/_aux_functions.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pathpatch3d.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="try" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="RRT*_LTL" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/trial.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.BiasOptPlan4MulR_shape" />
-      <item index="1" class="java.lang.String" itemvalue="Python.Tri" />
+      <item index="1" class="java.lang.String" itemvalue="Python.pathpatch3d" />
       <item index="2" class="java.lang.String" itemvalue="Python.SMT4MulR" />
-      <item index="3" class="java.lang.String" itemvalue="Python.Problem" />
-      <item index="4" class="java.lang.String" itemvalue="Python._aux_functions" />
+      <item index="3" class="java.lang.String" itemvalue="Python.Tri" />
+      <item index="4" class="java.lang.String" itemvalue="Python.try" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.SMT4MulR" />
+        <item index="0" class="java.lang.String" itemvalue="Python.try" />
         <item index="1" class="java.lang.String" itemvalue="Python.Tri" />
-        <item index="2" class="java.lang.String" itemvalue="Python.BiasOptPlan4MulR_shape" />
-        <item index="3" class="java.lang.String" itemvalue="Python._aux_functions" />
-        <item index="4" class="java.lang.String" itemvalue="Python.Problem" />
+        <item index="2" class="java.lang.String" itemvalue="Python.pathpatch3d" />
+        <item index="3" class="java.lang.String" itemvalue="Python.SMT4MulR" />
+        <item index="4" class="java.lang.String" itemvalue="Python.BiasOptPlan4MulR_shape" />
       </list>
     </recent_temporary>
   </component>
@@ -412,18 +396,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16380544" sideWeight="0.49272728" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3117932" sideWeight="0.49272728" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27238807" sideWeight="0.50572246" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24626866" sideWeight="0.49427754" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27736318" sideWeight="0.49427754" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26865673" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40547264" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28551137" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32089552" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18168813" sideWeight="0.5072727" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -439,18 +423,18 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22014925" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27238807" sideWeight="0.50572246" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27238807" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24502487" sideWeight="0.49427754" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26865673" sideWeight="0.49713877" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15307583" sideWeight="0.49272728" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21890548" sideWeight="0.49713877" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18597998" sideWeight="0.49272728" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37686568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3211382" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18168813" sideWeight="0.5072727" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
@@ -508,9 +492,19 @@
           <option name="timeStamp" value="639" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Tri.py</url>
-          <line>19</line>
-          <option name="timeStamp" value="673" />
+          <url>file:///usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/cplex/_internal/_procedural.py</url>
+          <line>302</line>
+          <option name="timeStamp" value="682" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pathpatch3d.py</url>
+          <line>172</line>
+          <option name="timeStamp" value="700" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pathpatch3d.py</url>
+          <line>283</line>
+          <option name="timeStamp" value="707" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -523,282 +517,15 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="679" />
+      <option name="time" value="711" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/sympy/logic/inference.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="37" column="59" lean-forward="true" selection-start-line="37" selection-start-column="59" selection-end-line="37" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.py" />
-    <entry file="file://$PROJECT_DIR$/hi.py" />
-    <entry file="file://$PROJECT_DIR$/hi1.py" />
-    <entry file="file://$PROJECT_DIR$/hi2.py" />
-    <entry file="file://$PROJECT_DIR$/hi3.py" />
-    <entry file="file://$PROJECT_DIR$/try.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5640">
-          <caret line="376" column="0" lean-forward="false" selection-start-line="376" selection-start-column="0" selection-end-line="376" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pathpatch3d.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2490">
-          <caret line="177" column="0" lean-forward="false" selection-start-line="177" selection-start-column="0" selection-end-line="177" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/Cellar/pypy3/6.0.0/libexec/site-packages/pyvisgraph/vis_graph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="26" column="9" lean-forward="false" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OptPlan41path.py" />
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FeasPlan.py" />
-    <entry file="file://$PROJECT_DIR$/tree.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="65" column="8" lean-forward="false" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FeasPlan4MulR.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="33" lean-forward="true" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RRT4MulR.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="329" column="39" lean-forward="true" selection-start-line="329" selection-start-column="39" selection-end-line="329" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tree4MulR2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="46" lean-forward="false" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
-          <folding>
-            <element signature="e#41#67#0" expanded="false" />
-            <element signature="e#393#1390#0" expanded="false" />
-            <element signature="e#1422#1662#0" expanded="false" />
-            <element signature="e#1704#1991#0" expanded="false" />
-            <element signature="e#2032#2614#0" expanded="false" />
-            <element signature="e#2664#3305#0" expanded="false" />
-            <element signature="e#3370#4920#0" expanded="false" />
-            <element signature="e#4978#6179#0" expanded="false" />
-            <element signature="e#6216#6722#0" expanded="false" />
-            <element signature="e#6780#7959#0" expanded="false" />
-            <element signature="e#7994#9275#0" expanded="false" />
-            <element signature="e#9338#9944#0" expanded="false" />
-            <element signature="e#10000#11064#0" expanded="false" />
-            <element signature="e#11105#11782#0" expanded="false" />
-            <element signature="e#11824#12095#0" expanded="false" />
-            <element signature="e#12137#12463#0" expanded="false" />
-            <element signature="e#12518#14239#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/matplotlib/texmanager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="334" column="0" lean-forward="false" selection-start-line="334" selection-start-column="0" selection-end-line="334" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/subprocess.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="335" column="0" lean-forward="false" selection-start-line="335" selection-start-column="0" selection-end-line="335" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/z_BiasOptPlan4MulR.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="40" column="44" lean-forward="false" selection-start-line="40" selection-start-column="44" selection-end-line="40" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/z_Biastree4MulR.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="483" column="48" lean-forward="false" selection-start-line="483" selection-start-column="48" selection-end-line="483" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-            <element signature="e#2124#2369#0" expanded="false" />
-            <element signature="e#2124#2233#1" expanded="false" />
-            <element signature="e#2432#3038#0" expanded="false" />
-            <element signature="e#3078#3557#0" expanded="false" />
-            <element signature="e#3632#3719#0" expanded="false" />
-            <element signature="e#3757#3875#0" expanded="false" />
-            <element signature="e#4809#5438#0" expanded="false" />
-            <element signature="e#5484#5975#0" expanded="false" />
-            <element signature="e#6065#7691#0" expanded="false" />
-            <element signature="e#7791#8050#1" expanded="false" />
-            <element signature="e#11207#11300#1" expanded="false" />
-            <element signature="e#14295#14323#0" expanded="false" />
-            <element signature="e#15600#16116#0" expanded="false" />
-            <element signature="e#16181#16434#1" expanded="false" />
-            <element signature="e#18226#18475#1" expanded="false" />
-            <element signature="e#19618#20137#0" expanded="false" />
-            <element signature="e#19618#19788#1" expanded="false" />
-            <element signature="e#22381#23662#0" expanded="false" />
-            <element signature="e#23725#24481#0" expanded="false" />
-            <element signature="e#25659#26305#0" expanded="false" />
-            <element signature="e#26346#27105#0" expanded="false" />
-            <element signature="e#27147#27418#0" expanded="false" />
-            <element signature="e#27460#27786#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/z_Problem.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="46" lean-forward="false" selection-start-line="42" selection-start-column="46" selection-end-line="42" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Biastree4MulR2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/sympy/core/sympify.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="355" column="0" lean-forward="false" selection-start-line="355" selection-start-column="0" selection-end-line="355" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/sympy/logic/boolalg.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="1120" column="0" lean-forward="false" selection-start-line="1120" selection-start-column="0" selection-end-line="1120" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OptPlan.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="11" column="46" lean-forward="false" selection-start-line="11" selection-start-column="46" selection-end-line="11" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Buchi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3555">
-          <caret line="345" column="64" lean-forward="false" selection-start-line="345" selection-start-column="64" selection-end-line="345" selection-end-column="64" />
-          <folding>
-            <element signature="e#25#42#0" expanded="false" />
-            <element signature="e#3313#4797#0" expanded="false" />
-            <element signature="e#4846#5429#0" expanded="false" />
-            <element signature="e#5488#7692#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/note.md">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="17" lean-forward="true" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="0">
-            <caret line="203" column="62" lean-forward="false" selection-start-line="203" selection-start-column="62" selection-end-line="203" selection-end-column="62" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/posixpath.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
           <caret line="159" column="0" lean-forward="false" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/matplotlib/pyplot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="1057" column="0" lean-forward="false" selection-start-line="1057" selection-start-column="0" selection-end-line="1057" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tree4MulR.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="272" column="0" lean-forward="false" selection-start-line="272" selection-start-column="0" selection-end-line="272" selection-end-column="0" />
-          <folding>
-            <element signature="e#38#64#0" expanded="true" />
-            <element signature="e#3365#3881#0" expanded="false" />
-            <element signature="e#5845#7092#0" expanded="false" />
-            <element signature="e#7129#7648#0" expanded="false" />
-            <element signature="e#11778#12469#0" expanded="false" />
-            <element signature="e#12511#12782#0" expanded="false" />
-            <element signature="e#12824#13150#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OptPlan4MulR.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="60" lean-forward="false" selection-start-line="8" selection-start-column="60" selection-end-line="8" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SMT_planning.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="51" column="13" lean-forward="false" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
-          <folding>
-            <element signature="e#143#159#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/triangle/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="334" column="46" lean-forward="true" selection-start-line="334" selection-start-column="46" selection-end-line="334" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -814,48 +541,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="143">
           <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Biastree4MulR.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="49" column="50" lean-forward="false" selection-start-line="49" selection-start-column="44" selection-end-line="49" selection-end-column="50" />
-          <folding>
-            <element signature="e#2337#2582#0" expanded="false" />
-            <element signature="e#2337#2446#1" expanded="false" />
-            <element signature="e#2645#3251#0" expanded="false" />
-            <element signature="e#3291#3770#0" expanded="false" />
-            <element signature="e#3845#3932#0" expanded="false" />
-            <element signature="e#3970#4088#0" expanded="false" />
-            <element signature="e#5028#5657#0" expanded="false" />
-            <element signature="e#5703#6194#0" expanded="false" />
-            <element signature="e#6284#7910#0" expanded="false" />
-            <element signature="e#8010#8269#1" expanded="false" />
-            <element signature="e#11426#11519#1" expanded="false" />
-            <element signature="e#14514#14542#0" expanded="false" />
-            <element signature="e#15129#15769#0" expanded="false" />
-            <element signature="e#15819#16335#0" expanded="false" />
-            <element signature="e#16400#18387#0" expanded="false" />
-            <element signature="e#16400#16653#1" expanded="false" />
-            <element signature="e#18445#19800#0" expanded="false" />
-            <element signature="e#18445#18694#1" expanded="false" />
-            <element signature="e#19837#20356#0" expanded="false" />
-            <element signature="e#19837#20007#1" expanded="false" />
-            <element signature="e#24773#25419#0" expanded="false" />
-            <element signature="e#25460#26219#0" expanded="false" />
-            <element signature="e#26261#26532#0" expanded="false" />
-            <element signature="e#26574#26900#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/z3/z3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="325" column="0" lean-forward="false" selection-start-line="325" selection-start-column="0" selection-end-line="325" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -863,7 +548,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="259">
           <caret line="314" column="42" lean-forward="true" selection-start-line="314" selection-start-column="42" selection-end-line="314" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -871,7 +555,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
           <caret line="58" column="41" lean-forward="true" selection-start-line="58" selection-start-column="41" selection-end-line="58" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -879,43 +562,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="106">
           <caret line="255" column="0" lean-forward="true" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/cplex/_internal/_parameter_classes.py">
+    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/pyvisgraph/vis_graph.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="70" column="42" lean-forward="true" selection-start-line="70" selection-start-column="19" selection-end-line="70" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BiasOptPlan4MulR.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="31" selection-end-column="29" />
-          <folding>
-            <element signature="e#135#147#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tri.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="142" column="33" lean-forward="true" selection-start-line="142" selection-start-column="12" selection-end-line="142" selection-end-column="33" />
-          <folding>
-            <element signature="e#72#87#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WorkspacePlot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="53">
-          <caret line="110" column="17" lean-forward="true" selection-start-line="110" selection-start-column="17" selection-end-line="110" selection-end-column="17" />
-          <folding />
+        <state relative-caret-position="-296">
+          <caret line="107" column="8" lean-forward="false" selection-start-line="107" selection-start-column="8" selection-end-line="107" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -923,73 +576,340 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125">
           <caret line="478" column="8" lean-forward="false" selection-start-line="478" selection-start-column="8" selection-end-line="478" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/cplex/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="1098" column="41" lean-forward="false" selection-start-line="1098" selection-start-column="41" selection-end-line="1098" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file:///usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/cplex/_internal/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="122" column="34" lean-forward="false" selection-start-line="122" selection-start-column="34" selection-end-line="122" selection-end-column="34" />
-          <folding />
+        <state relative-caret-position="223">
+          <caret line="124" column="0" lean-forward="false" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/cplex/_internal/_parameter_classes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="122" column="0" lean-forward="false" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/cplex/_internal/_parameter_hierarchy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="340" column="0" lean-forward="false" selection-start-line="340" selection-start-column="0" selection-end-line="340" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/cplex/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="1249" column="30" lean-forward="false" selection-start-line="1249" selection-start-column="30" selection-end-line="1249" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file:///usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/cplex/_internal/_pycplex.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="17" lean-forward="true" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
-          <folding />
+        <state relative-caret-position="143">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file:///usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/cplex/_internal/_procedural.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="326" column="20" lean-forward="false" selection-start-line="326" selection-start-column="20" selection-end-line="326" selection-end-column="20" />
+        <state relative-caret-position="143">
+          <caret line="280" column="0" lean-forward="false" selection-start-line="280" selection-start-column="0" selection-end-line="280" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Problem.py">
+    <entry file="file:///Applications/CPLEX_Studio128/python/setup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="49">
-          <caret line="40" column="58" lean-forward="true" selection-start-line="40" selection-start-column="58" selection-end-line="40" selection-end-column="58" />
-          <folding />
+        <state relative-caret-position="1935">
+          <caret line="137" column="21" lean-forward="true" selection-start-line="137" selection-start-column="21" selection-end-line="137" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Applications/CPLEX_Studio128/cplex/python/3.6/x86-64_osx/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Applications/CPLEX_Studio128/cplex/examples/src/python/qcpex1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="33" column="7" lean-forward="false" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/workspace.poly">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-52">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/arrow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/matplotlib/patches.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13860">
+          <caret line="941" column="8" lean-forward="false" selection-start-line="941" selection-start-column="8" selection-end-line="941" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/matplotlib/pyplot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14055">
+          <caret line="988" column="4" lean-forward="false" selection-start-line="988" selection-start-column="4" selection-end-line="988" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="65" column="8" lean-forward="false" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/z3/z3num.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="17" column="7" lean-forward="false" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/z3/z3rcf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="20" lean-forward="false" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/z3/z3printer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="416" column="16" lean-forward="false" selection-start-line="416" selection-start-column="16" selection-end-line="416" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/z3/z3util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6965">
+          <caret line="1" column="37" lean-forward="false" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/z3/z3types.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="38" lean-forward="false" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/z3/z3poly.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="38" lean-forward="false" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/z3/z3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="6748" column="5" lean-forward="false" selection-start-line="6748" selection-start-column="4" selection-end-line="6748" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/z3/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="7" lean-forward="true" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SMT4MulR.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="426" column="13" lean-forward="true" selection-start-line="426" selection-start-column="13" selection-end-line="426" selection-end-column="13" />
+        <state relative-caret-position="3780">
+          <caret line="1332" column="33" lean-forward="false" selection-start-line="1332" selection-start-column="33" selection-end-line="1332" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OptPlan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/note.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="723">
+            <caret line="76" column="63" lean-forward="false" selection-start-line="76" selection-start-column="63" selection-end-line="76" selection-end-column="63" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="17" lean-forward="true" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SMT_planning.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="3" lean-forward="false" selection-start-line="0" selection-start-column="3" selection-end-line="0" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WorkspacePlot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="12" column="29" lean-forward="false" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OptPlan4MulR.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2010">
+          <caret line="144" column="19" lean-forward="false" selection-start-line="144" selection-start-column="19" selection-end-line="144" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pathpatch3d.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2850">
+          <caret line="190" column="41" lean-forward="false" selection-start-line="190" selection-start-column="37" selection-end-line="190" selection-end-column="41" />
           <folding>
-            <element signature="e#215#231#0" expanded="true" />
-            <element signature="e#489#507#0" expanded="false" />
-            <element signature="e#527#543#0" expanded="false" />
-            <element signature="e#562#577#0" expanded="false" />
-            <element signature="e#596#612#0" expanded="false" />
-            <element signature="e#640#665#0" expanded="false" />
-            <element signature="e#702#823#0" expanded="false" />
-            <element signature="e#1361#3029#0" expanded="false" />
-            <element signature="e#3081#4006#0" expanded="false" />
-            <element signature="e#4071#8140#0" expanded="false" />
-            <element signature="e#8205#11118#0" expanded="false" />
-            <element signature="e#19878#20166#0" expanded="false" />
-            <element signature="e#20361#20384#0" expanded="false" />
-            <element signature="e#25239#26705#0" expanded="false" />
-            <element signature="e#26718#27759#0" expanded="false" />
-            <element signature="e#27773#29023#0" expanded="false" />
-            <element signature="e#29368#29503#0" expanded="false" />
-            <element signature="e#29516#29636#0" expanded="false" />
+            <element signature="e#174#192#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tree4MulR.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4335">
+          <caret line="297" column="21" lean-forward="false" selection-start-line="297" selection-start-column="21" selection-end-line="297" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Buchi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="42" column="8" lean-forward="false" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
+          <folding>
+            <element signature="e#3313#4797#0" expanded="false" />
+            <element signature="e#4846#5429#0" expanded="false" />
+            <element signature="e#5488#7692#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Python/3.6/lib/python/site-packages/triangle/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="727">
+          <caret line="353" column="0" lean-forward="false" selection-start-line="353" selection-start-column="0" selection-end-line="353" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2017.2/python_stubs/-1604679571/numpy/random/mtrand.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-95">
+          <caret line="2771" column="4" lean-forward="false" selection-start-line="2771" selection-start-column="4" selection-end-line="2771" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/z_BiasOptPlan4MulR.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tri.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3919">
+          <caret line="12" column="30" lean-forward="true" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trial.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="416" column="17" lean-forward="true" selection-start-line="416" selection-start-column="17" selection-end-line="416" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uniform_geometry.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="42" lean-forward="true" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Biastree4MulR.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9930">
+          <caret line="730" column="20" lean-forward="false" selection-start-line="730" selection-start-column="20" selection-end-line="730" selection-end-column="20" />
+          <folding>
+            <element signature="e#156#182#0" expanded="true" />
+            <element signature="e#8283#11632#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UG_result.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="3030">
+            <caret line="202" column="0" lean-forward="false" selection-start-line="202" selection-start-column="0" selection-end-line="202" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BiasOptPlan4MulR.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="31" column="27" lean-forward="true" selection-start-line="31" selection-start-column="27" selection-end-line="31" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/newnote.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="6975">
+            <caret line="465" column="0" lean-forward="false" selection-start-line="465" selection-start-column="0" selection-end-line="465" selection-end-column="0" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Problem.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="263" column="0" lean-forward="false" selection-start-line="263" selection-start-column="0" selection-end-line="263" selection-end-column="0" />
+          <folding>
+            <element signature="e#73#116#0" expanded="true" />
           </folding>
         </state>
       </provider>

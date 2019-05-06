@@ -5,7 +5,7 @@ __date__ = 8/30/18
 """
 
 """
-biaed samping optimal task planning for multi-robots
+biased samping optimal task planning for multi-robots
 """
 
 import Buchi
@@ -26,44 +26,45 @@ import sys
 
 workspace, regions, obs, init_state, uni_cost, formula, formula_comp, exclusion, no = problemFormulation().Formulation()
 ts = {'workspace':workspace, 'region':regions, 'obs':obs, 'uni_cost':uni_cost}
-# plot the workspace
-# ax = plt.figure(1).gca()
-# region_plot(regions, 'region', ax)
-# region_plot(obs, 'obs', ax)
-# +------------------------------------------+
-# |            construct buchi graph         |
-# +------------------------------------------+
-start1 = datetime.datetime.now()
+# # plot the workspace
+# # ax = plt.figure(1).gca()
+# # region_plot(regions, 'region', ax)
+# # region_plot(obs, 'obs', ax)
+# # +------------------------------------------+
+# # |            construct buchi graph         |
+# # +------------------------------------------+
+# start1 = datetime.datetime.now()
+# buchi = Buchi.buchi_graph(formula, formula_comp, exclusion)
+# buchi.formulaParser()
+# buchi.execLtl2ba()
+# _ = buchi.buchiGraph()
+# buchi.DelInfesEdge(len(init_state))
+# min_qb = buchi.MinLen()
+# buchi.FeasAcpt(min_qb)
+# buchi_graph = buchi.buchi_graph
+# # buchi_state = dict(zip(list(buchi_graph.nodes()), range(1, buchi_graph.number_of_nodes() + 1)))  # dict
+# # # # # # # #
+# t = (datetime.datetime.now() - start1).total_seconds()
+# print(t)
 #
-buchi = Buchi.buchi_graph(formula, formula_comp, exclusion)
-buchi.formulaParser()
-buchi.execLtl2ba()
-_ = buchi.buchiGraph()
-buchi.DelInfesEdge(len(init_state))
-min_qb = buchi.MinLen()
-buchi.FeasAcpt(min_qb)
-buchi_graph = buchi.buchi_graph
-buchi_state = dict(zip(list(buchi_graph.nodes()), range(1, buchi_graph.number_of_nodes() + 1)))  # dict
-# # # # # #
-print((datetime.datetime.now() - start1).total_seconds())
-# # #
-# with open('data/buchi_case2_false', 'wb') as filehandle:
-#     # store the data as binary data stream
-#     pickle.dump(buchi_graph, filehandle)
-#     pickle.dump(buchi_state, filehandle)
-#     pickle.dump(min_qb, filehandle)
-# with open('data/buchi_case2_false', 'rb') as filehandle:
-#     # store the data as binary data stream
-#     buchi_graph = pickle.load(filehandle)
-#     buchi_state = pickle.load(filehandle)
-#     min_qb = pickle.load(filehandle)
+# # with open('data/buchi_case21_false', 'wb') as filehandle:
+# #     # store the data as binary data stream
+# #     pickle.dump(buchi_graph, filehandle)
+# #     pickle.dump(buchi_state, filehandle)
+# #     pickle.dump(min_qb, filehandle)
+with open('data/buchi_case{0}_false'.format(int(sys.argv[1])), 'rb') as filehandle:
+    # store the data as binary data stream
+    buchi_graph = pickle.load(filehandle)
+    buchi_state = pickle.load(filehandle)
+    min_qb = pickle.load(filehandle)
 # print(buchi_graph.number_of_nodes())
 # print(buchi_graph.number_of_edges())
 # +------------------------------------------+
 # |            construct prefix path         |
 # +------------------------------------------+
 # print(1)
-n_max = 1000
+start1 = datetime.datetime.now()
+n_max = int(sys.argv[3])
 n_robot = len(init_state)
 step_size = 0.25*n_robot
 cost_path = OrderedDict()
@@ -103,7 +104,7 @@ for b_init in buchi_graph.graph['init']:
         # plt.plot(x, y, 'g*')
         # workspace_plot(regions, obs)
     else:
-        print('Couldn\'t find the path within predetermined iteration')
+        # print('Couldn\'t find the path within predetermined iteration')
         break
 
     """
@@ -115,7 +116,7 @@ for b_init in buchi_graph.graph['init']:
     tree_suf = tree_pre
     # each initial state <=> multiple accepting states
     # for i in range(len(tree_pre.goals)):
-    for i in range(1):
+    for i in range(5):
         # goal product state
         goal = tree_pre.goals[i]
         tree_suf = tree(n_robot,'', ts, buchi_graph, goal, 'suf', step_size, no)
@@ -161,7 +162,7 @@ for b_init in buchi_graph.graph['init']:
     print(pre_time, suf_time, opt_cost[0], opt_cost[1], pre_time + suf_time, (opt_cost[0] + opt_cost[1])/2)
     # plot optimal path
 
-    path_plot((opt_path_pre, opt_path_suf), regions, obs, tree_pre.robot, tree_pre.dim)
+    # path_plot((opt_path_pre, opt_path_suf), regions, obs, tree_pre.robot, tree_pre.dim)
     # draw 3D layer graph
     # layer_plot(tree_pre.tree, opt_path_pre, buchi_state)
     # layer_plot(tree_suf.tree, opt_path_suf, buchi_state)
@@ -185,4 +186,4 @@ for b_init in buchi_graph.graph['init']:
     # plt.xlabel(r'Iteration $n$')
     # plt.ylabel(r"$|V_T^n|$")
     # plt.savefig('size_VS_n.png', bbox_inches='tight', dpi=600)
-    plt.show()
+    # plt.show()

@@ -16,8 +16,8 @@ from scipy.stats import truncnorm
 from collections import OrderedDict
 import pyvisgraph as vg
 from shapely.geometry import Point, Polygon, LineString
+from uniform_geometry import sample_uniform_geometry
 
-import random
 
 class tree(object):
     """ construction of prefix and suffix tree
@@ -57,7 +57,7 @@ class tree(object):
         # probability
         self.p = 0.9
         # threshold for collision avoidance
-        self.threshold = 0.02
+        self.threshold = 0.01
         # polygon obstacle
         polys = [[vg.Point(0.4, 1.0), vg.Point(0.4, 0.7), vg.Point(0.6, 0.7), vg.Point(0.6, 1.0)],
                  [vg.Point(0.3, 0.2), vg.Point(0.3, 0.0), vg.Point(0.7, 0.0), vg.Point(0.7, 0.2)]]
@@ -65,6 +65,9 @@ class tree(object):
         self.g.build(polys, status=False)
         # region that has ! preceding it
         self.no = no
+
+        # biased sampling
+        # self.acp = np.random.randint(0, len(buchi_graph.graph['accept']))
 
     def add_group(self, q_state):
         """
@@ -128,7 +131,8 @@ class tree(object):
         :return: true collision free
         """
         for i in range(len(x)):
-            if i != index and np.linalg.norm(np.subtract(x[i], x[index])) <= self.threshold:
+            # if i != index and np.linalg.norm(np.subtract(x[i], x[index])) <= self.threshold:
+            if i != index and np.fabs(x[i][0]-x[index][0]) <= self.threshold and np.fabs(x[i][1]-x[index][1]) <= self.threshold:
                 return False
         return True
 
@@ -289,6 +293,7 @@ class tree(object):
         """
         if self.seg == 'pre':
             b_final = buchi_graph.graph['accept'][np.random.randint(0, len(buchi_graph.graph['accept']))]     # feasible final buchi state
+            # b_final = buchi_graph.graph['accept'][self.acp]
         else:
             b_final = buchi_graph.graph['accept']
         # collects the buchi state in the tree with minimum distance to the final state
@@ -298,9 +303,11 @@ class tree(object):
         # sample random nodes
         p_rand = np.random.uniform(0,1,1)
         if (p_rand <= self.p and len(q_min2final) > 0) or not q_minNot2final:
-            q_rand = q_min2final[np.random.randint(0, len(q_min2final))]
+            q_rand = sample_uniform_geometry(q_min2final)
+            # q_rand = q_min2final[np.random.randint(0, len(q_min2final))]
         elif p_rand > self.p or not q_min2final:
-            q_rand = q_minNot2final[np.random.randint(0, len(q_minNot2final))]
+            q_rand = sample_uniform_geometry(q_minNot2final)
+            # q_rand = q_minNot2final[np.random.randint(0, len(q_minNot2final))]
         # find feasible succssor of buchi state in q_rand
         Rb_q_rand = []
         x_label = []
@@ -333,8 +340,10 @@ class tree(object):
         if not M_cand:
             return M_cand, M_cand
         # sample b_min and b_decr
-        b_min = M_cand[np.random.randint(0, len(M_cand))]
-        b_decr = decr_dict[b_min][np.random.randint(0, len(decr_dict[b_min]))]
+        b_min = sample_uniform_geometry(M_cand)
+        # b_min = M_cand[np.random.randint(0, len(M_cand))]
+        b_decr = sample_uniform_geometry(decr_dict[b_min])
+        # b_decr = decr_dict[b_min][np.random.randint(0, len(decr_dict[b_min]))]
 
 
         # b_label = buchi_graph.edges[(b_min, b_decr)]['label']
@@ -663,6 +672,7 @@ class tree(object):
             mp.append(point[i*self.dim :(i+1)*self.dim])
         return tuple(mp)
 
+
 def construction_tree(tree, buchi_graph, min_qb_dict, regions, n_max):
     sz = [0]
     # trivial suffix path
@@ -672,8 +682,7 @@ def construction_tree(tree, buchi_graph, min_qb_dict, regions, n_max):
     # for n in range(n_max):
     while 1:
         # sample form: multiple
-        x_new , q_rand = tree.sample(buchi_graph, min_qb_dict, regions)
-        # print(x_new)
+        x_new, q_rand = tree.sample(buchi_graph, min_qb_dict, regions)
         # x_rand, _ = tree.sample(buchi_graph, min_qb_dict, regions)
         # couldn't find
         if not x_new:
@@ -723,13 +732,13 @@ def construction_tree(tree, buchi_graph, min_qb_dict, regions, n_max):
             added = tree.extend(q_new, near_v, label, obs_check)
             # rewire
             # if added == 1:
-            #     # print(q_new)
-            #     tree.rewire(q_new, near_v, obs_check)
+            #     print(q_new)
+                # tree.rewire(q_new, near_v, obs_check)
 
         # number of nodes
         sz.append(tree.tree.number_of_nodes())
         # first accepting state
-        if len(tree.goals):
+        if len(tree.goals) >= 5:
             break
 
     cost_path = tree.findpath(tree.goals)

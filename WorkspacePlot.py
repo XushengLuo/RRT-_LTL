@@ -164,8 +164,8 @@ def layer_plot(tree, opt_path, buchi):
     ax.set_zticks(range(0,10))
     # region_plot(regions, 'region', ax)
     # region_plot(obs, 'obs', ax)
-    plt.savefig('3D.png', bbox_inches='tight', dpi=600)
-    # plt.show()
+    # plt.savefig('3D.png', bbox_inches='tight', dpi=600)
+    plt.show()
 
 
 #

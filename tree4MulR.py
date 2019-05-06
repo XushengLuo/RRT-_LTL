@@ -45,7 +45,7 @@ class tree(object):
         self.tree.add_node(init, cost=0, label=label)
         self.no = no
         # threshold for collision avoidance
-        self.threshold = 0.02
+        self.threshold = 0.01
 
     def sample(self):
         """
@@ -66,7 +66,8 @@ class tree(object):
         :return: true collision free
         """
         for robot in x_rand:
-            if np.linalg.norm(np.subtract(point, robot)) <= self.threshold:
+            # if np.linalg.norm(np.subtract(point, robot)) <= self.threshold:
+            if np.fabs(point[0]-robot[0]) <= self.threshold and np.fabs(point[1]-robot[1]) <= self.threshold:
                 return False
         return True
 
@@ -413,8 +414,8 @@ def construction_tree(tree, buchi_graph, n_max):
         # number of nodes
         sz.append(tree.tree.number_of_nodes())
         # first accepting state
-        if len(tree.goals):
-            break
+        # if len(tree.goals) > 10:
+        #     break
 
     cost_path = tree.findpath(tree.goals)
     return cost_path, sz
