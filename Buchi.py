@@ -207,12 +207,16 @@ class buchi_graph(object):
         :param robot: # robot
         """
         TobeDel = []
-        print(self.buchi_graph.number_of_edges())
+        # print(self.buchi_graph.number_of_edges())
         i = 0
         for edge in self.buchi_graph.edges():
             i = i+1
-            print(i)
+            # print(i)
             b_label = self.buchi_graph.edges[edge]['label']
+            # multiple labels
+            if ') && (' in b_label:
+                TobeDel.append(edge)
+                continue
             if b_label != '(1)':
                 exp = b_label.replace('||', '|').replace('&&', '&').replace('!', '~')
                 truth = satisfiable(exp, algorithm="dpll")
@@ -228,7 +232,7 @@ class buchi_graph(object):
 
         for edge in TobeDel:
             self.buchi_graph.remove_edge(edge[0], edge[1])
-        print(self.buchi_graph.number_of_edges())
+        # print(self.buchi_graph.number_of_edges())
 
     def InitialDelInfesEdge(self, orig_label):
         div_by_or = orig_label.split(') || (')
@@ -261,21 +265,18 @@ class buchi_graph(object):
                         l, _ = nx.algorithms.single_source_dijkstra(self.buchi_graph, source=node1, target=node2)
                     except nx.exception.NetworkXNoPath:
                         l = np.inf
-                        # path = []
                     min_qb_dict[(node1, node2)] = l
                 elif node1 == node2 and 'accept' in node2:
                     l = np.inf
-                    # path = []
                     for succ in self.buchi_graph.succ[node1]:
                         try:
                             l0, _ = nx.algorithms.single_source_dijkstra(self.buchi_graph, source=succ, target=node1)
                         except nx.exception.NetworkXNoPath:
                             l0 = np.inf
-                            # path0 = []
                         if l0 < l:
                             l = l0 + 1
-                            # path = path0
                     min_qb_dict[(node1, node2)] = l
+
 
         return min_qb_dict
 

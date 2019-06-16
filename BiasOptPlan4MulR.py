@@ -5,11 +5,11 @@ __date__ = 8/30/18
 """
 
 """
-biased samping optimal task planning for multi-robots
+biased samping optimal   task planning for multi-robots
 """
 
 import Buchi
-from Problem import problemFormulation
+from Generator import problemFormulation
 import datetime
 from Biastree4MulR import tree, construction_tree
 from collections import OrderedDict
@@ -19,13 +19,14 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import pickle
 import sys
-
+from BiasRRT4MulR import second_construction_tree, second_tree
 # +------------------------------------------+
 # |     construct transition system graph    |
 # +------------------------------------------+
 
 workspace, regions, obs, init_state, uni_cost, formula, formula_comp, exclusion, no = problemFormulation().Formulation()
 ts = {'workspace':workspace, 'region':regions, 'obs':obs, 'uni_cost':uni_cost}
+
 # # plot the workspace
 # # ax = plt.figure(1).gca()
 # # region_plot(regions, 'region', ax)
@@ -33,38 +34,35 @@ ts = {'workspace':workspace, 'region':regions, 'obs':obs, 'uni_cost':uni_cost}
 # # +------------------------------------------+
 # # |            construct buchi graph         |
 # # +------------------------------------------+
-# start1 = datetime.datetime.now()
-# buchi = Buchi.buchi_graph(formula, formula_comp, exclusion)
-# buchi.formulaParser()
-# buchi.execLtl2ba()
-# _ = buchi.buchiGraph()
-# buchi.DelInfesEdge(len(init_state))
-# min_qb = buchi.MinLen()
-# buchi.FeasAcpt(min_qb)
-# buchi_graph = buchi.buchi_graph
-# # buchi_state = dict(zip(list(buchi_graph.nodes()), range(1, buchi_graph.number_of_nodes() + 1)))  # dict
-# # # # # # # #
-# t = (datetime.datetime.now() - start1).total_seconds()
+start1 = datetime.datetime.now()
+buchi = Buchi.buchi_graph(formula, formula_comp, exclusion)
+buchi.formulaParser()
+buchi.execLtl2ba()
+_ = buchi.buchiGraph()
+buchi.DelInfesEdge(len(init_state))
+min_qb = buchi.MinLen()
+buchi.FeasAcpt(min_qb)
+buchi_graph = buchi.buchi_graph
+buchi_state = dict(zip(list(buchi_graph.nodes()), range(1, buchi_graph.number_of_nodes() + 1)))  # dict
+print(buchi_graph.number_of_nodes(), buchi_graph.number_of_edges())
+t = (datetime.datetime.now() - start1).total_seconds()
 # print(t)
-#
 # # with open('data/buchi_case21_false', 'wb') as filehandle:
 # #     # store the data as binary data stream
 # #     pickle.dump(buchi_graph, filehandle)
 # #     pickle.dump(buchi_state, filehandle)
 # #     pickle.dump(min_qb, filehandle)
-with open('data/buchi_case{0}_false'.format(int(sys.argv[1])), 'rb') as filehandle:
-    # store the data as binary data stream
-    buchi_graph = pickle.load(filehandle)
-    buchi_state = pickle.load(filehandle)
-    min_qb = pickle.load(filehandle)
-# print(buchi_graph.number_of_nodes())
-# print(buchi_graph.number_of_edges())
+# with open('data/buchi_case{0}_false'.format(int(sys.argv[1])), 'rb') as filehandle:
+#     # store the data as binary data stream
+#     buchi_graph = pickle.load(filehandle)
+#     buchi_state = pickle.load(filehandle)
+#     min_qb = pickle.load(filehandle)
+
 # +------------------------------------------+
 # |            construct prefix path         |
 # +------------------------------------------+
-# print(1)
-start1 = datetime.datetime.now()
-n_max = int(sys.argv[3])
+# start1 = datetime.datetime.now()
+n_max = 10000000  # int(sys.argv[3])
 n_robot = len(init_state)
 step_size = 0.25*n_robot
 cost_path = OrderedDict()
@@ -88,7 +86,7 @@ for b_init in buchi_graph.graph['init']:
     tree_pre = tree(n_robot, acpt, ts, buchi_graph, init, 'pre', step_size, no)
     # print('--------------prefix path---------------------')
     # prefix path with cost
-    cost_path_pre, sz = construction_tree(tree_pre, buchi_graph, min_qb, regions, n_max)
+    cost_path_pre, _ = construction_tree(tree_pre, buchi_graph, min_qb, regions, n_max)
     # print(cost_path_pre[0][1])
     if len(tree_pre.goals):
         pre_time = (datetime.datetime.now() - start).total_seconds()
@@ -116,14 +114,14 @@ for b_init in buchi_graph.graph['init']:
     tree_suf = tree_pre
     # each initial state <=> multiple accepting states
     # for i in range(len(tree_pre.goals)):
-    for i in range(5):
+    for i in range(1):
         # goal product state
         goal = tree_pre.goals[i]
-        tree_suf = tree(n_robot,'', ts, buchi_graph, goal, 'suf', step_size, no)
+        tree_suf = tree(n_robot, '', ts, buchi_graph, goal, 'suf', step_size, no)
         # update accepting buchi state
         buchi_graph.graph['accept'] = goal[1]
         # construct suffix tree
-        cost_path_suf_cand, _ = construction_tree(tree_suf, buchi_graph, min_qb, regions, n_max)
+        cost_path_suf_cand, final = construction_tree(tree_suf, buchi_graph, min_qb, regions, n_max)
 
         # print('--------------suffix path for {0}-th goal (of {1} in total)---------------------'.format(i, len(tree_pre.goals)))
         # print('{0}-th goal: {1} accepting goals found'.format(i, len(tree_suf.goals)))
@@ -141,11 +139,17 @@ for b_init in buchi_graph.graph['init']:
         if cost_path_pre[i][0] + cost_path_suf[0] < opt_cost[0] + opt_cost[1]:
             opt_path_pre = cost_path_pre[i][1]      # plan of [(position, buchi)]
             opt_path_suf = cost_path_suf[1]
-            opt_cost = (cost_path_pre[i][0], cost_path_suf[0])    # optimal cost (pre_cost, suf_cost)
+            opt_cost = [cost_path_pre[i][0], cost_path_suf[0]]    # optimal cost (pre_cost, suf_cost)
             opt_tree_suf = tree_suf
 
         nx.write_gpickle(opt_tree_suf, "data_suf_tree")
+        # print('Time to find the surfix path')
 
+        if not final:                         # goal                  # initial
+            tree_second = second_tree(n_robot, goal, ts, buchi_graph, tree_suf.goals[0], step_size, no)
+            cost_path_second = second_construction_tree(tree_second, buchi_graph)
+            opt_cost[1] += cost_path_second[0][0]
+            opt_path_suf = opt_path_suf + cost_path_second[0][1] + [goal]
     # first pre + suf path
     # first_path = (cost_path_pre[0][0] + cost_path_suf[0][0], (cost_path_pre[0][1], cost_path_suf[0][1]))
     # path_plot(first_path[1])
@@ -159,10 +163,12 @@ for b_init in buchi_graph.graph['init']:
     # print('Total cost = prefix Cost + suffix Cost: {0} = {1} + {2}'.format(opt_cost[0]+opt_cost[1], opt_cost[0], opt_cost[1]))
     suf_time = (datetime.datetime.now() - start).total_seconds()
     # print('Time to find the surfix path: {0}'.format(suf_time))
-    print(pre_time, suf_time, opt_cost[0], opt_cost[1], pre_time + suf_time, (opt_cost[0] + opt_cost[1])/2)
+    print(pre_time, suf_time, opt_cost[0], opt_cost[1], pre_time + suf_time,
+          (opt_cost[0] + opt_cost[1])/2)
     # plot optimal path
 
     # path_plot((opt_path_pre, opt_path_suf), regions, obs, tree_pre.robot, tree_pre.dim)
+    # plt.show()
     # draw 3D layer graph
     # layer_plot(tree_pre.tree, opt_path_pre, buchi_state)
     # layer_plot(tree_suf.tree, opt_path_suf, buchi_state)
@@ -186,4 +192,3 @@ for b_init in buchi_graph.graph['init']:
     # plt.xlabel(r'Iteration $n$')
     # plt.ylabel(r"$|V_T^n|$")
     # plt.savefig('size_VS_n.png', bbox_inches='tight', dpi=600)
-    # plt.show()
